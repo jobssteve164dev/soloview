@@ -14,7 +14,12 @@
   },
   "categories": ["Other"],
   "main": "./dist/extension.js",
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:soloview.recentDocuments",
+    "onCommand:soloview.openDocument",
+    "onCommand:soloview.clearRecent",
+    "onCustomEditor:soloview.documentViewer"
+  ],
   "contributes": {
     "commands": [
       {
