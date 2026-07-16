@@ -7,7 +7,7 @@ This file stores stable project facts future agents should reuse. Do not paste r
 - Name: soloview
 - Type: Infrastructure / tooling foundation
 - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
-- Current stage: `0.1.3` 已发布到 Visual Studio Marketplace 与 Open VSX
+- Current stage: `0.1.4` 已发布到 Visual Studio Marketplace 与 Open VSX
 
 ## Stable Decisions
 
@@ -30,5 +30,6 @@ This file stores stable project facts future agents should reuse. Do not paste r
 ## Handoff Notes
 
 - `0.1.2` 只补齐了侧边栏入口的显式激活事件，未解决用户安装后看不到活动栏图标的问题。
-- `0.1.3` 将活动栏资源改为 24×24 单色实心 SVG，并让容器和“最近打开”视图共同引用该图标；双市场与 GitHub Release 均已验证可见。
+- `0.1.3` 只替换了固定白色 SVG，用户真实安装后仍看不到活动栏入口，不得视为闭环。
+- `0.1.4` 参照 SoloMap 的已验证实现统一侧边栏容器与视图 ID，图标使用 `currentColor`，并增加干净 VS Code Extension Host 入口测试；最终市场 VSIX 已直接下载解包核验。
 - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
