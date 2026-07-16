@@ -7,7 +7,7 @@ This file stores stable project facts future agents should reuse. Do not paste r
 - Name: soloview
 - Type: Infrastructure / tooling foundation
 - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
-- Current stage: `0.1.4` 已发布到 Visual Studio Marketplace 与 Open VSX
+- Current stage: `0.1.5` 已发布到 Visual Studio Marketplace 与 Open VSX
 
 ## Stable Decisions
 
