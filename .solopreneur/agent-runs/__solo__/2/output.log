@@ -8660,3 +8660,91 @@ index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b947799
 +  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
 +});
 
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git add -A && git commit -m "docs: record sidebar activation release" && git pull --rebase origin main && git push origin main && git status --short && gh run view 29468999414 --json status,conclusion,url'[0m in /home/ubuntu/project/soloview
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[31m exited 1 in 520ms:[0m
+From https://github.com/jobssteve164dev/soloview
+ * branch            main       -> FETCH_HEAD
+error: cannot rebase: You have unstaged changes.
+error: Please commit or stash them.
+
