@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-16T04:37:33.728Z",
+  "updatedAt": "2026-07-16T06:08:44.445Z",
   "documents": [
     {
       "path": "README.md",
@@ -8,7 +8,7 @@
       "status": "active",
       "solves": "说明项目是什么、服务谁、成功标准和对外表达。",
       "lastReviewedAt": "",
-      "lastTouchedAt": "2026-07-16T02:50:50.459Z"
+      "lastTouchedAt": "2026-07-16T06:06:36.525Z"
     },
     {
       "path": ".solopreneur/README.md",

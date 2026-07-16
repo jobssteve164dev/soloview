@@ -1,0 +1,8 @@
+{
+  "extension.description": "无需离开 VS Code，即刻查看 PDF、Word、Excel、CSV 和 PowerPoint；本地优先，只读无上传。",
+  "command.open": "打开文档",
+  "command.clearRecent": "清空最近打开",
+  "view.recent": "最近打开",
+  "view.welcome": "最近打开的文档会显示在这里。\n[打开文档](command:soloview.openDocument)",
+  "editor.displayName": "SoloView 文档查看器"
+}

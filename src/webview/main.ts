@@ -3,7 +3,32 @@ import { renderAsync as renderDocx } from 'docx-preview';
 import * as XLSX from 'xlsx';
 import { PptxViewer, RECOMMENDED_ZIP_LIMITS } from '@aiden0z/pptx-renderer';
 
-declare function acquireVsCodeApi(): { postMessage(message: unknown): void };
+declare function acquireVsCodeApi(): {
+  postMessage(message: unknown): void;
+  getState(): { locale?: Locale } | undefined;
+  setState(state: { locale: Locale }): void;
+};
+
+type Locale = 'zh' | 'en';
+
+const messages = {
+  zh: {
+    skip: '跳到文档内容', toolbar: '文档工具栏', zoomOut: '缩小', zoomIn: '放大', reload: '重新载入',
+    reveal: '在文件夹中显示', sheets: '工作表', opening: '正在打开文档…', content: '文档内容',
+    unsupported: 'SoloView 暂不支持这种文件格式。', language: '切换为英文', languageLabel: 'EN',
+    openFailed: '无法打开这个文档', retry: '重新尝试', genericError: '文档无法打开。',
+    canvasError: '当前环境无法创建 PDF 画布。', emptyWorkbook: '文件中没有可显示的工作表。',
+    page: (number: number, total: number) => `第 ${number} 页，共 ${total} 页`,
+  },
+  en: {
+    skip: 'Skip to document', toolbar: 'Document toolbar', zoomOut: 'Zoom out', zoomIn: 'Zoom in', reload: 'Reload',
+    reveal: 'Show in folder', sheets: 'Worksheets', opening: 'Opening document…', content: 'Document content',
+    unsupported: 'SoloView does not support this file format yet.', language: 'Switch to Chinese', languageLabel: '中文',
+    openFailed: 'Unable to open this document', retry: 'Try again', genericError: 'The document could not be opened.',
+    canvasError: 'PDF canvas is unavailable in this environment.', emptyWorkbook: 'This file has no worksheets to display.',
+    page: (number: number, total: number) => `Page ${number} of ${total}`,
+  },
+};
 
 type OpenMessage = {
   kind: 'open';
@@ -13,6 +38,7 @@ type OpenMessage = {
 };
 
 const vscode = acquireVsCodeApi();
+let locale: Locale = vscode.getState()?.locale ?? (document.body.dataset.initialLocale === 'zh' ? 'zh' : 'en');
 const viewer = requiredElement<HTMLDivElement>('viewer');
 const status = requiredElement<HTMLElement>('status');
 const tabs = requiredElement<HTMLDivElement>('sheet-tabs');
@@ -26,6 +52,8 @@ requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => se
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
 requiredElement<HTMLButtonElement>('open-external').addEventListener('click', () => vscode.postMessage({ kind: 'openExternal' }));
+requiredElement<HTMLButtonElement>('language-toggle').addEventListener('click', () => setLocale(locale === 'zh' ? 'en' : 'zh'));
+setLocale(locale);
 
 window.addEventListener('message', (event: MessageEvent<OpenMessage | { kind: 'error'; message: string }>) => {
   if (event.data.kind === 'error') {
@@ -40,7 +68,7 @@ window.addEventListener('message', (event: MessageEvent<OpenMessage | { kind: 'e
 async function openDocument(message: OpenMessage): Promise<void> {
   const generation = ++renderGeneration;
   status.hidden = false;
-  status.innerHTML = '<div class="spinner" aria-hidden="true"></div><p>正在打开文档…</p>';
+  status.innerHTML = `<div class="spinner" aria-hidden="true"></div><p data-i18n="opening">${messages[locale].opening}</p>`;
   viewer.replaceChildren();
   tabs.replaceChildren();
   tabs.hidden = true;
@@ -59,7 +87,7 @@ async function openDocument(message: OpenMessage): Promise<void> {
     if (generation === renderGeneration) status.hidden = true;
   } catch (error) {
     if (generation === renderGeneration) {
-      showError(error instanceof Error ? error.message : '文档无法打开。');
+      showError(error instanceof Error ? error.message : messages[locale].genericError);
     }
   }
 }
@@ -75,9 +103,11 @@ async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
     canvas.width = viewport.width;
     canvas.height = viewport.height;
     canvas.className = 'pdf-page';
-    canvas.setAttribute('aria-label', `第 ${number} 页，共 ${pdf.numPages} 页`);
+    canvas.setAttribute('aria-label', messages[locale].page(number, pdf.numPages));
+    canvas.dataset.page = String(number);
+    canvas.dataset.totalPages = String(pdf.numPages);
     const context = canvas.getContext('2d');
-    if (!context) throw new Error('当前环境无法创建 PDF 画布。');
+    if (!context) throw new Error(messages[locale].canvasError);
     await page.render({ canvas, canvasContext: context, viewport }).promise;
     fragment.append(canvas);
   }
@@ -107,7 +137,7 @@ function showWorkbook(bytes: Uint8Array, type: 'xlsx' | 'xls' | 'csv'): void {
     tabs.append(button);
   });
   const first = workbook.SheetNames[0];
-  if (!first) throw new Error(`${type.toUpperCase()} 文件中没有可显示的工作表。`);
+  if (!first) throw new Error(`${type.toUpperCase()}: ${messages[locale].emptyWorkbook}`);
   renderSheet(first);
 }
 
@@ -119,8 +149,29 @@ function setZoom(next: number): void {
 
 function showError(message: string): void {
   status.hidden = false;
-  status.innerHTML = `<div class="error-symbol" aria-hidden="true">!</div><h1>无法打开这个文档</h1><p>${escapeHtml(message)}</p><button id="retry" type="button">重新尝试</button>`;
+  status.innerHTML = `<div class="error-symbol" aria-hidden="true">!</div><h1 data-i18n="openFailed">${messages[locale].openFailed}</h1><p>${escapeHtml(message)}</p><button id="retry" type="button" data-i18n="retry">${messages[locale].retry}</button>`;
   requiredElement<HTMLButtonElement>('retry').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
+}
+
+function setLocale(next: Locale): void {
+  locale = next;
+  vscode.setState({ locale });
+  document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
+  const copy = messages[locale];
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
+    const key = element.dataset.i18n as keyof typeof copy;
+    const value = copy[key];
+    if (typeof value === 'string') element.textContent = value;
+  });
+  document.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach((element) => {
+    const key = element.dataset.i18nAria as keyof typeof copy;
+    const value = copy[key];
+    if (typeof value === 'string') element.setAttribute('aria-label', value);
+  });
+  document.querySelectorAll<HTMLCanvasElement>('.pdf-page[data-page][data-total-pages]').forEach((canvas) => {
+    canvas.setAttribute('aria-label', copy.page(Number(canvas.dataset.page), Number(canvas.dataset.totalPages)));
+  });
+  requiredElement<HTMLButtonElement>('language-toggle').textContent = copy.languageLabel;
 }
 
 function normalizeBytes(value: OpenMessage['bytes']): Uint8Array {

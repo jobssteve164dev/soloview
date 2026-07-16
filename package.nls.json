@@ -1,0 +1,8 @@
+{
+  "extension.description": "Open PDF, Word, Excel, CSV, and PowerPoint files instantly in VS Code — private, read-only, and local-first.",
+  "command.open": "Open Document",
+  "command.clearRecent": "Clear Recent Documents",
+  "view.recent": "Recent Documents",
+  "view.welcome": "Your recent documents will appear here.\n[Open a document](command:soloview.openDocument)",
+  "editor.displayName": "SoloView Document Viewer"
+}
