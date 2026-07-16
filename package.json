@@ -50,7 +50,9 @@
       "soloview.sidebar": [
         {
           "id": "soloview.recentDocuments",
-          "name": "最近打开"
+          "name": "最近打开",
+          "icon": "resources/activitybar.svg",
+          "contextualTitle": "SoloView"
         }
       ]
     },
