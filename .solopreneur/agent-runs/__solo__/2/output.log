@@ -8748,3 +8748,528 @@ From https://github.com/jobssteve164dev/soloview
 error: cannot rebase: You have unstaged changes.
 error: Please commit or stash them.
 
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git merge origin/main --no-edit && git add -A && git commit -m "chore: update Solo session record" && git push origin main && git status --short'[0m in /home/ubuntu/project/soloview
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[32m succeeded in 1818ms:[0m
+To https://github.com/jobssteve164dev/soloview.git
+   2108e14..bf2c864  main -> main
+ M .solopreneur/agent-runs/__solo__/2/output.log
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc "node <<'NODE'
+const expected='0.1.2';
+const open=await fetch("'`https://open-vsx.org/api/SZLK/soloview/${expected}`); console.log('"'open-vsx',open.status,(await open.json()).version);
+const response=await fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery',{method:'POST',headers:{'content-type':'application/json',accept:'application/json;api-version=7.2-preview.1'},body:JSON.stringify({filters:[{criteria:[{filterType:7,value:'SZLK.soloview'}]}],flags:914})});
+const data=await response.json(); console.log('marketplace',data.results?.flatMap(x=>x.extensions??[])[0]?.versions?.[0]?.version);
+NODE
+gh run list --branch main --limit 6 --json name,status,conclusion,headSha,url
+git log --oneline --decorate -6"[0m in /home/ubuntu/project/soloview
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[32m succeeded in 1314ms:[0m
+open-vsx [33m200[39m 0.1.2
+marketplace 0.1.2
+[{"conclusion":"","headSha":"bf2c8648863842b2d1a5a2536481896bdcc119a5","name":"Security","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29469304716"},{"conclusion":"","headSha":"bf2c8648863842b2d1a5a2536481896bdcc119a5","name":"CI","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29469304748"},{"conclusion":"success","headSha":"51adf16d0243959eeced15f6bcdc13ab31b882f0","name":"Security","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29468999439"},{"conclusion":"success","headSha":"51adf16d0243959eeced15f6bcdc13ab31b882f0","name":"CI","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29468999378"},{"conclusion":"success","headSha":"51adf16d0243959eeced15f6bcdc13ab31b882f0","name":"Publish VS Code Extension","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29468999414"},{"conclusion":"success","headSha":"ce66addfb36fd02001a9bfeba175572721df9e72","name":"Security","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29468830653"}]
+bf2c864 (HEAD -> main, origin/main) chore: update Solo session record
+59f47d0 Merge remote-tracking branch 'origin/main'
+f929a7a docs: record sidebar activation release
+2108e14 (tag: v0.1.2) chore(release): bump version to 0.1.2 [skip ci]
+51adf16 fix: activate SoloView sidebar from installed extension
+8d4a91d SoloMap pre-session auto-backup [2026-07-16T03:24:58.999Z]
+
+[35m[3mcodex[0m[0m
+0.1.2 现在已在 Visual Studio Marketplace 和 Open VSX 同时可见，发布主链闭环。最后一组由记忆文档提交触发的 CI/安全检查正在运行；它不改变插件包，但我会等它结束，确保仓库最终状态无尾项。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29469304748 --exit-status && gh run watch 29469304716 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[32m succeeded in 16519ms:[0m
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29469304748
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87529087472)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  * Install dependencies
+  * Check extension
+  * Package extension
+  * Upload VSIX
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29469304748
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87529087472)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  * Package extension
+  * Upload VSIX
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29469304748
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87529087472)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  * Post Setup Node.js
+  * Post Checkout
+✓ main CI · 29469304748
+Triggered via push less than a minute ago
+
+JOBS
+✓ Build, test and package in 25s (ID 87529087472)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  ✓ Post Setup Node.js
+  ✓ Post Checkout
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build, test and package: .github#2
+
+Run Security (29469304716) has already completed with 'success'
+
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[35m[3mcodex[0m[0m
+已修复并发布 `SoloView 0.1.2`。
+
+- 根因：0.1.1 的发布清单将 `activationEvents` 留空，侧边栏点击后没有显式激活扩展。
+- 修复：为侧边栏、打开/清空命令及文档查看器补齐激活事件，并增加清单回归测试。
+- 验证：6 项测试、最终 VSIX、CI、安全检查全部通过。
+- 发布：Visual Studio Marketplace、Open VSX 和 GitHub Release 均已验证为 `0.1.2`。
+
+更新到 0.1.2 并重载 VS Code 后，活动栏中的 SoloView 按钮即可正常打开侧边栏。
+
+本次对话适合：仅保留在 Solo。
+diff --git a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+index d1f6b21bcdbf22bafc0c821630abe768d34a995b..cfab75eae99efb4806c1fd82668d51a51f5eda60
+--- a//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
++++ b//home/ubuntu/project/.solomap-global/memory/projects/soloview.md
+@@ -9,6 +9,7 @@
+ - 2026-07-16: GitHub 远端为 `https://github.com/jobssteve164dev/soloview`；`main` 的 CI 与 Security 工作流成功，`v0.1.0` 发布工作流成功。
+ - 2026-07-16: 首版已发布为 `SZLK.soloview@0.1.0`，Visual Studio Marketplace 与 Open VSX API 均已验证可见；GitHub Release 包含 `soloview-0.1.0.vsix`。
+ - 2026-07-16: 提交 `c3adab8` 增加 SoloView 活动栏图标与原生“最近打开”Tree View；最多保存 12 条本地 URI，自动去重排序，支持点击重新打开、文件选择器打开和确认后清空。5 项本地测试、VSIX 最终清单、图标 Chromium 渲染、远端 CI 与 Security 均通过。
++- 2026-07-16: `0.1.1` 的已发布 VSIX 虽包含侧边栏贡献点与实现代码，但 `activationEvents` 为空，安装态点击活动栏入口无响应；`0.1.2` 已为 Tree View、两个命令和自定义编辑器补齐显式激活事件，并增加发布清单回归。6 项本地测试、最终 VSIX 清单、CI、Security、GitHub Release、Visual Studio Marketplace 与 Open VSX 均验证通过。
+ 
+ ## Decisions
+ 
+@@ -18,5 +19,5 @@
+ ## Current Handoff
+ 
+ - Goal: 用真实复杂样本文档完成四格式渲染验收，重点验证 PPTX、复杂 Excel 与 DOCX 版式。
+-- Confirmed state: 源码、调研、构建、测试、安全审计、远端 CI、安全工作流、GitHub Release 和双市场 `0.1.0` 发布均已闭环；工作区干净。
++- Confirmed state: 侧边栏安装态激活问题已在 `0.1.2` 修复；源码测试、最终 VSIX 清单、远端 CI、安全工作流、GitHub Release 和双市场发布均已闭环。
+ - Next useful action: 在 Extension Development Host 中运行固定样本集，补入口级 UI 回归与渲染缺口清单；后续版本通过语义化 Tag 触发双市场发布。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 54965be3ffb130d5325fc4439e70871fc94ef7b5..4ddb01eb43da78a11350ecdeb6568001e439b29a
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -7,7 +7,7 @@
+ - Name: soloview
+ - Type: Infrastructure / tooling foundation
+ - Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+-- Current stage: `0.1.1` 已发布到 Visual Studio Marketplace 与 Open VSX
++- Current stage: `0.1.2` 已发布到 Visual Studio Marketplace 与 Open VSX
+ 
+ ## Stable Decisions
+ 
+@@ -29,5 +29,5 @@
+ 
+ ## Handoff Notes
+ 
+-- 当前正式版本：`0.1.1`。
++- 当前正式版本：`0.1.2`。该版本为侧边栏视图、命令与自定义编辑器补齐显式激活事件，避免安装态入口依赖宿主隐式推导。
+ - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
+diff --git a/package.json b/package.json
+index 93adb8f7beeff2e808ca810ddb89d15feaf09d0b..8e11fad68197eef49b8173190c92509b0eaf502e
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,12 @@
+   },
+   "categories": ["Other"],
+   "main": "./dist/extension.js",
+-  "activationEvents": [],
++  "activationEvents": [
++    "onView:soloview.recentDocuments",
++    "onCommand:soloview.openDocument",
++    "onCommand:soloview.clearRecent",
++    "onCustomEditor:soloview.documentViewer"
++  ],
+   "contributes": {
+     "commands": [
+       {
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ca03881d4f28080613dec00b9477994a877569
+--- /dev/null
++++ b/test/extensionManifest.test.mjs
+@@ -0,0 +1,16 @@
++import assert from 'node:assert/strict';
++import { readFile } from 'node:fs/promises';
++import test from 'node:test';
++
++const manifest = JSON.parse(
++  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
++);
++
++test('每个需要扩展宿主代码的入口都有显式激活事件', () => {
++  const activationEvents = new Set(manifest.activationEvents);
++
++  assert.ok(activationEvents.has('onView:soloview.recentDocuments'));
++  assert.ok(activationEvents.has('onCommand:soloview.openDocument'));
++  assert.ok(activationEvents.has('onCommand:soloview.clearRecent'));
++  assert.ok(activationEvents.has('onCustomEditor:soloview.documentViewer'));
++});
+
+[2mtokens used[0m
+95,946
+已修复并发布 `SoloView 0.1.2`。
+
+- 根因：0.1.1 的发布清单将 `activationEvents` 留空，侧边栏点击后没有显式激活扩展。
+- 修复：为侧边栏、打开/清空命令及文档查看器补齐激活事件，并增加清单回归测试。
+- 验证：6 项测试、最终 VSIX、CI、安全检查全部通过。
+- 发布：Visual Studio Marketplace、Open VSX 和 GitHub Release 均已验证为 `0.1.2`。
+
+更新到 0.1.2 并重载 VS Code 后，活动栏中的 SoloView 按钮即可正常打开侧边栏。
+
+本次对话适合：仅保留在 Solo。

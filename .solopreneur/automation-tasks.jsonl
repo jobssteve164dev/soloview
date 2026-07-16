@@ -1,2 +1,4 @@
 {"trigger":"completed","nodeId":"1","executionLogId":1,"action":"sound","status":"ok","recordedAt":"2026-07-16T03:22:50.518Z"}
 {"trigger":"completed","nodeId":"1","executionLogId":1,"action":"sound","status":"ok","recordedAt":"2026-07-16T03:22:56.360Z"}
+{"trigger":"completed","nodeId":"__solo__","executionLogId":2,"action":"sound","status":"ok","recordedAt":"2026-07-16T03:52:29.404Z"}
+{"trigger":"completed","nodeId":"__solo__","executionLogId":2,"action":"sound","status":"ok","recordedAt":"2026-07-16T03:52:34.687Z"}

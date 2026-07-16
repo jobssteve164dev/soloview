@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "nodeId": "__solo__",
+  "sessions": {
+    "codex": {
+      "agentCli": "/usr/local/bin/codex",
+      "provider": "codex",
+      "sessionId": "019f68f4-d66c-7583-a305-fbfc402132b1",
+      "updatedAt": "2026-07-16T03:52:30.537Z"
+    }
+  }
+}
