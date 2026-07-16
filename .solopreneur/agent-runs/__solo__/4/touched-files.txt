@@ -1,0 +1,92 @@
+A .vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0
+A .vscode-test/user-data/Crashpad/settings.dat
+A .vscode-test/user-data/Local Storage/leveldb/LOG.old
+A .vscode-test/user-data/logs/20260716T060824/editSessions.log
+A .vscode-test/user-data/logs/20260716T060824/main.log
+A .vscode-test/user-data/logs/20260716T060824/mcpGateway.log
+A .vscode-test/user-data/logs/20260716T060824/network-shared.log
+A .vscode-test/user-data/logs/20260716T060824/remoteTunnelService.log
+A .vscode-test/user-data/logs/20260716T060824/sharedprocess.log
+A .vscode-test/user-data/logs/20260716T060824/telemetry.log
+A .vscode-test/user-data/logs/20260716T060824/terminal.log
+A .vscode-test/user-data/logs/20260716T060824/tunnelHostService.log
+A .vscode-test/user-data/logs/20260716T060824/userDataSync.log
+A .vscode-test/user-data/logs/20260716T060824/window1/exthost/exthost.log
+A .vscode-test/user-data/logs/20260716T060824/window1/exthost/extHostTelemetry.log
+A .vscode-test/user-data/logs/20260716T060824/window1/exthost/vscode.git/Git.log
+A .vscode-test/user-data/logs/20260716T060824/window1/exthost/vscode.github-authentication/GitHub Authentication.log
+A .vscode-test/user-data/logs/20260716T060824/window1/exthost/vscode.github/GitHub.log
+A .vscode-test/user-data/logs/20260716T060824/window1/network.log
+A .vscode-test/user-data/logs/20260716T060824/window1/notebook.rendering.log
+A .vscode-test/user-data/logs/20260716T060824/window1/output_20260716T060826/agentSessionsOutput.log
+A .vscode-test/user-data/logs/20260716T060824/window1/output_20260716T060826/tasks.log
+A .vscode-test/user-data/logs/20260716T060824/window1/renderer.log
+A .vscode-test/user-data/logs/20260716T060824/window1/textModelChanges.log
+A .vscode-test/user-data/logs/20260716T060824/window1/views.log
+A .vscode-test/user-data/logs/20260716T060922/editSessions.log
+A .vscode-test/user-data/logs/20260716T060922/main.log
+A .vscode-test/user-data/logs/20260716T060922/mcpGateway.log
+A .vscode-test/user-data/logs/20260716T060922/network-shared.log
+A .vscode-test/user-data/logs/20260716T060922/remoteTunnelService.log
+A .vscode-test/user-data/logs/20260716T060922/sharedprocess.log
+A .vscode-test/user-data/logs/20260716T060922/telemetry.log
+A .vscode-test/user-data/logs/20260716T060922/terminal.log
+A .vscode-test/user-data/logs/20260716T060922/tunnelHostService.log
+A .vscode-test/user-data/logs/20260716T060922/userDataSync.log
+A .vscode-test/user-data/logs/20260716T060922/window1/exthost/exthost.log
+A .vscode-test/user-data/logs/20260716T060922/window1/exthost/extHostTelemetry.log
+A .vscode-test/user-data/logs/20260716T060922/window1/exthost/vscode.git/Git.log
+A .vscode-test/user-data/logs/20260716T060922/window1/exthost/vscode.github-authentication/GitHub Authentication.log
+A .vscode-test/user-data/logs/20260716T060922/window1/exthost/vscode.github/GitHub.log
+A .vscode-test/user-data/logs/20260716T060922/window1/network.log
+A .vscode-test/user-data/logs/20260716T060922/window1/notebook.rendering.log
+A .vscode-test/user-data/logs/20260716T060922/window1/output_20260716T060925/agentSessionsOutput.log
+A .vscode-test/user-data/logs/20260716T060922/window1/output_20260716T060925/tasks.log
+A .vscode-test/user-data/logs/20260716T060922/window1/renderer.log
+A .vscode-test/user-data/logs/20260716T060922/window1/textModelChanges.log
+A .vscode-test/user-data/logs/20260716T060922/window1/views.log
+A .vscode-test/user-data/Session Storage/LOG.old
+A package.nls.json
+A package.nls.zh-cn.json
+A resources/branding/soloview-market-source.png
+A resources/soloview-market.png
+A soloview-0.1.4.vsix
+M .vscode-test/user-data/Cache/Cache_Data/014ee23fe2ffeba9_0
+M .vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0
+M .vscode-test/user-data/Cache/Cache_Data/9f50bddbd978eddd_0
+M .vscode-test/user-data/Cache/Cache_Data/index-dir/the-real-index
+M .vscode-test/user-data/Cache/No_Vary_Search/journal.baj
+M .vscode-test/user-data/CachedProfilesData/__default__profile__/extensions.builtin.cache
+M .vscode-test/user-data/CachedProfilesData/__default__profile__/extensions.user.cache
+M .vscode-test/user-data/Code Cache/js/c7d625d7116de39e_0
+M .vscode-test/user-data/Code Cache/js/index-dir/the-real-index
+M .vscode-test/user-data/DawnGraphiteCache/data_1
+M .vscode-test/user-data/DawnGraphiteCache/index
+M .vscode-test/user-data/DawnWebGPUCache/data_1
+M .vscode-test/user-data/DawnWebGPUCache/index
+M .vscode-test/user-data/DIPS
+M .vscode-test/user-data/GPUCache/data_1
+M .vscode-test/user-data/GPUCache/index
+M .vscode-test/user-data/languagepacks.json
+M .vscode-test/user-data/Local Storage/leveldb/LOG
+M .vscode-test/user-data/Network Persistent State
+M .vscode-test/user-data/Session Storage/000003.log
+M .vscode-test/user-data/Session Storage/LOG
+M .vscode-test/user-data/TransportSecurity
+M .vscode-test/user-data/User/globalStorage/storage.json
+M .vscodeignore
+M CHANGELOG.md
+M dist/documentTypes.cjs
+M dist/extension.js
+M dist/pdf.worker.min.mjs
+M dist/recentDocuments.cjs
+M dist/viewer.css
+M dist/webview.js
+M package-lock.json
+M package.json
+M PROJECT_MEMORY.md
+M README.md
+M src/extension.ts
+M src/webview/main.ts
+M src/webview/viewer.css
+M test/extensionManifest.test.mjs
