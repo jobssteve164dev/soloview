@@ -5,6 +5,7 @@ import { RecentDocuments, type RecentDocument } from './recentDocuments.js';
 export { documentTypeForPath } from './documentTypes.js';
 
 const viewType = 'soloview.documentViewer';
+const sidebarViewType = 'soloview.sidebar';
 
 class SoloViewDocument implements vscode.CustomDocument {
   constructor(readonly uri: vscode.Uri) {}
@@ -177,7 +178,7 @@ export function activate(context: vscode.ExtensionContext): void {
       supportsMultipleEditorsPerDocument: true,
       webviewOptions: { retainContextWhenHidden: true },
     }),
-    vscode.window.registerTreeDataProvider('soloview.recentDocuments', recentProvider),
+    vscode.window.registerTreeDataProvider(sidebarViewType, recentProvider),
     vscode.commands.registerCommand('soloview.openDocument', async () => {
       const selected = await vscode.window.showOpenDialog({
         canSelectFiles: true,

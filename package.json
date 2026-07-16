@@ -17,7 +17,7 @@
   ],
   "main": "./dist/extension.js",
   "activationEvents": [
-    "onView:soloview.recentDocuments",
+    "onView:soloview.sidebar",
     "onCommand:soloview.openDocument",
     "onCommand:soloview.clearRecent",
     "onCustomEditor:soloview.documentViewer"
@@ -40,25 +40,23 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "soloview.sidebar",
+          "id": "soloview-sidebar-container",
           "title": "SoloView",
           "icon": "resources/activitybar.svg"
         }
       ]
     },
     "views": {
-      "soloview.sidebar": [
+      "soloview-sidebar-container": [
         {
-          "id": "soloview.recentDocuments",
-          "name": "最近打开",
-          "icon": "resources/activitybar.svg",
-          "contextualTitle": "SoloView"
+          "id": "soloview.sidebar",
+          "name": "最近打开"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "soloview.recentDocuments",
+        "view": "soloview.sidebar",
         "contents": "最近打开的文档会显示在这里。\n[打开文档](command:soloview.openDocument)"
       }
     ],
@@ -66,12 +64,12 @@
       "view/title": [
         {
           "command": "soloview.openDocument",
-          "when": "view == soloview.recentDocuments",
+          "when": "view == soloview.sidebar",
           "group": "navigation@1"
         },
         {
           "command": "soloview.clearRecent",
-          "when": "view == soloview.recentDocuments",
+          "when": "view == soloview.sidebar",
           "group": "navigation@2"
         }
       ]
@@ -106,13 +104,15 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "check": "tsc --noEmit && npm run build && node --test",
+    "check": "tsc --noEmit && npm run build && node --test test/*.test.mjs",
+    "test:host": "npm run build && xvfb-run -a node test/host/run.mjs",
     "watch": "node build.mjs --watch",
     "package": "npm run check && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^3.0.0",
     "@vscode/vsce": "^3.6.0",
     "esbuild": "^0.25.0",
     "typescript": "^5.8.0"

@@ -1,6 +1,7 @@
 .git/**
 .gitignore
 .github/**
+.vscode-test/**
 .solopreneur/**
 AGENTS.md
 PROJECT_MEMORY.md
