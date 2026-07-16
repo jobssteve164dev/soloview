@@ -69,10 +69,12 @@ test('文档查看器提供可记忆的中英文切换', () => {
   assert.match(extensionSource, /affectsConfiguration\('soloview\.language'\)/);
 });
 
-test('文档查看器首屏样式同步注入，内容区不叠加水平边距', () => {
+test('文档查看器首屏样式同步注入，页面壳完整覆盖 Webview', () => {
   assert.match(viewerStyles, /\.sheet-tabs\[hidden\]\s*\{\s*display:\s*none;/);
   assert.match(extensionSource, /readFileSync\([\s\S]*viewer\.css/);
   assert.match(extensionSource, /<style nonce="\$\{nonce\}">\$\{styles\}<\/style>/);
   assert.doesNotMatch(extensionSource, /<link rel="stylesheet"/);
-  assert.match(viewerStyles, /min-height:\s*100%;\s*padding:\s*0;/);
+  assert.match(viewerStyles, /html, body \{ width:\s*100%; height:\s*100%; margin:\s*0; padding:\s*0;/);
+  assert.match(viewerStyles, /body \{ width:\s*100vw; height:\s*100vh; overflow:\s*hidden;/);
+  assert.match(viewerStyles, /min-height:\s*100%;\s*padding:\s*24px;/);
 });
