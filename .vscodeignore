@@ -1,6 +1,9 @@
 .git/**
 .gitignore
 .github/**
+.solopreneur/**
+AGENTS.md
+PROJECT_MEMORY.md
 src/**
 test/**
 tsconfig.json
