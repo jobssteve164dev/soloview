@@ -2,7 +2,7 @@
   "name": "soloview",
   "displayName": "SoloView",
   "description": "在 VS Code 中本地查看 PDF、Word、Excel 和 PowerPoint 文档。",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "SZLK",
   "license": "MIT",
   "repository": {
