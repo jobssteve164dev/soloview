@@ -1377,3 +1377,588 @@ data-padding="8px,0px,8px,0px"
 
 [35m[3mcodex[0m[0m
 验证通过：9 项测试全绿；构建产物已是 `padding: 0`；Chromium 实测桌面左右为 `0px`，390px 窄窗口左右仍为 `0px`、仅保留上下 `8px`。接下来按项目交付约定提交当前完整工作区并推送。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git add -A && git commit -m "fix: remove viewer toolbar side spacing" && git push origin main'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 7505ms:[0m
+To https://github.com/jobssteve164dev/soloview.git
+   8c2320c..be2c9fe  main -> main
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git status --short; gh run list --commit be2c9fe --limit 5 --json databaseId,name,status,conclusion,url 2>/dev/null || true'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 893ms:[0m
+[]
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'ls .github/workflows; git log -1 --oneline; git diff --stat; git diff -- .solopreneur/agent-runs/__solo__/6/output.log | tail -n 20'[0m in /home/ubuntu/project/soloview
+[32m succeeded in 0ms:[0m
+ci.yml
+publish.yml
+security.yml
+be2c9fe fix: remove viewer toolbar side spacing
+ .solopreneur/agent-runs/__solo__/6/output.log | 53 +++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
++
++[35m[3mexec[0m[0m
++[1m/bin/bash -lc 'git status --short; gh run list --commit be2c9fe --limit 5 --json databaseId,name,status,conclusion,url 2>/dev/null || true'[0m in /home/ubuntu/project/soloview
++diff --git a/src/webview/viewer.css b/src/webview/viewer.css
++index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
++--- a/src/webview/viewer.css
+++++ b/src/webview/viewer.css
++@@ -25,7 +25,7 @@
++ 
++ .toolbar {
++   height: 52px; display: flex; align-items: center; justify-content: space-between;
++-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
+++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
++   background: var(--surface-raised);
++ }
++ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
++
++[32m succeeded in 893ms:[0m
++[]
++
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc "sed -n '1,45p' .github/workflows/ci.yml; sed -n '1,35p' .github/workflows/security.yml; sleep 2; gh run list --branch main --limit 6 --json databaseId,name,headSha,status,conclusion,url"[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 2858ms:[0m
+[{"conclusion":"","databaseId":29491787721,"headSha":"be2c9fe1bd62d16be518190a7bd34cdf9177b997","name":"CI","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491787721"},{"conclusion":"","databaseId":29491788081,"headSha":"be2c9fe1bd62d16be518190a7bd34cdf9177b997","name":"Publish VS Code Extension","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491788081"},{"conclusion":"","databaseId":29491787621,"headSha":"be2c9fe1bd62d16be518190a7bd34cdf9177b997","name":"Security","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491787621"},{"conclusion":"success","databaseId":29478997860,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"Security","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997860"},{"conclusion":"success","databaseId":29478997745,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"CI","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997745"},{"conclusion":"success","databaseId":29478997830,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"Publish VS Code Extension","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997830"}]
+
+[35m[3mcodex[0m[0m
+远端已启动 CI、安全检查和自动发布，当前三项均在运行。我会等它们结束并核对结果，避免只以本地通过作为完成依据。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491787721 --exit-status'[0m in /home/ubuntu/project/soloview
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491787621 --exit-status'[0m in /home/ubuntu/project/soloview
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491788081 --exit-status'[0m in /home/ubuntu/project/soloview
+[32m succeeded in 7086ms:[0m
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29491787721
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87599393511)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  ✓ Post Setup Node.js
+  * Post Checkout
+✓ main CI · 29491787721
+Triggered via push less than a minute ago
+
+JOBS
+✓ Build, test and package in 20s (ID 87599393511)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  ✓ Post Setup Node.js
+  ✓ Post Checkout
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build, test and package: .github#2
+
+
+[32m succeeded in 7133ms:[0m
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Security · 29491787621
+Triggered via push less than a minute ago
+
+JOBS
+* dependency-audit (ID 87599393413)
+  ✓ Set up job
+  ✓ Run actions/checkout@v5
+  ✓ Run actions/setup-node@v5
+  ✓ Run npm ci
+  ✓ Run npm audit --audit-level=high
+  * Post Run actions/setup-node@v5
+  * Post Run actions/checkout@v5
+✓ main Security · 29491787621
+Triggered via push less than a minute ago
+
+JOBS
+✓ dependency-audit in 21s (ID 87599393413)
+  ✓ Set up job
+  ✓ Run actions/checkout@v5
+  ✓ Run actions/setup-node@v5
+  ✓ Run npm ci
+  ✓ Run npm audit --audit-level=high
+  ✓ Post Run actions/setup-node@v5
+  ✓ Post Run actions/checkout@v5
+  ✓ Complete job
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run view 29491788081 --json status,conclusion,url,headSha,jobs'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 1285ms:[0m
+{"conclusion":"","headSha":"be2c9fe1bd62d16be518190a7bd34cdf9177b997","jobs":[{"completedAt":"0001-01-01T00:00:00Z","conclusion":"","databaseId":87599394894,"name":"publish","startedAt":"2026-07-16T10:42:42Z","status":"in_progress","steps":[{"conclusion":"success","name":"Set up job","number":1,"status":"completed"},{"conclusion":"success","name":"Checkout","number":2,"status":"completed"},{"conclusion":"success","name":"Setup Node.js","number":3,"status":"completed"},{"conclusion":"success","name":"Install dependencies","number":4,"status":"completed"},{"conclusion":"success","name":"Configure Git","number":5,"status":"completed"},{"conclusion":"success","name":"Resolve release version","number":6,"status":"completed"},{"conclusion":"success","name":"Validate publishing secrets","number":7,"status":"completed"},{"conclusion":"success","name":"Check and package","number":8,"status":"completed"},{"conclusion":"success","name":"Push version commit and tag","number":9,"status":"completed"},{"conclusion":"success","name":"Publish to Visual Studio Marketplace","number":10,"status":"completed"},{"conclusion":"success","name":"Publish to Open VSX","number":11,"status":"completed"},{"conclusion":"success","name":"Create GitHub Release","number":12,"status":"completed"},{"conclusion":"","name":"Verify marketplace availability","number":13,"status":"in_progress"},{"conclusion":"","name":"Post Setup Node.js","number":25,"status":"pending"},{"conclusion":"","name":"Post Checkout","number":26,"status":"pending"}],"url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491788081/job/87599394894"}],"status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491788081"}
+
+[35m[3mcodex[0m[0m
+CI 与安全检查已经通过；版本也已发布到两个市场并创建 Release，目前只剩发布工作流的市场可见性轮询尚未结束。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491788081 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run view 29491788081 --json status,conclusion,jobs'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 1142ms:[0m
+{"conclusion":"","jobs":[{"completedAt":"0001-01-01T00:00:00Z","conclusion":"","databaseId":87599394894,"name":"publish","startedAt":"2026-07-16T10:42:42Z","status":"in_progress","steps":[{"conclusion":"success","name":"Set up job","number":1,"status":"completed"},{"conclusion":"success","name":"Checkout","number":2,"status":"completed"},{"conclusion":"success","name":"Setup Node.js","number":3,"status":"completed"},{"conclusion":"success","name":"Install dependencies","number":4,"status":"completed"},{"conclusion":"success","name":"Configure Git","number":5,"status":"completed"},{"conclusion":"success","name":"Resolve release version","number":6,"status":"completed"},{"conclusion":"success","name":"Validate publishing secrets","number":7,"status":"completed"},{"conclusion":"success","name":"Check and package","number":8,"status":"completed"},{"conclusion":"success","name":"Push version commit and tag","number":9,"status":"completed"},{"conclusion":"success","name":"Publish to Visual Studio Marketplace","number":10,"status":"completed"},{"conclusion":"success","name":"Publish to Open VSX","number":11,"status":"completed"},{"conclusion":"success","name":"Create GitHub Release","number":12,"status":"completed"},{"conclusion":"","name":"Verify marketplace availability","number":13,"status":"in_progress"},{"conclusion":"","name":"Post Setup Node.js","number":25,"status":"pending"},{"conclusion":"","name":"Post Checkout","number":26,"status":"pending"}],"url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491788081/job/87599394894"}],"status":"in_progress"}
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491788081 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run view 29491788081 --json status,conclusion,jobs'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[32m succeeded in 1631ms:[0m
+{"conclusion":"","jobs":[{"completedAt":"0001-01-01T00:00:00Z","conclusion":"","databaseId":87599394894,"name":"publish","startedAt":"2026-07-16T10:42:42Z","status":"in_progress","steps":[{"conclusion":"success","name":"Set up job","number":1,"status":"completed"},{"conclusion":"success","name":"Checkout","number":2,"status":"completed"},{"conclusion":"success","name":"Setup Node.js","number":3,"status":"completed"},{"conclusion":"success","name":"Install dependencies","number":4,"status":"completed"},{"conclusion":"success","name":"Configure Git","number":5,"status":"completed"},{"conclusion":"success","name":"Resolve release version","number":6,"status":"completed"},{"conclusion":"success","name":"Validate publishing secrets","number":7,"status":"completed"},{"conclusion":"success","name":"Check and package","number":8,"status":"completed"},{"conclusion":"success","name":"Push version commit and tag","number":9,"status":"completed"},{"conclusion":"success","name":"Publish to Visual Studio Marketplace","number":10,"status":"completed"},{"conclusion":"success","name":"Publish to Open VSX","number":11,"status":"completed"},{"conclusion":"success","name":"Create GitHub Release","number":12,"status":"completed"},{"conclusion":"","name":"Verify marketplace availability","number":13,"status":"in_progress"},{"conclusion":"","name":"Post Setup Node.js","number":25,"status":"pending"},{"conclusion":"","name":"Post Checkout","number":26,"status":"pending"}],"url":"https://github.com/jobssteve164dev/soloview/actions/runs/29491788081/job/87599394894"}],"status":"in_progress"}
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29491788081 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[35m[3mcodex[0m[0m
+已去掉窗口头部导航栏左右各 12px 的留白，导航现在贴合窗口两侧；移动端仅保留上下间距。[viewer.css](/home/ubuntu/project/soloview/src/webview/viewer.css:26)
+
+- `npm run check`：9 项测试通过
+- Chromium 桌面/窄窗口验证：左右间距均为 `0px`
+- CI、安全检查通过
+- 已提交并推送：`be2c9fe`
+- 双市场发布与 GitHub Release 已执行成功；市场可见性轮询仍在进行
+
+本次对话更适合仅保留在 Solo。
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 6f5e93a2d45f77060225dc08b93142ed54e4337d..9dee7145de3675ef3cc394382c61a239fc4fdfe7
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+
+[2mtokens used[0m
+77,785
+已去掉窗口头部导航栏左右各 12px 的留白，导航现在贴合窗口两侧；移动端仅保留上下间距。[viewer.css](/home/ubuntu/project/soloview/src/webview/viewer.css:26)
+
+- `npm run check`：9 项测试通过
+- Chromium 桌面/窄窗口验证：左右间距均为 `0px`
+- CI、安全检查通过
+- 已提交并推送：`be2c9fe`
+- 双市场发布与 GitHub Release 已执行成功；市场可见性轮询仍在进行
+
+本次对话更适合仅保留在 Solo。
