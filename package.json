@@ -3,8 +3,12 @@
   "displayName": "SoloView",
   "description": "在 VS Code 中本地查看 PDF、Word、Excel 和 PowerPoint 文档。",
   "version": "0.1.0",
-  "publisher": "soloview",
+  "publisher": "SZLK",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jobssteve164dev/soloview.git"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },

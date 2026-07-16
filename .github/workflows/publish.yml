@@ -1,0 +1,145 @@
+name: Publish VS Code Extension
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve and validate version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "$TAG" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match package version ${VERSION}."
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "vsix=soloview-${VERSION}.vsix" >> "$GITHUB_OUTPUT"
+
+      - name: Validate publishing secrets
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          test -n "$VSCE_PAT" || { echo "::error::VSCE_PAT is empty."; exit 1; }
+          test -n "$OVSX_PAT" || { echo "::error::OVSX_PAT is empty."; exit 1; }
+          npx --yes ovsx -p "$OVSX_PAT" verify-pat SZLK
+
+      - name: Check and package
+        run: |
+          npm run check
+          npx vsce package --no-dependencies --out "${{ steps.version.outputs.vsix }}"
+
+      - name: Publish to Visual Studio Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          for attempt in 1 2 3; do
+            npx vsce publish --packagePath "${{ steps.version.outputs.vsix }}" --skip-duplicate && exit 0
+            [ "$attempt" = 3 ] && exit 1
+            sleep 15
+          done
+
+      - name: Publish to Open VSX
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          for attempt in 1 2 3; do
+            npx --yes ovsx -p "$OVSX_PAT" publish "${{ steps.version.outputs.vsix }}" --skip-duplicate && exit 0
+            [ "$attempt" = 3 ] && exit 1
+            sleep 15
+          done
+
+      - name: Ensure release tag
+        if: github.ref_type != 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -a "${{ steps.version.outputs.tag }}" -m "${{ steps.version.outputs.tag }}" "${GITHUB_SHA}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "${{ steps.version.outputs.vsix }}" --clobber
+          else
+            gh release create "$TAG" "${{ steps.version.outputs.vsix }}" --title "$TAG" --generate-notes --latest
+          fi
+
+      - name: Verify marketplace availability
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          node <<'NODE'
+          const expected = process.env.VERSION;
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          async function retry(label, verify) {
+            for (let attempt = 1; attempt <= 30; attempt += 1) {
+              try {
+                if (await verify()) {
+                  console.log(`${label} verified at ${expected}.`);
+                  return;
+                }
+              } catch (error) {
+                console.log(`${label} check ${attempt} pending: ${error.message}`);
+              }
+              await sleep(20_000);
+            }
+            throw new Error(`${label} did not expose ${expected} within the verification window.`);
+          }
+          await retry('Open VSX', async () => {
+            const response = await fetch(`https://open-vsx.org/api/SZLK/soloview/${expected}`);
+            if (!response.ok) return false;
+            const data = await response.json();
+            return data.namespace === 'SZLK' && data.name === 'soloview' && data.version === expected;
+          });
+          await retry('Visual Studio Marketplace', async () => {
+            const response = await fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                accept: 'application/json;api-version=7.2-preview.1',
+              },
+              body: JSON.stringify({
+                filters: [{ criteria: [{ filterType: 7, value: 'SZLK.soloview' }] }],
+                flags: 914,
+              }),
+            });
+            if (!response.ok) return false;
+            const data = await response.json();
+            const extension = data.results?.flatMap((result) => result.extensions ?? [])[0];
+            return extension?.versions?.some((version) => version.version === expected) ?? false;
+          });
+          NODE
