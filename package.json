@@ -51,7 +51,7 @@
       "soloview-sidebar-container": [
         {
           "id": "soloview.sidebar",
-          "name": "%view.recent%"
+          "name": "SoloView"
         }
       ]
     },
@@ -101,7 +101,23 @@
         ],
         "priority": "default"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "SoloView",
+      "properties": {
+        "soloview.language": {
+          "type": "string",
+          "default": "auto",
+          "enum": ["auto", "en", "zh"],
+          "enumDescriptions": [
+            "%configuration.language.auto%",
+            "%configuration.language.en%",
+            "%configuration.language.zh%"
+          ],
+          "description": "%configuration.language.description%"
+        }
+      }
+    }
   },
   "scripts": {
     "build": "node build.mjs",

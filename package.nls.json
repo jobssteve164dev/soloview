@@ -3,6 +3,10 @@
   "command.open": "Open Document",
   "command.clearRecent": "Clear Recent Documents",
   "view.recent": "Recent Documents",
+  "configuration.language.description": "Language used across the SoloView viewer and sidebar.",
+  "configuration.language.auto": "Follow VS Code",
+  "configuration.language.en": "English",
+  "configuration.language.zh": "Simplified Chinese",
   "view.welcome": "Your recent documents will appear here.\n[Open a document](command:soloview.openDocument)",
   "editor.displayName": "SoloView Document Viewer"
 }

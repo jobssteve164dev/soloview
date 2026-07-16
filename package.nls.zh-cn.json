@@ -3,6 +3,10 @@
   "command.open": "打开文档",
   "command.clearRecent": "清空最近打开",
   "view.recent": "最近打开",
+  "configuration.language.description": "SoloView 文档查看器与侧边栏统一使用的语言。",
+  "configuration.language.auto": "跟随 VS Code",
+  "configuration.language.en": "English",
+  "configuration.language.zh": "简体中文",
   "view.welcome": "最近打开的文档会显示在这里。\n[打开文档](command:soloview.openDocument)",
   "editor.displayName": "SoloView 文档查看器"
 }

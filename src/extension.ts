@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { readFileSync } from 'node:fs';
 import { documentTypeForPath } from './documentTypes.js';
 import { RecentDocuments, type RecentDocument } from './recentDocuments.js';
 
@@ -6,13 +7,24 @@ export { documentTypeForPath } from './documentTypes.js';
 
 const viewType = 'soloview.documentViewer';
 const sidebarViewType = 'soloview.sidebar';
-const hostCopy = vscode.env.language.toLowerCase().startsWith('zh') ? {
+type Locale = 'zh' | 'en';
+
+function resolveLocale(): Locale {
+  const configured = vscode.workspace.getConfiguration('soloview').get<string>('language', 'auto').toLowerCase();
+  if (configured === 'zh' || configured === 'zh-cn') return 'zh';
+  if (configured === 'en') return 'en';
+  return vscode.env.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+}
+
+function hostCopy() {
+  return resolveLocale() === 'zh' ? {
   open: '打开文档', openInSoloView: '在 SoloView 中打开', supported: '支持的文档',
-  clearQuestion: '清空 SoloView 最近打开记录？', clear: '清空',
+  clearQuestion: '清空 SoloView 最近打开记录？', clear: '清空', recent: '最近文件',
 } : {
   open: 'Open Document', openInSoloView: 'Open in SoloView', supported: 'Supported documents',
-  clearQuestion: 'Clear SoloView recent documents?', clear: 'Clear',
+  clearQuestion: 'Clear SoloView recent documents?', clear: 'Clear', recent: 'Recent Files',
 };
+}
 
 class SoloViewDocument implements vscode.CustomDocument {
   constructor(readonly uri: vscode.Uri) {}
@@ -38,7 +50,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       enableScripts: true,
       localResourceRoots: [vscode.Uri.joinPath(this.context.extensionUri, 'dist')],
     };
-    panel.webview.html = this.html(panel.webview, document.uri, type, vscode.env.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+    panel.webview.html = this.html(panel.webview, document.uri, type, resolveLocale());
 
     if (!type) {
       return;
@@ -68,6 +80,9 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       if (message?.kind === 'openExternal') {
         void vscode.commands.executeCommand('revealFileInOS', document.uri);
       }
+      if (message?.kind === 'setLanguage' && (message.locale === 'zh' || message.locale === 'en')) {
+        void vscode.workspace.getConfiguration('soloview').update('language', message.locale, vscode.ConfigurationTarget.Global);
+      }
     });
 
     const watcher = vscode.workspace.createFileSystemWatcher(
@@ -82,7 +97,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 
   private html(webview: vscode.Webview, uri: vscode.Uri, type: string | undefined, locale: 'zh' | 'en'): string {
     const script = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview.js'));
-    const style = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'viewer.css'));
+    const styles = readFileSync(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'viewer.css').fsPath, 'utf8');
     const worker = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdf.worker.min.mjs'));
     const nonce = crypto.randomUUID().replaceAll('-', '');
     const title = escapeHtml(uri.path.split('/').pop() ?? 'Document');
@@ -101,8 +116,8 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' ${webview.cspSource}; worker-src ${webview.cspSource} blob:;">
-  <link rel="stylesheet" href="${style}">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}' ${webview.cspSource}; worker-src ${webview.cspSource} blob:;">
+  <style nonce="${nonce}">${styles}</style>
   <title>${title}</title>
 </head>
 <body data-pdf-worker="${worker}" data-initial-locale="${locale}">
@@ -158,7 +173,7 @@ class RecentDocumentsProvider implements vscode.TreeDataProvider<RecentDocument>
     item.tooltip = new vscode.MarkdownString(`**${escapeMarkdown(document.name)}**\n\n${escapeMarkdown(uri.fsPath || uri.path)}`);
     item.command = {
       command: 'vscode.openWith',
-      title: hostCopy.open,
+      title: hostCopy().open,
       arguments: [uri, viewType],
     };
     item.contextValue = 'soloview.recentDocument';
@@ -186,6 +201,13 @@ function recentDocumentForUri(uri: vscode.Uri): RecentDocument {
 export function activate(context: vscode.ExtensionContext): void {
   const recent = new RecentDocuments(context.globalState);
   const recentProvider = new RecentDocumentsProvider(recent);
+  const recentView = vscode.window.createTreeView(sidebarViewType, { treeDataProvider: recentProvider });
+  const localizeSidebar = (): void => {
+    recentView.title = 'SoloView';
+    recentView.description = hostCopy().recent;
+    recentProvider.refresh();
+  };
+  localizeSidebar();
   const recordOpened = (uri: vscode.Uri): void => {
     void recent.add(recentDocumentForUri(uri)).then(() => recentProvider.refresh());
   };
@@ -195,15 +217,18 @@ export function activate(context: vscode.ExtensionContext): void {
       supportsMultipleEditorsPerDocument: true,
       webviewOptions: { retainContextWhenHidden: true },
     }),
-    vscode.window.registerTreeDataProvider(sidebarViewType, recentProvider),
+    recentView,
+    vscode.workspace.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration('soloview.language')) localizeSidebar();
+    }),
     vscode.commands.registerCommand('soloview.openDocument', async () => {
       const selected = await vscode.window.showOpenDialog({
         canSelectFiles: true,
         canSelectFolders: false,
         canSelectMany: false,
-        openLabel: hostCopy.openInSoloView,
+        openLabel: hostCopy().openInSoloView,
         filters: {
-          [hostCopy.supported]: ['pdf', 'docx', 'xlsx', 'xls', 'csv', 'pptx'],
+          [hostCopy().supported]: ['pdf', 'docx', 'xlsx', 'xls', 'csv', 'pptx'],
         },
       });
       const uri = selected?.[0];
@@ -213,8 +238,9 @@ export function activate(context: vscode.ExtensionContext): void {
     }),
     vscode.commands.registerCommand('soloview.clearRecent', async () => {
       if (recent.list().length === 0) return;
-      const answer = await vscode.window.showInformationMessage(hostCopy.clearQuestion, { modal: true }, hostCopy.clear);
-      if (answer === hostCopy.clear) {
+      const copy = hostCopy();
+      const answer = await vscode.window.showInformationMessage(copy.clearQuestion, { modal: true }, copy.clear);
+      if (answer === copy.clear) {
         await recent.clear();
         recentProvider.refresh();
       }
