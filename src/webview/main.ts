@@ -52,7 +52,11 @@ requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => se
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
 requiredElement<HTMLButtonElement>('open-external').addEventListener('click', () => vscode.postMessage({ kind: 'openExternal' }));
-requiredElement<HTMLButtonElement>('language-toggle').addEventListener('click', () => setLocale(locale === 'zh' ? 'en' : 'zh'));
+requiredElement<HTMLButtonElement>('language-toggle').addEventListener('click', () => {
+  const next = locale === 'zh' ? 'en' : 'zh';
+  setLocale(next);
+  vscode.postMessage({ kind: 'setLanguage', locale: next });
+});
 setLocale(locale);
 
 window.addEventListener('message', (event: MessageEvent<OpenMessage | { kind: 'error'; message: string }>) => {
