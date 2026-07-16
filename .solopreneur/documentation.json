@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-16T07:04:06.791Z",
+  "updatedAt": "2026-07-16T07:06:48.495Z",
   "documents": [
     {
       "path": "README.md",
@@ -32,19 +32,17 @@
       "path": "README.md",
       "reason": "文档内容疑似包含 prompt、终端输出或执行流水，不适合进入长期项目解释性文档。",
       "severity": "warning",
-      "detectedAt": "2026-07-16T07:04:06.667Z",
+      "detectedAt": "2026-07-16T07:04:25.719Z",
       "source": "documentation_audit"
     }
   ],
   "lastAudit": {
-    "auditedAt": "2026-07-16T07:04:06.667Z",
+    "auditedAt": "2026-07-16T07:06:30.736Z",
     "runKind": "solo",
     "nodeId": "__solo__",
-    "status": "Completed",
-    "action": "needs_review",
-    "touchedDocuments": [
-      "README.md"
-    ],
+    "status": "Failed",
+    "action": "none",
+    "touchedDocuments": [],
     "pendingReviewCount": 1
   }
 }
