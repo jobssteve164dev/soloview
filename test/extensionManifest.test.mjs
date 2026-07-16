@@ -14,6 +14,7 @@ const extensionSource = await readFile(
   'utf8',
 );
 const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
+const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
 const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
 const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
 
@@ -61,4 +62,10 @@ test('文档查看器提供可记忆的中英文切换', () => {
   assert.match(webviewSource, /setState\(\{ locale \}\)/);
   assert.match(webviewSource, /languageLabel: 'EN'/);
   assert.match(webviewSource, /languageLabel: '中文'/);
+});
+
+test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {
+  assert.match(viewerStyles, /\.sheet-tabs\[hidden\]\s*\{\s*display:\s*none;/);
+  assert.match(viewerStyles, /gap:\s*16px;\s*padding:\s*0 16px;/);
+  assert.match(viewerStyles, /padding:\s*8px 12px;/);
 });
