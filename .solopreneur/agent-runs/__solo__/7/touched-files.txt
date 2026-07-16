@@ -1,0 +1,10 @@
+M dist/documentTypes.cjs
+M dist/extension.js
+M dist/pdf.worker.min.mjs
+M dist/recentDocuments.cjs
+M dist/viewer.css
+M dist/webview.js
+M package-lock.json
+M package.json
+M src/webview/viewer.css
+M test/extensionManifest.test.mjs
