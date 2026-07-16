@@ -2,7 +2,7 @@
   "name": "soloview",
   "displayName": "SoloView",
   "description": "%extension.description%",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "publisher": "SZLK",
   "license": "MIT",
   "repository": {
@@ -108,7 +108,11 @@
         "soloview.language": {
           "type": "string",
           "default": "auto",
-          "enum": ["auto", "en", "zh"],
+          "enum": [
+            "auto",
+            "en",
+            "zh"
+          ],
           "enumDescriptions": [
             "%configuration.language.auto%",
             "%configuration.language.en%",
