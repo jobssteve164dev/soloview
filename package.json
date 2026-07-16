@@ -1,0 +1,50 @@
+{
+  "name": "soloview",
+  "displayName": "SoloView",
+  "description": "在 VS Code 中本地查看 PDF、Word、Excel 和 PowerPoint 文档。",
+  "version": "0.1.0",
+  "publisher": "soloview",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "soloview.documentViewer",
+        "displayName": "SoloView 文档查看器",
+        "selector": [
+          { "filenamePattern": "*.pdf" },
+          { "filenamePattern": "*.docx" },
+          { "filenamePattern": "*.xlsx" },
+          { "filenamePattern": "*.xls" },
+          { "filenamePattern": "*.csv" },
+          { "filenamePattern": "*.pptx" }
+        ],
+        "priority": "default"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "tsc --noEmit && npm run build && node --test",
+    "watch": "node build.mjs --watch",
+    "package": "npm run check && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.6.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  },
+  "dependencies": {
+    "@aiden0z/pptx-renderer": "^1.2.4",
+    "docx-preview": "^0.4.0",
+    "pdfjs-dist": "^6.1.200",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}

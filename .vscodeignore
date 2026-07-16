@@ -1,0 +1,9 @@
+.git/**
+.gitignore
+.github/**
+src/**
+test/**
+tsconfig.json
+build.mjs
+dist/*.map
+dist/documentTypes.js

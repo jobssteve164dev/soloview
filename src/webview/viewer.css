@@ -1,0 +1,87 @@
+:root {
+  color-scheme: light dark;
+  --surface: var(--vscode-editor-background);
+  --surface-raised: var(--vscode-sideBar-background);
+  --text: var(--vscode-editor-foreground);
+  --muted: var(--vscode-descriptionForeground);
+  --border: var(--vscode-panel-border);
+  --accent: var(--vscode-focusBorder);
+  --button: var(--vscode-button-background);
+  --button-text: var(--vscode-button-foreground);
+  --shadow: 0 8px 28px rgb(0 0 0 / 18%);
+  font-family: var(--vscode-font-family);
+}
+
+* { box-sizing: border-box; }
+
+html, body { min-height: 100%; margin: 0; background: var(--surface); color: var(--text); }
+body { overflow: hidden; }
+
+.skip-link {
+  position: fixed; left: 12px; top: -60px; z-index: 100;
+  padding: 8px 12px; background: var(--button); color: var(--button-text);
+}
+.skip-link:focus { top: 8px; }
+
+.toolbar {
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 0 12px; border-bottom: 1px solid var(--border);
+  background: var(--surface-raised);
+}
+.document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+.file-mark {
+  flex: none; min-width: 38px; padding: 3px 5px; border: 1px solid var(--border);
+  border-radius: 4px; color: var(--muted); font-size: 10px; font-weight: 700; text-align: center;
+}
+.document-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+button {
+  min-height: 32px; border: 1px solid var(--vscode-button-border, transparent); border-radius: 4px;
+  padding: 0 10px; background: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground);
+  font: inherit; cursor: pointer;
+}
+button:hover { background: var(--vscode-button-secondaryHoverBackground); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#zoom-in, #zoom-out { width: 34px; padding: 0; font-size: 18px; }
+#zoom-value { min-width: 48px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.sheet-tabs {
+  height: 40px; display: flex; gap: 4px; align-items: end; padding: 4px 12px 0;
+  overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface-raised);
+}
+.sheet-tabs button { flex: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.sheet-tabs button.active { background: var(--surface); color: var(--text); border-bottom-color: var(--surface); }
+
+#document-content { height: calc(100vh - 52px); overflow: auto; outline: none; }
+.sheet-tabs:not([hidden]) + #document-content { height: calc(100vh - 92px); }
+.viewer {
+  --viewer-zoom: 1;
+  min-height: 100%; padding: 24px;
+  transform-origin: top center;
+}
+.viewer > * { zoom: var(--viewer-zoom); }
+.status {
+  position: absolute; inset: 52px 0 0; z-index: 5; display: grid; place-content: center;
+  justify-items: center; gap: 10px; padding: 32px; text-align: center; background: var(--surface);
+}
+.status[hidden] { display: none; }
+.status h1 { margin: 0; font-size: 20px; }
+.status p { max-width: 52ch; margin: 0; color: var(--muted); line-height: 1.5; }
+.spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 800ms linear infinite; }
+.error-symbol { display: grid; place-content: center; width: 40px; height: 40px; border: 2px solid var(--vscode-errorForeground); border-radius: 50%; color: var(--vscode-errorForeground); font-weight: 700; }
+
+.pdf-page { display: block; max-width: 100%; height: auto; margin: 0 auto 20px; background: white; box-shadow: var(--shadow); }
+.docx-wrapper { background: transparent !important; padding: 0 !important; }
+.docx-wrapper > section.docx { margin: 0 auto 20px; box-shadow: var(--shadow); }
+.pptx-viewer, .slide { margin-inline: auto; }
+#workbook-table { border-collapse: collapse; min-width: 100%; background: var(--vscode-editor-background); }
+#workbook-table td, #workbook-table th { min-width: 80px; padding: 6px 8px; border: 1px solid var(--border); white-space: pre-wrap; }
+#workbook-table tr:first-child { position: sticky; top: 0; z-index: 1; background: var(--surface-raised); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1600ms; } }
+@media (max-width: 720px) {
+  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding-block: 8px; }
+  .toolbar-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+  #document-content { height: calc(100vh - 104px); }
+  .viewer { padding: 12px; }
+}
