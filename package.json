@@ -2,7 +2,7 @@
   "name": "soloview",
   "displayName": "SoloView",
   "description": "在 VS Code 中本地查看 PDF、Word、Excel 和 PowerPoint 文档。",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "SZLK",
   "license": "MIT",
   "repository": {
@@ -12,7 +12,9 @@
   "engines": {
     "vscode": "^1.90.0"
   },
-  "categories": ["Other"],
+  "categories": [
+    "Other"
+  ],
   "main": "./dist/extension.js",
   "activationEvents": [
     "onView:soloview.recentDocuments",
@@ -77,12 +79,24 @@
         "viewType": "soloview.documentViewer",
         "displayName": "SoloView 文档查看器",
         "selector": [
-          { "filenamePattern": "*.pdf" },
-          { "filenamePattern": "*.docx" },
-          { "filenamePattern": "*.xlsx" },
-          { "filenamePattern": "*.xls" },
-          { "filenamePattern": "*.csv" },
-          { "filenamePattern": "*.pptx" }
+          {
+            "filenamePattern": "*.pdf"
+          },
+          {
+            "filenamePattern": "*.docx"
+          },
+          {
+            "filenamePattern": "*.xlsx"
+          },
+          {
+            "filenamePattern": "*.xls"
+          },
+          {
+            "filenamePattern": "*.csv"
+          },
+          {
+            "filenamePattern": "*.pptx"
+          }
         ],
         "priority": "default"
       }
