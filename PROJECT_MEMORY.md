@@ -13,6 +13,7 @@ This file stores stable project facts future agents should reuse. Do not paste r
 
 - 首版保持本地只读查看，不执行宏、不上传文档。
 - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+- 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
 
 ## Architecture Boundaries
 

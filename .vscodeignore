@@ -12,3 +12,4 @@ build.mjs
 dist/*.map
 dist/documentTypes.js
 dist/recentDocuments.js
+resources/branding/**

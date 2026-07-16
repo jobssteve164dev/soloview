@@ -1,7 +1,7 @@
 {
   "name": "soloview",
   "displayName": "SoloView",
-  "description": "在 VS Code 中本地查看 PDF、Word、Excel 和 PowerPoint 文档。",
+  "description": "%extension.description%",
   "version": "0.1.4",
   "publisher": "SZLK",
   "license": "MIT",
@@ -15,6 +15,7 @@
   "categories": [
     "Other"
   ],
+  "icon": "resources/soloview-market.png",
   "main": "./dist/extension.js",
   "activationEvents": [
     "onView:soloview.sidebar",
@@ -26,13 +27,13 @@
     "commands": [
       {
         "command": "soloview.openDocument",
-        "title": "打开文档",
+        "title": "%command.open%",
         "category": "SoloView",
         "icon": "$(folder-opened)"
       },
       {
         "command": "soloview.clearRecent",
-        "title": "清空最近打开",
+        "title": "%command.clearRecent%",
         "category": "SoloView",
         "icon": "$(clear-all)"
       }
@@ -50,14 +51,14 @@
       "soloview-sidebar-container": [
         {
           "id": "soloview.sidebar",
-          "name": "最近打开"
+          "name": "%view.recent%"
         }
       ]
     },
     "viewsWelcome": [
       {
         "view": "soloview.sidebar",
-        "contents": "最近打开的文档会显示在这里。\n[打开文档](command:soloview.openDocument)"
+        "contents": "%view.welcome%"
       }
     ],
     "menus": {
@@ -77,7 +78,7 @@
     "customEditors": [
       {
         "viewType": "soloview.documentViewer",
-        "displayName": "SoloView 文档查看器",
+        "displayName": "%editor.displayName%",
         "selector": [
           {
             "filenamePattern": "*.pdf"

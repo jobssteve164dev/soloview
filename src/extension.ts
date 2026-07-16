@@ -6,6 +6,13 @@ export { documentTypeForPath } from './documentTypes.js';
 
 const viewType = 'soloview.documentViewer';
 const sidebarViewType = 'soloview.sidebar';
+const hostCopy = vscode.env.language.toLowerCase().startsWith('zh') ? {
+  open: '打开文档', openInSoloView: '在 SoloView 中打开', supported: '支持的文档',
+  clearQuestion: '清空 SoloView 最近打开记录？', clear: '清空',
+} : {
+  open: 'Open Document', openInSoloView: 'Open in SoloView', supported: 'Supported documents',
+  clearQuestion: 'Clear SoloView recent documents?', clear: 'Clear',
+};
 
 class SoloViewDocument implements vscode.CustomDocument {
   constructor(readonly uri: vscode.Uri) {}
@@ -31,7 +38,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       enableScripts: true,
       localResourceRoots: [vscode.Uri.joinPath(this.context.extensionUri, 'dist')],
     };
-    panel.webview.html = this.html(panel.webview, document.uri, type);
+    panel.webview.html = this.html(panel.webview, document.uri, type, vscode.env.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
 
     if (!type) {
       return;
@@ -43,13 +50,13 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
         await panel.webview.postMessage({
           kind: 'open',
           type,
-          name: document.uri.path.split('/').pop() ?? '文档',
+          name: document.uri.path.split('/').pop() ?? 'Document',
           bytes,
         });
       } catch (error) {
         await panel.webview.postMessage({
           kind: 'error',
-          message: error instanceof Error ? error.message : '无法读取文档。',
+          message: error instanceof Error ? error.message : 'Unable to read the document.',
         });
       }
     };
@@ -73,15 +80,24 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
     });
   }
 
-  private html(webview: vscode.Webview, uri: vscode.Uri, type: string | undefined): string {
+  private html(webview: vscode.Webview, uri: vscode.Uri, type: string | undefined, locale: 'zh' | 'en'): string {
     const script = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview.js'));
     const style = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'viewer.css'));
     const worker = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdf.worker.min.mjs'));
     const nonce = crypto.randomUUID().replaceAll('-', '');
-    const title = escapeHtml(uri.path.split('/').pop() ?? '文档');
-    const unsupported = type ? '' : '<p class="error-copy">SoloView 暂不支持这种文件格式。</p>';
+    const title = escapeHtml(uri.path.split('/').pop() ?? 'Document');
+    const copy = locale === 'zh' ? {
+      skip: '跳到文档内容', toolbar: '文档工具栏', zoomOut: '缩小', zoomIn: '放大', reload: '重新载入',
+      reveal: '在文件夹中显示', sheets: '工作表', opening: '正在打开文档…', content: '文档内容',
+      unsupported: 'SoloView 暂不支持这种文件格式。', language: '切换为英文', languageLabel: 'EN',
+    } : {
+      skip: 'Skip to document', toolbar: 'Document toolbar', zoomOut: 'Zoom out', zoomIn: 'Zoom in', reload: 'Reload',
+      reveal: 'Show in folder', sheets: 'Worksheets', opening: 'Opening document…', content: 'Document content',
+      unsupported: 'SoloView does not support this file format yet.', language: 'Switch to Chinese', languageLabel: '中文',
+    };
+    const unsupported = type ? '' : `<p class="error-copy" data-i18n="unsupported">${copy.unsupported}</p>`;
     return `<!doctype html>
-<html lang="zh-CN">
+<html lang="${locale === 'zh' ? 'zh-CN' : 'en'}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,29 +105,30 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
   <link rel="stylesheet" href="${style}">
   <title>${title}</title>
 </head>
-<body data-pdf-worker="${worker}">
-  <a class="skip-link" href="#document-content">跳到文档内容</a>
-  <header class="toolbar" aria-label="文档工具栏">
+<body data-pdf-worker="${worker}" data-initial-locale="${locale}">
+  <a class="skip-link" href="#document-content" data-i18n="skip">${copy.skip}</a>
+  <header class="toolbar" aria-label="${copy.toolbar}" data-i18n-aria="toolbar">
     <div class="document-identity">
       <span class="file-mark" aria-hidden="true">${(type ?? '?').toUpperCase()}</span>
       <span class="document-title" title="${title}">${title}</span>
     </div>
     <div class="toolbar-actions">
-      <button id="zoom-out" type="button" aria-label="缩小">−</button>
+      <button id="zoom-out" type="button" aria-label="${copy.zoomOut}" data-i18n-aria="zoomOut">−</button>
       <output id="zoom-value" aria-live="polite">100%</output>
-      <button id="zoom-in" type="button" aria-label="放大">+</button>
-      <button id="reload" type="button">重新载入</button>
-      <button id="open-external" type="button">在文件夹中显示</button>
+      <button id="zoom-in" type="button" aria-label="${copy.zoomIn}" data-i18n-aria="zoomIn">+</button>
+      <button id="reload" type="button" data-i18n="reload">${copy.reload}</button>
+      <button id="open-external" type="button" data-i18n="reveal">${copy.reveal}</button>
+      <button id="language-toggle" class="language-toggle" type="button" aria-label="${copy.language}" data-i18n-aria="language">${copy.languageLabel}</button>
     </div>
   </header>
-  <div id="sheet-tabs" class="sheet-tabs" role="tablist" aria-label="工作表" hidden></div>
+  <div id="sheet-tabs" class="sheet-tabs" role="tablist" aria-label="${copy.sheets}" data-i18n-aria="sheets" hidden></div>
   <main id="document-content" tabindex="-1">
     <section id="status" class="status" aria-live="polite">
       <div class="spinner" aria-hidden="true"></div>
-      <p>正在打开文档…</p>
+      <p data-i18n="opening">${copy.opening}</p>
       ${unsupported}
     </section>
-    <div id="viewer" class="viewer" aria-label="文档内容"></div>
+    <div id="viewer" class="viewer" aria-label="${copy.content}" data-i18n-aria="content"></div>
   </main>
   <script nonce="${nonce}" src="${script}"></script>
 </body>
@@ -141,7 +158,7 @@ class RecentDocumentsProvider implements vscode.TreeDataProvider<RecentDocument>
     item.tooltip = new vscode.MarkdownString(`**${escapeMarkdown(document.name)}**\n\n${escapeMarkdown(uri.fsPath || uri.path)}`);
     item.command = {
       command: 'vscode.openWith',
-      title: '打开文档',
+      title: hostCopy.open,
       arguments: [uri, viewType],
     };
     item.contextValue = 'soloview.recentDocument';
@@ -184,9 +201,9 @@ export function activate(context: vscode.ExtensionContext): void {
         canSelectFiles: true,
         canSelectFolders: false,
         canSelectMany: false,
-        openLabel: '在 SoloView 中打开',
+        openLabel: hostCopy.openInSoloView,
         filters: {
-          '支持的文档': ['pdf', 'docx', 'xlsx', 'xls', 'csv', 'pptx'],
+          [hostCopy.supported]: ['pdf', 'docx', 'xlsx', 'xls', 'csv', 'pptx'],
         },
       });
       const uri = selected?.[0];
@@ -196,8 +213,8 @@ export function activate(context: vscode.ExtensionContext): void {
     }),
     vscode.commands.registerCommand('soloview.clearRecent', async () => {
       if (recent.list().length === 0) return;
-      const answer = await vscode.window.showInformationMessage('清空 SoloView 最近打开记录？', { modal: true }, '清空');
-      if (answer === '清空') {
+      const answer = await vscode.window.showInformationMessage(hostCopy.clearQuestion, { modal: true }, hostCopy.clear);
+      if (answer === hostCopy.clear) {
         await recent.clear();
         recentProvider.refresh();
       }
