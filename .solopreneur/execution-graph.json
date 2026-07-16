@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-07-16T03:22:50.533Z",
+  "runCount": 1,
+  "indexes": {
+    "byNode": {
+      "1": [
+        "1-1"
+      ]
+    },
+    "byAgent": {
+      "/usr/local/bin/codex": [
+        "1-1"
+      ]
+    },
+    "byFile": {},
+    "byStatus": {
+      "Completed": [
+        "1-1"
+      ]
+    },
+    "byFailure": {},
+    "byCommand": {
+      "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --d...": [
+        "1-1"
+      ]
+    },
+    "byExperience": {
+      "exp-verification-2f850070dc222ec9": [
+        "1-1"
+      ],
+      "exp-verification-2af71afdb2793ece": [
+        "1-1"
+      ],
+      "exp-verification-b0322be030d4e439": [
+        "1-1"
+      ],
+      "exp-verification-0b85771b8287ab35": [
+        "1-1"
+      ],
+      "exp-verification-f06b7024a40f6f0a": [
+        "1-1"
+      ],
+      "exp-reusable-signal-d44bf4b957fb90e2": [
+        "1-1"
+      ],
+      "exp-handoff-action-9c8a8c6b5a4b637f": [
+        "1-1"
+      ]
+    }
+  },
+  "experienceNodes": {
+    "exp-verification-2f850070dc222ec9": {
+      "id": "exp-verification-2f850070dc222ec9",
+      "type": "verification",
+      "centralMeaning": "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-verification-2af71afdb2793ece": {
+      "id": "exp-verification-2af71afdb2793ece",
+      "type": "verification",
+      "centralMeaning": "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-verification-b0322be030d4e439": {
+      "id": "exp-verification-b0322be030d4e439",
+      "type": "verification",
+      "centralMeaning": "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-verification-0b85771b8287ab35": {
+      "id": "exp-verification-0b85771b8287ab35",
+      "type": "verification",
+      "centralMeaning": "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-verification-f06b7024a40f6f0a": {
+      "id": "exp-verification-f06b7024a40f6f0a",
+      "type": "verification",
+      "centralMeaning": "+5,发布并建立持续维护闭环,通过既有自动发布链路交付验证版本，并把兼容性、安全与市场可用性纳入可重复检查。,维护,4,codex,\"根据 workspace-validation 结果更新 CHANGELOG.md 并提交推送 main，确认自动版本、Tag、GitHub Release、Visual Studio Marketplace 和 Open VSX 全部出现同一新版本；运行或核验 CI、Security 与 Publish...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-reusable-signal-d44bf4b957fb90e2": {
+      "id": "exp-reusable-signal-d44bf4b957fb90e2",
+      "type": "reusable_signal",
+      "centralMeaning": "Completion: 已基于当前项目重写五环节定制路线图，复读检查与 bootstrap 校验均通过。",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：1",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    },
+    "exp-handoff-action-9c8a8c6b5a4b637f": {
+      "id": "exp-handoff-action-9c8a8c6b5a4b637f",
+      "type": "handoff_action",
+      "centralMeaning": "复用或复跑验证信号：+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及...",
+      "sourceKinds": [
+        "step"
+      ],
+      "sourceRefs": [
+        "1-1"
+      ],
+      "appliesWhen": [
+        "接手同一路线图入口：1",
+        "后续 Agent 需要接续上一轮未完全显式化的上下文"
+      ],
+      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
+      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run...",
+        "+4,在两类真实工作区完成验收,用至少两个不同使用场景验证插件对真实文档和用户动作有效，并把失败转成可复现回归。,验证,\"2,3\",codex,\"创建 docs/quality/workspace-validation.md，分别在常规本地工作区和远程或容器工作区安装当前 VSIX，按 test/fixtures 与至少一组脱敏真实文档逐项执行打开、切换、缩放、导航、查找、重新载入和最近打开验收；修复发现的阻断问题并补回归测试，记录环境..."
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-16T03:22:50.525Z"
+      }
+    }
+  },
+  "usageEdges": [
+    {
+      "runId": "1-1",
+      "experienceId": "exp-verification-2f850070dc222ec9",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-verification-2af71afdb2793ece",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-verification-b0322be030d4e439",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-verification-0b85771b8287ab35",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-verification-f06b7024a40f6f0a",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-reusable-signal-d44bf4b957fb90e2",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    },
+    {
+      "runId": "1-1",
+      "experienceId": "exp-handoff-action-9c8a8c6b5a4b637f",
+      "phase": "observed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/1-1.json",
+        "execution_logs:1",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:+1,建立真实文档验收基线,用代表性样本文档和明确成功标准锁定 SoloView 下一轮最值得解决的查看问题。,需求确认,,codex,\"基于 README、现有渲染适配器和调研文档，在 test/fixtures/ 下加入可安全提交的 PDF、DOCX、XLSX、PPTX 最小样本，并创建 docs/quality/document-acceptance.md，记录每类格式的用户任务、版式与交互验收项、已知边界以及样本来源；补充一个测...",
+        "check:+2,补齐统一阅读核心体验,围绕真实样本完善跨格式一致的导航与查找能力，让用户能高效读完而不只是打开文档。,开发,1,codex,\"依据 docs/quality/document-acceptance.md 审计现有 Webview，在不改变本地只读和独立渲染适配器边界的前提下，实现统一的页码或幻灯片导航、文档内查找及键盘操作；为共享状态与各格式关键路径补充测试，并运行 npm run check 与 npm run package，...",
+        "check:+3,完成三十分钟内接入指南,让新用户和维护者无需理解内部实现即可安装、打开文档、判断支持边界并完成常见操作。,文档,2,codex,\"更新 README.md 和 CHANGELOG.md：提供从 Visual Studio Marketplace 或 Open VSX 安装、双击或命令打开文档、最近打开、导航查找、错误恢复和隐私边界的简明说明；加入四类格式的能力与限制表，确保首次使用路径可在 30 分钟内完成，并运行 npm run..."
+      ],
+      "createdAt": "2026-07-16T03:22:50.525Z"
+    }
+  ],
+  "runs": [
+    {
+      "runId": "1-1",
+      "executionLogId": 1,
+      "nodeId": "1",
+      "runKind": "step",
+      "agentCli": "/usr/local/bin/codex",
+      "status": "Completed",
+      "finishedAt": "2026-07-16T03:22:50.525Z",
+      "changedFiles": [],
+      "touchedFiles": [],
+      "failures": [],
+      "handoffSummary": "已基于当前项目重写五环节定制路线图，复读检查与 bootstrap 校验均通过。 建议验证：cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/1/1/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -。"
+    }
+  ]
+}
