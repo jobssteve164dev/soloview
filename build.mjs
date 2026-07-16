@@ -26,6 +26,13 @@ const builds = [
     platform: 'node',
     format: 'cjs',
   },
+  {
+    ...shared,
+    entryPoints: ['src/recentDocuments.ts'],
+    outfile: 'dist/recentDocuments.cjs',
+    platform: 'node',
+    format: 'cjs',
+  },
 ];
 
 await mkdir('dist', { recursive: true });

@@ -16,6 +16,57 @@
   "main": "./dist/extension.js",
   "activationEvents": [],
   "contributes": {
+    "commands": [
+      {
+        "command": "soloview.openDocument",
+        "title": "打开文档",
+        "category": "SoloView",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "soloview.clearRecent",
+        "title": "清空最近打开",
+        "category": "SoloView",
+        "icon": "$(clear-all)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "soloview.sidebar",
+          "title": "SoloView",
+          "icon": "resources/activitybar.svg"
+        }
+      ]
+    },
+    "views": {
+      "soloview.sidebar": [
+        {
+          "id": "soloview.recentDocuments",
+          "name": "最近打开"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "soloview.recentDocuments",
+        "contents": "最近打开的文档会显示在这里。\n[打开文档](command:soloview.openDocument)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "soloview.openDocument",
+          "when": "view == soloview.recentDocuments",
+          "group": "navigation@1"
+        },
+        {
+          "command": "soloview.clearRecent",
+          "when": "view == soloview.recentDocuments",
+          "group": "navigation@2"
+        }
+      ]
+    },
     "customEditors": [
       {
         "viewType": "soloview.documentViewer",

@@ -7,3 +7,4 @@ tsconfig.json
 build.mjs
 dist/*.map
 dist/documentTypes.js
+dist/recentDocuments.js
