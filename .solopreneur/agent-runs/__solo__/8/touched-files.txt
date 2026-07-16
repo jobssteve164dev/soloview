@@ -1,0 +1,58 @@
+A .vscode-test/user-data/logs/20260716T115611/editSessions.log
+A .vscode-test/user-data/logs/20260716T115611/main.log
+A .vscode-test/user-data/logs/20260716T115611/mcpGateway.log
+A .vscode-test/user-data/logs/20260716T115611/network-shared.log
+A .vscode-test/user-data/logs/20260716T115611/remoteTunnelService.log
+A .vscode-test/user-data/logs/20260716T115611/sharedprocess.log
+A .vscode-test/user-data/logs/20260716T115611/telemetry.log
+A .vscode-test/user-data/logs/20260716T115611/terminal.log
+A .vscode-test/user-data/logs/20260716T115611/tunnelHostService.log
+A .vscode-test/user-data/logs/20260716T115611/userDataSync.log
+A .vscode-test/user-data/logs/20260716T115611/window1/exthost/exthost.log
+A .vscode-test/user-data/logs/20260716T115611/window1/exthost/extHostTelemetry.log
+A .vscode-test/user-data/logs/20260716T115611/window1/exthost/vscode.git/Git.log
+A .vscode-test/user-data/logs/20260716T115611/window1/exthost/vscode.github-authentication/GitHub Authentication.log
+A .vscode-test/user-data/logs/20260716T115611/window1/exthost/vscode.github/GitHub.log
+A .vscode-test/user-data/logs/20260716T115611/window1/network.log
+A .vscode-test/user-data/logs/20260716T115611/window1/notebook.rendering.log
+A .vscode-test/user-data/logs/20260716T115611/window1/output_20260716T115614/agentSessionsOutput.log
+A .vscode-test/user-data/logs/20260716T115611/window1/output_20260716T115614/tasks.log
+A .vscode-test/user-data/logs/20260716T115611/window1/renderer.log
+A .vscode-test/user-data/logs/20260716T115611/window1/textModelChanges.log
+A .vscode-test/user-data/logs/20260716T115611/window1/views.log
+A soloview-0.1.7.vsix
+M .vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0
+M .vscode-test/user-data/Cache/Cache_Data/9f50bddbd978eddd_0
+M .vscode-test/user-data/Cache/Cache_Data/index-dir/the-real-index
+M .vscode-test/user-data/Cache/No_Vary_Search/journal.baj
+M .vscode-test/user-data/CachedProfilesData/__default__profile__/extensions.builtin.cache
+M .vscode-test/user-data/Code Cache/js/index-dir/the-real-index
+M .vscode-test/user-data/Crashpad/settings.dat
+M .vscode-test/user-data/DawnGraphiteCache/data_1
+M .vscode-test/user-data/DawnGraphiteCache/index
+M .vscode-test/user-data/DawnWebGPUCache/data_1
+M .vscode-test/user-data/DawnWebGPUCache/index
+M .vscode-test/user-data/DIPS
+M .vscode-test/user-data/GPUCache/data_1
+M .vscode-test/user-data/GPUCache/index
+M .vscode-test/user-data/languagepacks.json
+M .vscode-test/user-data/Local Storage/leveldb/LOG
+M .vscode-test/user-data/Local Storage/leveldb/LOG.old
+M .vscode-test/user-data/Session Storage/000003.log
+M .vscode-test/user-data/Session Storage/LOG
+M .vscode-test/user-data/Session Storage/LOG.old
+M .vscode-test/user-data/TransportSecurity
+M dist/documentTypes.cjs
+M dist/extension.js
+M dist/pdf.worker.min.mjs
+M dist/recentDocuments.cjs
+M dist/viewer.css
+M dist/webview.js
+M package-lock.json
+M package.json
+M package.nls.json
+M package.nls.zh-cn.json
+M src/extension.ts
+M src/webview/main.ts
+M src/webview/viewer.css
+M test/extensionManifest.test.mjs

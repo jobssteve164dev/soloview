@@ -1,0 +1,2 @@
+?? .solopreneur/agent-runs/__solo__/8/changes.txt
+?? .solopreneur/agent-runs/__solo__/8/session.json
