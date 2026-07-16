@@ -3349,3 +3349,189 @@ index 1523d257709810b0e277d8d0e03bd08ef75977ea..cc6630c04a5c25175e3159c5b885189a
 +  assert.match(viewerStyles, /padding:\s*8px 12px;/);
 +});
 
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git add -A && git commit -m "fix: clean up viewer toolbar layout" && git push origin main'[0m in /home/ubuntu/project/soloview
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 9dee7145de3675ef3cc394382c61a239fc4fdfe7..360011832ef6df4094a31e3f9e75e652be448cc2
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0 16px; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+@@ -49,6 +49,7 @@
+   height: 40px; display: flex; gap: 4px; align-items: end; padding: 4px 12px 0;
+   overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface-raised);
+ }
++.sheet-tabs[hidden] { display: none; }
+ .sheet-tabs button { flex: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+ .sheet-tabs button.active { background: var(--surface); color: var(--text); border-bottom-color: var(--surface); }
+ 
+@@ -81,7 +82,7 @@
+ @keyframes spin { to { transform: rotate(360deg); } }
+ @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1600ms; } }
+ @media (max-width: 720px) {
+-  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding-block: 8px; }
++  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding: 8px 12px; }
+   .toolbar-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+   #document-content { height: calc(100vh - 104px); }
+   .viewer { padding: 12px; }
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+index 1523d257709810b0e277d8d0e03bd08ef75977ea..cc6630c04a5c25175e3159c5b885189a29fd9054
+--- a/test/extensionManifest.test.mjs
++++ b/test/extensionManifest.test.mjs
+@@ -14,6 +14,7 @@
+   'utf8',
+ );
+ const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
++const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
+ const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
+ const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
+ 
+@@ -62,3 +63,9 @@
+   assert.match(webviewSource, /languageLabel: 'EN'/);
+   assert.match(webviewSource, /languageLabel: '中文'/);
+ });
++
++test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {
++  assert.match(viewerStyles, /\.sheet-tabs\[hidden\]\s*\{\s*display:\s*none;/);
++  assert.match(viewerStyles, /gap:\s*16px;\s*padding:\s*0 16px;/);
++  assert.match(viewerStyles, /padding:\s*8px 12px;/);
++});
+
+[31m exited 1 in 841ms:[0m
+To https://github.com/jobssteve164dev/soloview.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/jobssteve164dev/soloview.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+[35m[3mcodex[0m[0m
+本地提交已完成，但远端 `main` 在本轮期间有新提交，首次推送被正常拒绝（非快进）。我会用非破坏性的 rebase 合并远端最新状态，复跑最窄检查后再推送。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git pull --rebase origin main'[0m in /home/ubuntu/project/soloview
+[31m exited 128 in 0ms:[0m
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 9dee7145de3675ef3cc394382c61a239fc4fdfe7..360011832ef6df4094a31e3f9e75e652be448cc2
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0 16px; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+@@ -49,6 +49,7 @@
+   height: 40px; display: flex; gap: 4px; align-items: end; padding: 4px 12px 0;
+   overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface-raised);
+ }
++.sheet-tabs[hidden] { display: none; }
+ .sheet-tabs button { flex: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+ .sheet-tabs button.active { background: var(--surface); color: var(--text); border-bottom-color: var(--surface); }
+ 
+@@ -81,7 +82,7 @@
+ @keyframes spin { to { transform: rotate(360deg); } }
+ @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1600ms; } }
+ @media (max-width: 720px) {
+-  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding-block: 8px; }
++  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding: 8px 12px; }
+   .toolbar-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+   #document-content { height: calc(100vh - 104px); }
+   .viewer { padding: 12px; }
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+index 1523d257709810b0e277d8d0e03bd08ef75977ea..cc6630c04a5c25175e3159c5b885189a29fd9054
+--- a/test/extensionManifest.test.mjs
++++ b/test/extensionManifest.test.mjs
+@@ -14,6 +14,7 @@
+   'utf8',
+ );
+ const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
++const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
+ const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
+ const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
+ 
+@@ -62,3 +63,9 @@
+   assert.match(webviewSource, /languageLabel: 'EN'/);
+   assert.match(webviewSource, /languageLabel: '中文'/);
+ });
++
++test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {
++  assert.match(viewerStyles, /\.sheet-tabs\[hidden\]\s*\{\s*display:\s*none;/);
++  assert.match(viewerStyles, /gap:\s*16px;\s*padding:\s*0 16px;/);
++  assert.match(viewerStyles, /padding:\s*8px 12px;/);
++});
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git status --short
+git diff --stat'[0m in /home/ubuntu/project/soloview
+[32m succeeded in 0ms:[0m
+ M .solopreneur/agent-runs/__solo__/7/output.log
+ .solopreneur/agent-runs/__solo__/7/output.log | 125 ++++++++++++++++++++++++++
+ 1 file changed, 125 insertions(+)
+
+diff --git a/src/webview/viewer.css b/src/webview/viewer.css
+index 9dee7145de3675ef3cc394382c61a239fc4fdfe7..360011832ef6df4094a31e3f9e75e652be448cc2
+--- a/src/webview/viewer.css
++++ b/src/webview/viewer.css
+@@ -25,7 +25,7 @@
+ 
+ .toolbar {
+   height: 52px; display: flex; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 0; border-bottom: 1px solid var(--border);
++  gap: 16px; padding: 0 16px; border-bottom: 1px solid var(--border);
+   background: var(--surface-raised);
+ }
+ .document-identity, .toolbar-actions { display: flex; align-items: center; min-width: 0; gap: 8px; }
+@@ -49,6 +49,7 @@
+   height: 40px; display: flex; gap: 4px; align-items: end; padding: 4px 12px 0;
+   overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--surface-raised);
+ }
++.sheet-tabs[hidden] { display: none; }
+ .sheet-tabs button { flex: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+ .sheet-tabs button.active { background: var(--surface); color: var(--text); border-bottom-color: var(--surface); }
+ 
+@@ -81,7 +82,7 @@
+ @keyframes spin { to { transform: rotate(360deg); } }
+ @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1600ms; } }
+ @media (max-width: 720px) {
+-  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding-block: 8px; }
++  .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding: 8px 12px; }
+   .toolbar-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+   #document-content { height: calc(100vh - 104px); }
+   .viewer { padding: 12px; }
+diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs
+index 1523d257709810b0e277d8d0e03bd08ef75977ea..cc6630c04a5c25175e3159c5b885189a29fd9054
+--- a/test/extensionManifest.test.mjs
++++ b/test/extensionManifest.test.mjs
+@@ -14,6 +14,7 @@
+   'utf8',
+ );
+ const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
++const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
+ const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
+ const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
+ 
+@@ -62,3 +63,9 @@
+   assert.match(webviewSource, /languageLabel: 'EN'/);
+   assert.match(webviewSource, /languageLabel: '中文'/);
+ });
++
++test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {
++  assert.match(viewerStyles, /\.sheet-tabs\[hidden\]\s*\{\s*display:\s*none;/);
++  assert.match(viewerStyles, /gap:\s*16px;\s*padding:\s*0 16px;/);
++  assert.match(viewerStyles, /padding:\s*8px 12px;/);
++});
+
