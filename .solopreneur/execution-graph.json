@@ -1,18 +1,20 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-16T03:52:30.542Z",
-  "runCount": 2,
+  "updatedAt": "2026-07-16T03:53:05.920Z",
+  "runCount": 3,
   "indexes": {
     "byNode": {
       "1": [
         "1-1"
       ],
       "__solo__": [
+        "__solo__-3",
         "__solo__-2"
       ]
     },
     "byAgent": {
       "/usr/local/bin/codex": [
+        "__solo__-3",
         "__solo__-2",
         "1-1"
       ]
@@ -32,13 +34,29 @@
       ]
     },
     "byStatus": {
+      "Recorded": [
+        "__solo__-3"
+      ],
       "Completed": [
         "__solo__-2",
         "1-1"
       ]
     },
-    "byFailure": {},
+    "byFailure": {
+      "⚠ MCP client for `terminal-grid` failed to start: MCP startup failed: handshaking with": [
+        "__solo__-3"
+      ],
+      "MCP server failed: connection closed: initialize response": [
+        "__solo__-3"
+      ],
+      "⚠ MCP startup incomplete (failed: terminal-grid)›Use /skills to list available skillsgpt-5.6-sol low · ~/project/soloview": [
+        "__solo__-3"
+      ]
+    },
     "byCommand": {
+      "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'": [
+        "__solo__-3"
+      ],
       "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/2/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-ch...": [
         "__solo__-2"
       ],
@@ -47,6 +65,18 @@
       ]
     },
     "byExperience": {
+      "exp-failure-0d2523df779fe339": [
+        "__solo__-3"
+      ],
+      "exp-failure-9937e16442d3fb93": [
+        "__solo__-3"
+      ],
+      "exp-failure-69e5e8df7cd7d387": [
+        "__solo__-3"
+      ],
+      "exp-reusable-signal-1477c0bd97fdae96": [
+        "__solo__-3"
+      ],
       "exp-verification-cfd05ebb611eb422": [
         "__solo__-2"
       ],
@@ -95,6 +125,126 @@
     }
   },
   "experienceNodes": {
+    "exp-failure-0d2523df779fe339": {
+      "id": "exp-failure-0d2523df779fe339",
+      "type": "failure",
+      "centralMeaning": "⚠ MCP client for `terminal-grid` failed to start: MCP startup failed: handshaking with",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-3"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同失败、相同命令或相同文件区域"
+      ],
+      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
+      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-16T03:53:05.913Z"
+      }
+    },
+    "exp-failure-9937e16442d3fb93": {
+      "id": "exp-failure-9937e16442d3fb93",
+      "type": "failure",
+      "centralMeaning": "MCP server failed: connection closed: initialize response",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-3"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同失败、相同命令或相同文件区域"
+      ],
+      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
+      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-16T03:53:05.913Z"
+      }
+    },
+    "exp-failure-69e5e8df7cd7d387": {
+      "id": "exp-failure-69e5e8df7cd7d387",
+      "type": "failure",
+      "centralMeaning": "⚠ MCP startup incomplete (failed: terminal-grid)›Use /skills to list available skillsgpt-5.6-sol low · ~/project/soloview",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-3"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同失败、相同命令或相同文件区域"
+      ],
+      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
+      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-16T03:53:05.913Z"
+      }
+    },
+    "exp-reusable-signal-1477c0bd97fdae96": {
+      "id": "exp-reusable-signal-1477c0bd97fdae96",
+      "type": "reusable_signal",
+      "centralMeaning": "Completion: 续聊已记录；不参与任务完成、失败或进行中判断。",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-3"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T03:53:05.913Z"
+      }
+    },
     "exp-verification-cfd05ebb611eb422": {
       "id": "exp-verification-cfd05ebb611eb422",
       "type": "verification",
@@ -640,6 +790,54 @@
   },
   "usageEdges": [
     {
+      "runId": "__solo__-3",
+      "experienceId": "exp-failure-0d2523df779fe339",
+      "phase": "failed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-3.json",
+        "execution_logs:3",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "createdAt": "2026-07-16T03:53:05.913Z"
+    },
+    {
+      "runId": "__solo__-3",
+      "experienceId": "exp-failure-9937e16442d3fb93",
+      "phase": "failed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-3.json",
+        "execution_logs:3",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "createdAt": "2026-07-16T03:53:05.913Z"
+    },
+    {
+      "runId": "__solo__-3",
+      "experienceId": "exp-failure-69e5e8df7cd7d387",
+      "phase": "failed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-3.json",
+        "execution_logs:3",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "createdAt": "2026-07-16T03:53:05.913Z"
+    },
+    {
+      "runId": "__solo__-3",
+      "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-3.json",
+        "execution_logs:3",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
+      ],
+      "createdAt": "2026-07-16T03:53:05.913Z"
+    },
+    {
       "runId": "__solo__-2",
       "experienceId": "exp-verification-cfd05ebb611eb422",
       "phase": "verified",
@@ -866,6 +1064,23 @@
     }
   ],
   "runs": [
+    {
+      "runId": "__solo__-3",
+      "executionLogId": 3,
+      "nodeId": "__solo__",
+      "runKind": "solo_continue",
+      "agentCli": "/usr/local/bin/codex",
+      "status": "Recorded",
+      "finishedAt": "2026-07-16T03:53:05.913Z",
+      "changedFiles": [],
+      "touchedFiles": [],
+      "failures": [
+        "⚠ MCP client for `terminal-grid` failed to start: MCP startup failed: handshaking with",
+        "MCP server failed: connection closed: initialize response",
+        "⚠ MCP startup incomplete (failed: terminal-grid)›Use /skills to list available skillsgpt-5.6-sol low · ~/project/soloview"
+      ],
+      "handoffSummary": "续聊已记录；不参与任务完成、失败或进行中判断。 阻塞/风险：⚠ MCP client for `terminal-grid` failed to start: MCP startup failed: handshaking with / MCP server failed: connection closed: initialize response。"
+    },
     {
       "runId": "__solo__-2",
       "executionLogId": 2,
