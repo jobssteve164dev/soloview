@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-16T07:06:30.761Z",
+  "updatedAt": "2026-07-16T07:13:43.040Z",
   "runCount": 5,
   "indexes": {
     "byNode": {
@@ -24,6 +24,24 @@
       ]
     },
     "byFile": {
+      "package-lock.json": [
+        "__solo__-5",
+        "__solo__-2"
+      ],
+      "package.json": [
+        "__solo__-5",
+        "__solo__-2"
+      ],
+      "PROJECT_MEMORY.md": [
+        "__solo__-5",
+        "__solo__-2"
+      ],
+      "resources/branding/soloview-market-source.png": [
+        "__solo__-5"
+      ],
+      "resources/soloview-market.png": [
+        "__solo__-5"
+      ],
       ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0": [
         "__solo__-4"
       ],
@@ -35,22 +53,11 @@
       ],
       "test/extensionManifest.test.mjs": [
         "__solo__-2"
-      ],
-      "package-lock.json": [
-        "__solo__-2"
-      ],
-      "package.json": [
-        "__solo__-2"
-      ],
-      "PROJECT_MEMORY.md": [
-        "__solo__-2"
       ]
     },
     "byStatus": {
-      "Failed": [
-        "__solo__-5"
-      ],
       "Completed": [
+        "__solo__-5",
         "__solo__-4",
         "__solo__-2",
         "1-1"
@@ -60,12 +67,6 @@
       ]
     },
     "byFailure": {
-      "Failure category: terminal_closed": [
-        "__solo__-5"
-      ],
-      "Failure reason: Agent terminal was closed before the task finished.": [
-        "__solo__-5"
-      ],
       "⚠ MCP client for `terminal-grid` failed to start: MCP startup failed: handshaking with": [
         "__solo__-3"
       ],
@@ -94,44 +95,33 @@
       ]
     },
     "byExperience": {
-      "exp-verification-81f81e62ea84c7c9": [
-        "__solo__-5"
-      ],
-      "exp-verification-7a4a9378be780408": [
-        "__solo__-5"
-      ],
-      "exp-failure-e2a88eee641300a8": [
-        "__solo__-5"
-      ],
-      "exp-failure-0e555b859c0108a2": [
-        "__solo__-5"
-      ],
-      "exp-reusable-signal-6a1934242c7f032f": [
-        "__solo__-5"
-      ],
-      "exp-reusable-signal-97e60cdc4a06dbcd": [
-        "__solo__-5"
-      ],
-      "exp-handoff-action-90c47f6d397c7afc": [
-        "__solo__-5"
-      ],
-      "exp-handoff-action-95c218e3f0695b0c": [
-        "__solo__-5"
-      ],
       "exp-verification-956902dcaffd8c27": [
+        "__solo__-5",
         "__solo__-4"
       ],
       "exp-verification-d9e0524ab855aa48": [
+        "__solo__-5",
         "__solo__-4"
       ],
+      "exp-verification-02aaf9d818eb434c": [
+        "__solo__-5"
+      ],
       "exp-reusable-signal-bbd83203f5340823": [
+        "__solo__-5",
         "__solo__-4",
         "__solo__-2"
       ],
-      "exp-handoff-action-c64bfa0966c9e99d": [
-        "__solo__-4"
+      "exp-reusable-signal-cba78005bbf88102": [
+        "__solo__-5"
+      ],
+      "exp-handoff-action-7ea57ab739fa65cc": [
+        "__solo__-5"
       ],
       "exp-handoff-action-00e7b099e20e208e": [
+        "__solo__-5",
+        "__solo__-4"
+      ],
+      "exp-handoff-action-c64bfa0966c9e99d": [
         "__solo__-4"
       ],
       "exp-failure-0d2523df779fe339": [
@@ -191,262 +181,6 @@
     }
   },
   "experienceNodes": {
-    "exp-verification-81f81e62ea84c7c9": {
-      "id": "exp-verification-81f81e62ea84c7c9",
-      "type": "verification",
-      "centralMeaning": "- [ ] Recognizable as a 16px favicon (squint test)",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环"
-      ],
-      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
-      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-verification-7a4a9378be780408": {
-      "id": "exp-verification-7a4a9378be780408",
-      "type": "verification",
-      "centralMeaning": "- Test on both light and dark backgrounds",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环"
-      ],
-      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
-      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-failure-e2a88eee641300a8": {
-      "id": "exp-failure-e2a88eee641300a8",
-      "type": "failure",
-      "centralMeaning": "Failure category: terminal_closed",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务出现相同失败、相同命令或相同文件区域"
-      ],
-      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
-      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-failure-0e555b859c0108a2": {
-      "id": "exp-failure-0e555b859c0108a2",
-      "type": "failure",
-      "centralMeaning": "Failure reason: Agent terminal was closed before the task finished.",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务出现相同失败、相同命令或相同文件区域"
-      ],
-      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
-      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-reusable-signal-6a1934242c7f032f": {
-      "id": "exp-reusable-signal-6a1934242c7f032f",
-      "type": "reusable_signal",
-      "centralMeaning": "Completion: Agent terminal was closed before the task finished.",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务出现相同目标、文件或验证需求"
-      ],
-      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
-      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-reusable-signal-97e60cdc4a06dbcd": {
-      "id": "exp-reusable-signal-97e60cdc4a06dbcd",
-      "type": "reusable_signal",
-      "centralMeaning": "| Mistake | Problem | Fix |",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "同一路线图入口：__solo__",
-        "后续任务出现相同目标、文件或验证需求"
-      ],
-      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
-      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 1,
-        "neutral": 0,
-        "alpha": 1,
-        "beta": 2,
-        "winRate": 0.3333,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-handoff-action-90c47f6d397c7afc": {
-      "id": "exp-handoff-action-90c47f6d397c7afc",
-      "type": "handoff_action",
-      "centralMeaning": "先复核上一轮失败原因：Agent terminal was closed before the task finished.",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "接手同一路线图入口：__solo__",
-        "后续 Agent 需要接续上一轮未完全显式化的上下文"
-      ],
-      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
-      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 0,
-        "neutral": 1,
-        "alpha": 1,
-        "beta": 1,
-        "winRate": 0.5,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
-    "exp-handoff-action-95c218e3f0695b0c": {
-      "id": "exp-handoff-action-95c218e3f0695b0c",
-      "type": "handoff_action",
-      "centralMeaning": "复用或复跑验证信号：- [ ] Recognizable as a 16px favicon (squint test) / - Test on both light and dark backgrounds",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-5"
-      ],
-      "appliesWhen": [
-        "接手同一路线图入口：__solo__",
-        "后续 Agent 需要接续上一轮未完全显式化的上下文"
-      ],
-      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
-      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "- [ ] Recognizable as a 16px favicon (squint test)",
-        "- Test on both light and dark backgrounds"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 0,
-        "neutral": 1,
-        "alpha": 1,
-        "beta": 1,
-        "winRate": 0.5,
-        "lastUsed": "2026-07-16T07:06:30.736Z"
-      }
-    },
     "exp-verification-956902dcaffd8c27": {
       "id": "exp-verification-956902dcaffd8c27",
       "type": "verification",
@@ -455,31 +189,37 @@
         "solo"
       ],
       "sourceRefs": [
+        "__solo__-5",
         "__solo__-4"
       ],
       "appliesWhen": [
-        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
-        ".vscode-test/user-data/Crashpad/settings.dat",
-        ".vscode-test/user-data/Local Storage/leveldb/LOG.old",
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
         "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环"
+        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
+        ".vscode-test/user-data/Crashpad/settings.dat"
       ],
       "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
       "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
       "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "* Verify marketplace availability",
-        "✓ Verify marketplace availability"
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
       ],
       "stats": {
-        "uses": 1,
-        "wins": 1,
+        "uses": 2,
+        "wins": 2,
         "losses": 0,
         "neutral": 0,
-        "alpha": 2,
+        "alpha": 3,
         "beta": 1,
-        "winRate": 0.6667,
-        "lastUsed": "2026-07-16T07:04:25.719Z"
+        "winRate": 0.75,
+        "lastUsed": "2026-07-16T07:13:43.035Z"
       }
     },
     "exp-verification-d9e0524ab855aa48": {
@@ -490,21 +230,64 @@
         "solo"
       ],
       "sourceRefs": [
+        "__solo__-5",
         "__solo__-4"
       ],
       "appliesWhen": [
-        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
-        ".vscode-test/user-data/Crashpad/settings.dat",
-        ".vscode-test/user-data/Local Storage/leveldb/LOG.old",
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
         "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环"
+        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
+        ".vscode-test/user-data/Crashpad/settings.dat"
       ],
       "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
       "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
       "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "* Verify marketplace availability",
-        "✓ Verify marketplace availability"
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 2,
+        "wins": 2,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 3,
+        "beta": 1,
+        "winRate": 0.75,
+        "lastUsed": "2026-07-16T07:13:43.035Z"
+      }
+    },
+    "exp-verification-02aaf9d818eb434c": {
+      "id": "exp-verification-02aaf9d818eb434c",
+      "type": "verification",
+      "centralMeaning": "- `npm run check` 全部通过，9 项测试通过。",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-5"
+      ],
+      "appliesWhen": [
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
+        "同一路线图入口：__solo__"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "* Verify marketplace availability",
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。"
       ],
       "stats": {
         "uses": 1,
@@ -514,7 +297,7 @@
         "alpha": 2,
         "beta": 1,
         "winRate": 0.6667,
-        "lastUsed": "2026-07-16T07:04:25.719Z"
+        "lastUsed": "2026-07-16T07:13:43.035Z"
       }
     },
     "exp-reusable-signal-bbd83203f5340823": {
@@ -525,65 +308,105 @@
         "solo"
       ],
       "sourceRefs": [
+        "__solo__-5",
         "__solo__-4",
         "__solo__-2"
       ],
       "appliesWhen": [
-        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
-        ".vscode-test/user-data/Crashpad/settings.dat",
-        ".vscode-test/user-data/Local Storage/leveldb/LOG.old",
-        "同一路线图入口：__solo__",
-        "后续任务出现相同目标、文件或验证需求",
-        "test/extensionManifest.test.mjs",
         "package-lock.json",
-        "package.json"
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
+        "同一路线图入口：__solo__",
+        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
+        ".vscode-test/user-data/Crashpad/settings.dat"
       ],
       "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
       "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
       "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "* Verify marketplace availability",
         "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/2/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "+import test from 'node:test';",
-        "+test('每个需要扩展宿主代码的入口都有显式激活事件', () => {"
+        "+++ b/test/extensionManifest.test.mjs"
       ],
       "stats": {
-        "uses": 2,
-        "wins": 2,
+        "uses": 3,
+        "wins": 3,
         "losses": 0,
         "neutral": 0,
-        "alpha": 3,
+        "alpha": 4,
         "beta": 1,
-        "winRate": 0.75,
-        "lastUsed": "2026-07-16T07:04:25.719Z"
+        "winRate": 0.8,
+        "lastUsed": "2026-07-16T07:13:43.035Z"
       }
     },
-    "exp-handoff-action-c64bfa0966c9e99d": {
-      "id": "exp-handoff-action-c64bfa0966c9e99d",
-      "type": "handoff_action",
-      "centralMeaning": "先阅读上一轮改动/触达文件：.vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0, .vscode-test/user-data/Crashpad/settings.dat, .vscode-test/user-data/Local Storage/leveldb/LOG.old",
+    "exp-reusable-signal-cba78005bbf88102": {
+      "id": "exp-reusable-signal-cba78005bbf88102",
+      "type": "reusable_signal",
+      "centralMeaning": "fd29563 fix: use rounded marketplace logo",
       "sourceKinds": [
         "solo"
       ],
       "sourceRefs": [
-        "__solo__-4"
+        "__solo__-5"
       ],
       "appliesWhen": [
-        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
-        ".vscode-test/user-data/Crashpad/settings.dat",
-        ".vscode-test/user-data/Local Storage/leveldb/LOG.old",
-        "接手同一路线图入口：__solo__",
-        "后续 Agent 需要接续上一轮未完全显式化的上下文"
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
+        "同一路线图入口：__solo__"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "* Verify marketplace availability",
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-16T07:13:43.035Z"
+      }
+    },
+    "exp-handoff-action-7ea57ab739fa65cc": {
+      "id": "exp-handoff-action-7ea57ab739fa65cc",
+      "type": "handoff_action",
+      "centralMeaning": "先阅读上一轮改动/触达文件：package-lock.json, package.json, PROJECT_MEMORY.md, resources/branding/soloview-market-source.png",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-5"
+      ],
+      "appliesWhen": [
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
+        "接手同一路线图入口：__solo__"
       ],
       "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
       "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
       "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
         "* Verify marketplace availability",
-        "✓ Verify marketplace availability"
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。"
       ],
       "stats": {
         "uses": 1,
@@ -593,13 +416,54 @@
         "alpha": 1,
         "beta": 1,
         "winRate": 0.5,
-        "lastUsed": "2026-07-16T07:04:25.719Z"
+        "lastUsed": "2026-07-16T07:13:43.035Z"
       }
     },
     "exp-handoff-action-00e7b099e20e208e": {
       "id": "exp-handoff-action-00e7b099e20e208e",
       "type": "handoff_action",
       "centralMeaning": "复用或复跑验证信号：* Verify marketplace availability / ✓ Verify marketplace availability",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-5",
+        "__solo__-4"
+      ],
+      "appliesWhen": [
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png",
+        "接手同一路线图入口：__solo__",
+        ".vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0",
+        ".vscode-test/user-data/Crashpad/settings.dat"
+      ],
+      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
+      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "* Verify marketplace availability",
+        "✓ Verify marketplace availability",
+        "- `npm run check` 全部通过，9 项测试通过。",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/4/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 2,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 2,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-16T07:13:43.035Z"
+      }
+    },
+    "exp-handoff-action-c64bfa0966c9e99d": {
+      "id": "exp-handoff-action-c64bfa0966c9e99d",
+      "type": "handoff_action",
+      "centralMeaning": "先阅读上一轮改动/触达文件：.vscode-test/user-data/Code Cache/js/0870cc00259bd28b_0, .vscode-test/user-data/Crashpad/settings.dat, .vscode-test/user-data/Local Storage/leveldb/LOG.old",
       "sourceKinds": [
         "solo"
       ],
@@ -1259,115 +1123,108 @@
   "usageEdges": [
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-verification-81f81e62ea84c7c9",
+      "experienceId": "exp-verification-956902dcaffd8c27",
       "phase": "verified",
-      "outcome": "loss",
+      "outcome": "win",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-verification-7a4a9378be780408",
+      "experienceId": "exp-verification-d9e0524ab855aa48",
       "phase": "verified",
-      "outcome": "loss",
+      "outcome": "win",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-failure-e2a88eee641300a8",
-      "phase": "failed",
-      "outcome": "loss",
+      "experienceId": "exp-verification-02aaf9d818eb434c",
+      "phase": "verified",
+      "outcome": "win",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-failure-0e555b859c0108a2",
-      "phase": "failed",
-      "outcome": "loss",
-      "evidenceRefs": [
-        "digest:.solopreneur/run-digests/__solo__-5.json",
-        "execution_logs:5",
-        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
-      ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
-    },
-    {
-      "runId": "__solo__-5",
-      "experienceId": "exp-reusable-signal-6a1934242c7f032f",
+      "experienceId": "exp-reusable-signal-bbd83203f5340823",
       "phase": "observed",
-      "outcome": "loss",
+      "outcome": "win",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-reusable-signal-97e60cdc4a06dbcd",
+      "experienceId": "exp-reusable-signal-cba78005bbf88102",
       "phase": "observed",
-      "outcome": "loss",
+      "outcome": "win",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-handoff-action-90c47f6d397c7afc",
+      "experienceId": "exp-handoff-action-7ea57ab739fa65cc",
       "phase": "observed",
       "outcome": "neutral",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-5",
-      "experienceId": "exp-handoff-action-95c218e3f0695b0c",
+      "experienceId": "exp-handoff-action-00e7b099e20e208e",
       "phase": "observed",
       "outcome": "neutral",
       "evidenceRefs": [
         "digest:.solopreneur/run-digests/__solo__-5.json",
         "execution_logs:5",
         "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "check:- [ ] Recognizable as a 16px favicon (squint test)",
-        "check:- Test on both light and dark backgrounds"
+        "check:* Verify marketplace availability",
+        "check:✓ Verify marketplace availability",
+        "check:- `npm run check` 全部通过，9 项测试通过。"
       ],
-      "createdAt": "2026-07-16T07:06:30.736Z"
+      "createdAt": "2026-07-16T07:13:43.035Z"
     },
     {
       "runId": "__solo__-4",
@@ -1720,15 +1577,18 @@
       "nodeId": "__solo__",
       "runKind": "solo",
       "agentCli": "/usr/local/bin/codex",
-      "status": "Failed",
-      "finishedAt": "2026-07-16T07:06:30.736Z",
+      "status": "Completed",
+      "finishedAt": "2026-07-16T07:13:43.035Z",
       "changedFiles": [],
-      "touchedFiles": [],
-      "failures": [
-        "Failure category: terminal_closed",
-        "Failure reason: Agent terminal was closed before the task finished."
+      "touchedFiles": [
+        "package-lock.json",
+        "package.json",
+        "PROJECT_MEMORY.md",
+        "resources/branding/soloview-market-source.png",
+        "resources/soloview-market.png"
       ],
-      "handoffSummary": "Agent terminal was closed before the task finished. 阻塞/风险：Failure category: terminal_closed / Agent terminal was closed before the task finished.。 建议验证：cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -。"
+      "failures": [],
+      "handoffSummary": "Solo 对话已完成，等待用户决定是否关联到路线图环节。 优先查看 package-lock.json, package.json, PROJECT_MEMORY.md, resources/branding/soloview-market-source.png。 建议验证：cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/5/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -。"
     },
     {
       "runId": "__solo__-4",

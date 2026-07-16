@@ -1535,3 +1535,1225 @@ ok 9 - clears saved history
 # todo 0
 # duration_ms 90.423151
 
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'git status --short
+git add -A
+git commit -m "fix: use rounded marketplace logo"
+git push origin main'[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 8777ms:[0m
+[main fd29563] fix: use rounded marketplace logo
+ 22 files changed, 2292 insertions(+), 25 deletions(-)
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/codex-home.txt
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/command.txt
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/completion.json
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/output.log
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/prompt.txt
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/roadmap-before.csv
+ create mode 100755 .solopreneur/agent-runs/__solo__/5/run-agent.sh
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/started_at
+ create mode 100644 .solopreneur/agent-runs/__solo__/5/workspace-before.json
+ create mode 100644 .solopreneur/agent-status/5.json
+ create mode 100644 .solopreneur/run-digests/__solo__-5.json
+To https://github.com/jobssteve164dev/soloview.git
+   2b5af60..fd29563  main -> main
+
+[35m[3mcodex[0m[0m
+改动已提交并推送到 `main`（`fd29563`）。由于这个仓库会在 `main` 自动升版并发布双市场，我正在做最后的发布链路状态确认，避免只停在“本地图片已改”。
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run list --branch main --limit 8 --json databaseId,name,status,conclusion,headSha,url,createdAt'[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 964ms:[0m
+[{"conclusion":"","createdAt":"2026-07-16T07:09:50Z","databaseId":29478997745,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"CI","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997745"},{"conclusion":"","createdAt":"2026-07-16T07:09:50Z","databaseId":29478997860,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"Security","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997860"},{"conclusion":"","createdAt":"2026-07-16T07:09:50Z","databaseId":29478997830,"headSha":"fd29563b3a1fb7b45f1acac57738e8c4e961026e","name":"Publish VS Code Extension","status":"in_progress","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29478997830"},{"conclusion":"success","createdAt":"2026-07-16T06:15:30Z","databaseId":29476177793,"headSha":"2b5af60508818769653d0f1af24552929b2282c7","name":"CI","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29476177793"},{"conclusion":"success","createdAt":"2026-07-16T06:15:30Z","databaseId":29476177795,"headSha":"2b5af60508818769653d0f1af24552929b2282c7","name":"Security","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29476177795"},{"conclusion":"success","createdAt":"2026-07-16T06:09:49Z","databaseId":29475903928,"headSha":"7d174de240e74b9843058448cbce634b8e2d561b","name":"CI","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29475903928"},{"conclusion":"success","createdAt":"2026-07-16T06:09:48Z","databaseId":29475903878,"headSha":"7d174de240e74b9843058448cbce634b8e2d561b","name":"Security","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29475903878"},{"conclusion":"success","createdAt":"2026-07-16T06:09:48Z","databaseId":29475903892,"headSha":"7d174de240e74b9843058448cbce634b8e2d561b","name":"Publish VS Code Extension","status":"completed","url":"https://github.com/jobssteve164dev/soloview/actions/runs/29475903892"}]
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29478997745 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 12246ms:[0m
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29478997745
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87558234853)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  * Package extension
+  * Upload VSIX
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main CI · 29478997745
+Triggered via push less than a minute ago
+
+JOBS
+* Build, test and package (ID 87558234853)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  ✓ Post Setup Node.js
+  * Post Checkout
+✓ main CI · 29478997745
+Triggered via push less than a minute ago
+
+JOBS
+✓ Build, test and package in 18s (ID 87558234853)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Check extension
+  ✓ Package extension
+  ✓ Upload VSIX
+  ✓ Post Setup Node.js
+  ✓ Post Checkout
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build, test and package: .github#2
+
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29478997860 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 818ms:[0m
+Run Security (29478997860) has already completed with 'success'
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc 'gh run watch 29478997830 --exit-status'[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[35m[3mcodex[0m[0m
+发布主体已完成：版本提交与 Tag、Visual Studio Marketplace、Open VSX、GitHub Release 都已成功；当前只剩工作流对两个市场的可见性轮询，属于市场同步延迟，我继续等它给出最终确认。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 158720ms:[0m
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push less than a minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push less than a minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push less than a minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 1 minute ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 2 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 3 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 3 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 3 minutes ago
+
+JOBS
+* publish (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  * Verify marketplace availability
+  * Post Setup Node.js
+  * Post Checkout
+Refreshing run status every 3 seconds. Press Ctrl+C to quit.
+
+* main Publish VS Code Extension · 29478997830
+Triggered via push about 3 minutes ago
+
+JOBS
+✓ publish in 3m11s (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  ✓ Verify marketplace availability
+  ✓ Post Setup Node.js
+  ✓ Post Checkout
+  ✓ Complete job
+✓ main Publish VS Code Extension · 29478997830
+Triggered via push about 3 minutes ago
+
+JOBS
+✓ publish in 3m11s (ID 87558235584)
+  ✓ Set up job
+  ✓ Checkout
+  ✓ Setup Node.js
+  ✓ Install dependencies
+  ✓ Configure Git
+  ✓ Resolve release version
+  ✓ Validate publishing secrets
+  ✓ Check and package
+  ✓ Push version commit and tag
+  ✓ Publish to Visual Studio Marketplace
+  ✓ Publish to Open VSX
+  ✓ Create GitHub Release
+  ✓ Verify marketplace availability
+  ✓ Post Setup Node.js
+  ✓ Post Checkout
+  ✓ Complete job
+
+[35m[3mexec[0m[0m
+[1m/bin/bash -lc "git pull --ff-only
+git status --short --branch
+node -p \"require('./package.json').version\"
+git log -2 --oneline"[0m in /home/ubuntu/project/soloview
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[32m succeeded in 619ms:[0m
+Updating fd29563..8c2320c
+Fast-forward
+ package-lock.json | 4 ++--
+ package.json      | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+## main...origin/main
+ M .solopreneur/agent-runs/__solo__/5/output.log
+0.1.6
+8c2320c chore(release): bump version to 0.1.6 [skip ci]
+fd29563 fix: use rounded marketplace logo
+
+[35m[3mcodex[0m[0m
+已完成并发布：
+
+- 市场 logo 已改为圆角矩形，保留蓝色折角与眼睛标识。
+- 更新 [市场图标](/home/ubuntu/project/soloview/resources/soloview-market.png) 和源文件。
+- 1254px、128px 缩略图及透明圆角检查通过。
+- `npm run check` 全部通过，9 项测试通过。
+- 已发布 `v0.1.6`，Visual Studio Marketplace、Open VSX 和 GitHub Release 均验证成功。
+- 提交：`fd29563`
+
+采用内置 imagegen 编辑，提示重点为：将现有 SoloView 图标重构为四角一致的圆角矩形，同时保持品牌配色、折角和眼睛符号。
+
+本次对话适合仅保留在 Solo。
+diff --git a/PROJECT_MEMORY.md b/PROJECT_MEMORY.md
+index 806295e158b585f667dffbc32445123d712ca740..09e3779dcf9d3a67dee5bd04fd29e1d48724e991
+--- a/PROJECT_MEMORY.md
++++ b/PROJECT_MEMORY.md
+@@ -14,6 +14,7 @@
+ - 首版保持本地只读查看，不执行宏、不上传文档。
+ - `main` 上影响插件的提交自动触发 patch 版本递增、语义化 Tag、GitHub Release 与双市场发布；失败重跑复用当前 Tag，不重复升版。
+ - 市场表达以“文档不离开 VS Code、本地优先、只读安全”为核心价值；市场页与插件界面同时提供中英文。
++- 市场 logo 使用圆角矩形外轮廓，保留蓝色文档折角与眼睛识别符号。
+ 
+ ## Architecture Boundaries
+ 
+
+[2mtokens used[0m
+173,655
+已完成并发布：
+
+- 市场 logo 已改为圆角矩形，保留蓝色折角与眼睛标识。
+- 更新 [市场图标](/home/ubuntu/project/soloview/resources/soloview-market.png) 和源文件。
+- 1254px、128px 缩略图及透明圆角检查通过。
+- `npm run check` 全部通过，9 项测试通过。
+- 已发布 `v0.1.6`，Visual Studio Marketplace、Open VSX 和 GitHub Release 均验证成功。
+- 提交：`fd29563`
+
+采用内置 imagegen 编辑，提示重点为：将现有 SoloView 图标重构为四角一致的圆角矩形，同时保持品牌配色、折角和眼睛符号。
+
+本次对话适合仅保留在 Solo。

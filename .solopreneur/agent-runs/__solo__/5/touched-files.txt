@@ -1,0 +1,11 @@
+M dist/documentTypes.cjs
+M dist/extension.js
+M dist/pdf.worker.min.mjs
+M dist/recentDocuments.cjs
+M dist/viewer.css
+M dist/webview.js
+M package-lock.json
+M package.json
+M PROJECT_MEMORY.md
+M resources/branding/soloview-market-source.png
+M resources/soloview-market.png
