@@ -14,8 +14,8 @@
 
 * { box-sizing: border-box; }
 
-html, body { min-height: 100%; margin: 0; background: var(--surface); color: var(--text); }
-body { overflow: hidden; }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; background: var(--surface); color: var(--text); }
+body { width: 100vw; height: 100vh; overflow: hidden; }
 
 .skip-link {
   position: fixed; left: 12px; top: -60px; z-index: 100;
@@ -57,7 +57,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sheet-tabs:not([hidden]) + #document-content { height: calc(100vh - 92px); }
 .viewer {
   --viewer-zoom: 1;
-  min-height: 100%; padding: 0;
+  min-height: 100%; padding: 24px;
   transform-origin: top center;
 }
 .viewer > * { zoom: var(--viewer-zoom); }
@@ -85,5 +85,5 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .toolbar { height: auto; min-height: 52px; align-items: flex-start; flex-direction: column; padding: 8px 12px; }
   .toolbar-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
   #document-content { height: calc(100vh - 104px); }
-  .viewer { padding: 0; }
+  .viewer { padding: 12px; }
 }
