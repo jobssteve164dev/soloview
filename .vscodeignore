@@ -2,6 +2,7 @@
 .gitignore
 .github/**
 .vscode-test/**
+.playwright-cli/**
 .solopreneur/**
 AGENTS.md
 PROJECT_MEMORY.md
@@ -10,6 +11,7 @@ test/**
 tsconfig.json
 build.mjs
 dist/*.map
+dist/webview.js
 dist/documentTypes.js
 dist/recentDocuments.js
 resources/branding/**

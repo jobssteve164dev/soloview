@@ -15,9 +15,11 @@ const builds = [
   {
     ...shared,
     entryPoints: ['src/webview/main.ts'],
-    outfile: 'dist/webview.js',
+    outdir: 'dist/webview',
     platform: 'browser',
-    format: 'iife',
+    format: 'esm',
+    splitting: true,
+    chunkNames: 'chunks/[name]-[hash]',
   },
   {
     ...shared,
