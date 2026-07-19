@@ -38,6 +38,11 @@ const builds = [
 await mkdir('dist', { recursive: true });
 await cp('src/webview/viewer.css', 'dist/viewer.css');
 await cp('node_modules/pdfjs-dist/build/pdf.worker.min.mjs', 'dist/pdf.worker.min.mjs');
+await Promise.all([
+  cp('node_modules/pdfjs-dist/wasm', 'dist/pdfjs/wasm', { recursive: true }),
+  cp('node_modules/pdfjs-dist/cmaps', 'dist/pdfjs/cmaps', { recursive: true }),
+  cp('node_modules/pdfjs-dist/standard_fonts', 'dist/pdfjs/standard_fonts', { recursive: true }),
+]);
 
 if (watch) {
   const contexts = await Promise.all(builds.map((options) => context(options)));

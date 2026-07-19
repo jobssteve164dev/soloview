@@ -97,7 +97,15 @@ async function openDocument(message: OpenMessage): Promise<void> {
 }
 
 async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
-  const pdf = await getDocument({ data: bytes }).promise;
+  const resourceRoot = document.body.dataset.pdfResourceRoot;
+  if (!resourceRoot) throw new Error(messages[locale].genericError);
+  const pdf = await getDocument({
+    data: bytes,
+    cMapUrl: `${resourceRoot}/cmaps/`,
+    cMapPacked: true,
+    standardFontDataUrl: `${resourceRoot}/standard_fonts/`,
+    wasmUrl: `${resourceRoot}/wasm/`,
+  }).promise;
   const fragment = document.createDocumentFragment();
   for (let number = 1; number <= pdf.numPages; number += 1) {
     if (generation !== renderGeneration) return;

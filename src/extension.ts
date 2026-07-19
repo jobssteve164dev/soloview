@@ -99,6 +99,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
     const script = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview.js'));
     const styles = readFileSync(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'viewer.css').fsPath, 'utf8');
     const worker = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdf.worker.min.mjs'));
+    const pdfResourceRoot = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdfjs'));
     const nonce = crypto.randomUUID().replaceAll('-', '');
     const title = escapeHtml(uri.path.split('/').pop() ?? 'Document');
     const copy = locale === 'zh' ? {
@@ -116,11 +117,11 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}' ${webview.cspSource}; worker-src ${webview.cspSource} blob:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}' ${webview.cspSource} 'wasm-unsafe-eval'; worker-src ${webview.cspSource} blob:;">
   <style nonce="${nonce}">${styles}</style>
   <title>${title}</title>
 </head>
-<body data-pdf-worker="${worker}" data-initial-locale="${locale}">
+<body data-pdf-worker="${worker}" data-pdf-resource-root="${pdfResourceRoot}" data-initial-locale="${locale}">
   <a class="skip-link" href="#document-content" data-i18n="skip">${copy.skip}</a>
   <header class="toolbar" aria-label="${copy.toolbar}" data-i18n-aria="toolbar">
     <div class="document-identity">

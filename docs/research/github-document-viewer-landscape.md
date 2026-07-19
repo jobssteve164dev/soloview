@@ -57,6 +57,8 @@
 
 推荐直接使用 PDF.js，而不是把另一个 VS Code PDF 插件作为运行时依赖。这样能减少版本滞后，并掌控 Content Security Policy、worker 和本地文件加载。
 
+扫描型 PDF 还需要单独保证图像解码链路。PDF.js 5 及后续版本使用 WASM 解码 JPEG2000（`JPXDecode`）、JBIG2 和部分色彩空间；只复制 worker 并不足够。插件必须把 `pdfjs-dist/wasm` 作为 Webview 本地资源提供给 `getDocument({ wasmUrl })`，并在 CSP 中允许 `wasm-unsafe-eval`。CMap 与标准字体也应通过 `cMapUrl`、`standardFontDataUrl` 一并接线，避免扫描图层之外的文字层或混合型文档出现缺字。该约束已用 PDF.js issue #18457 的公开 JPEG2000 样本在 Chromium 中验证。
+
 ### DOCX
 
 高保真预览优先选 [`docxjs`](https://github.com/VolodymyrBaydalka/docxjs)：Apache-2.0、约 2k Stars，近期仍活跃，目标就是在浏览器中渲染 DOCX。`vscode-office` 也明确采用它，说明这条组合路径已经过实际插件验证。
