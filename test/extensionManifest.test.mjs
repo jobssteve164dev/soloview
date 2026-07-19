@@ -102,6 +102,13 @@ test('查看器按格式加载渲染器并优先显示 PDF 首页面', () => {
   assert.match(webviewSource, /viewer\.append\(canvas\);[\s\S]*number === 1[\s\S]*status\.hidden = true/);
 });
 
+test('PPTX 使用惰性解析和窗口化挂载并在首张幻灯片完成后显示', () => {
+  assert.match(webviewSource, /lazySlides:\s*true/);
+  assert.match(webviewSource, /lazyMedia:\s*true/);
+  assert.match(webviewSource, /listOptions:\s*\{[\s\S]*windowed:\s*true[\s\S]*initialSlides:\s*2[\s\S]*batchSize:\s*2/);
+  assert.match(webviewSource, /onSlideRendered:[\s\S]*generation === renderGeneration[\s\S]*status\.hidden = true/);
+});
+
 test('DOCX 页面始终使用浅色纸张背景与可读正文颜色', () => {
   assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*background:\s*#fff !important/);
   assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*color:\s*#111 !important/);

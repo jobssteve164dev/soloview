@@ -77,7 +77,7 @@ async function openDocument(message: OpenMessage): Promise<void> {
     const bytes = normalizeBytes(message.bytes);
     if (message.type === 'pdf') await showPdf(bytes, generation);
     else if (message.type === 'docx') await showDocx(bytes);
-    else if (message.type === 'pptx') await showPptx(bytes);
+    else if (message.type === 'pptx') await showPptx(bytes, generation);
     else await showWorkbook(bytes, message.type);
     if (generation === renderGeneration) status.hidden = true;
   } catch (error) {
@@ -123,11 +123,21 @@ async function showDocx(bytes: Uint8Array): Promise<void> {
   await renderAsync(bytes.buffer, viewer, undefined, { inWrapper: true, breakPages: true });
 }
 
-async function showPptx(bytes: Uint8Array): Promise<void> {
+async function showPptx(bytes: Uint8Array, generation: number): Promise<void> {
   const { PptxViewer, RECOMMENDED_ZIP_LIMITS } = await import('@aiden0z/pptx-renderer');
   await PptxViewer.open(bytes, viewer, {
     renderMode: 'list',
     fitMode: 'contain',
+    lazySlides: true,
+    lazyMedia: true,
+    listOptions: {
+      windowed: true,
+      initialSlides: 2,
+      batchSize: 2,
+    },
+    onSlideRendered: () => {
+      if (generation === renderGeneration) status.hidden = true;
+    },
     zipLimits: RECOMMENDED_ZIP_LIMITS,
   });
 }

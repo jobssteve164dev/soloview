@@ -37,3 +37,4 @@ This file stores stable project facts future agents should reuse. Do not paste r
 - 后续功能提交推送 `main` 即可，不再人工打 Tag；自动发布工作流负责升版和 Release。
 - PDF.js 6 的扫描件链路必须随 VSIX 打包 `wasm`、`cmaps`、`standard_fonts`，Webview CSP 允许 `wasm-unsafe-eval`，并向 `getDocument` 提供三类资源 URL；否则 JPEG2000/JBIG2 扫描页可能为空白。GitHub PDF.js issue #18457 的 JPEG2000 样本是固定回归样本。
 - Webview 渲染器必须按文档格式动态加载，不能让 DOCX/PDF/XLSX/PPTX 共用一个全量首屏 bundle；DOCX 纸张固定为浅色背景和深色正文，不继承 VS Code 深色主题。PDF 首页面渲染后立即撤掉加载层，后续页继续追加。
+- PPTX 长文稿必须启用上游 `lazySlides`、`lazyMedia` 和 windowed list，首张幻灯片渲染后立即显示；禁止使用默认 eager 模式等待全部幻灯片解析、媒体解压和 DOM 挂载。60 页、9.8 MB 媒体样本在 Chromium 中首张可见约 1.88 秒，滚动到末页可继续增量渲染。
