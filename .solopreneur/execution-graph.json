@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-19T05:46:19.807Z",
-  "runCount": 10,
+  "updatedAt": "2026-07-19T05:57:59.139Z",
+  "runCount": 11,
   "indexes": {
     "byNode": {
       "1": [
@@ -9,6 +9,7 @@
         "1-1"
       ],
       "__solo__": [
+        "__solo__-11",
         "__solo__-10",
         "__solo__-8",
         "__solo__-7",
@@ -21,6 +22,7 @@
     },
     "byAgent": {
       "/usr/local/bin/codex": [
+        "__solo__-11",
         "__solo__-10",
         "1-9",
         "__solo__-8",
@@ -34,6 +36,15 @@
       ]
     },
     "byFile": {
+      ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml": [
+        "__solo__-11"
+      ],
+      ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache": [
+        "__solo__-11"
+      ],
+      ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0": [
+        "__solo__-11"
+      ],
       "soloview-0.1.7.vsix": [
         "__solo__-8"
       ],
@@ -79,12 +90,8 @@
       ]
     },
     "byStatus": {
-      "Recorded": [
-        "__solo__-10",
-        "1-9",
-        "__solo__-3"
-      ],
       "Completed": [
+        "__solo__-11",
         "__solo__-8",
         "__solo__-7",
         "__solo__-6",
@@ -92,9 +99,17 @@
         "__solo__-4",
         "__solo__-2",
         "1-1"
+      ],
+      "Recorded": [
+        "__solo__-10",
+        "1-9",
+        "__solo__-3"
       ]
     },
     "byFailure": {
+      "+ if (!resourceRoot) throw new Error(messages[locale].genericError);": [
+        "__solo__-11"
+      ],
       "window.addEventListener('message', (event: MessageEvent<OpenMessage | { kind: 'error'; message: string }>) => {": [
         "__solo__-8"
       ],
@@ -121,6 +136,9 @@
       ]
     },
     "byCommand": {
+      "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-c...": [
+        "__solo__-11"
+      ],
       "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'": [
         "__solo__-10"
       ],
@@ -153,6 +171,45 @@
       ]
     },
     "byExperience": {
+      "exp-verification-cfd05ebb611eb422": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-2"
+      ],
+      "exp-verification-5642cea234f4442a": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7"
+      ],
+      "exp-verification-9a49da584bcc3b73": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-2"
+      ],
+      "exp-verification-0fff6d67a061f52a": [
+        "__solo__-11"
+      ],
+      "exp-failure-5f17e1f1ef7fece5": [
+        "__solo__-11"
+      ],
+      "exp-reusable-signal-bbd83203f5340823": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-6",
+        "__solo__-5",
+        "__solo__-4",
+        "__solo__-2"
+      ],
+      "exp-handoff-action-5fefcc3b4cc60775": [
+        "__solo__-11"
+      ],
+      "exp-handoff-action-f1425867a79a61a0": [
+        "__solo__-11",
+        "__solo__-8"
+      ],
       "exp-reusable-signal-1477c0bd97fdae96": [
         "__solo__-10",
         "1-9",
@@ -160,20 +217,6 @@
       ],
       "exp-reusable-signal-a9fa41ec41a4c9d0": [
         "__solo__-10"
-      ],
-      "exp-verification-cfd05ebb611eb422": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-2"
-      ],
-      "exp-verification-5642cea234f4442a": [
-        "__solo__-8",
-        "__solo__-7"
-      ],
-      "exp-verification-9a49da584bcc3b73": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-2"
       ],
       "exp-verification-7e20514e7679db7b": [
         "__solo__-8"
@@ -183,14 +226,6 @@
       ],
       "exp-failure-1e6349973a312ffa": [
         "__solo__-8"
-      ],
-      "exp-reusable-signal-bbd83203f5340823": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-6",
-        "__solo__-5",
-        "__solo__-4",
-        "__solo__-2"
       ],
       "exp-reusable-signal-8a589c75a4b0beb5": [
         "__solo__-8"
@@ -208,9 +243,6 @@
         "__solo__-8"
       ],
       "exp-handoff-action-d8d981ac3fc4f4a1": [
-        "__solo__-8"
-      ],
-      "exp-handoff-action-f1425867a79a61a0": [
         "__solo__-8"
       ],
       "exp-verification-b83a0a8f6a32cfd8": [
@@ -318,6 +350,345 @@
     }
   },
   "experienceNodes": {
+    "exp-verification-cfd05ebb611eb422": {
+      "id": "exp-verification-cfd05ebb611eb422",
+      "type": "verification",
+      "centralMeaning": "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-2"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务需要证明相同区域或相同命令链路已闭环",
+        "soloview-0.1.7.vsix",
+        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
+        "package-lock.json"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 4,
+        "wins": 4,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 5,
+        "beta": 1,
+        "winRate": 0.8333,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-verification-5642cea234f4442a": {
+      "id": "exp-verification-5642cea234f4442a",
+      "type": "verification",
+      "centralMeaning": "--- a/test/extensionManifest.test.mjs",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务需要证明相同区域或相同命令链路已闭环",
+        "soloview-0.1.7.vsix",
+        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
+        "package-lock.json"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 3,
+        "wins": 3,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 4,
+        "beta": 1,
+        "winRate": 0.8,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-verification-9a49da584bcc3b73": {
+      "id": "exp-verification-9a49da584bcc3b73",
+      "type": "verification",
+      "centralMeaning": "+++ b/test/extensionManifest.test.mjs",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-2"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务需要证明相同区域或相同命令链路已闭环",
+        "soloview-0.1.7.vsix",
+        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
+        "package-lock.json"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 4,
+        "wins": 4,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 5,
+        "beta": 1,
+        "winRate": 0.8333,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-verification-0fff6d67a061f52a": {
+      "id": "exp-verification-0fff6d67a061f52a",
+      "type": "verification",
+      "centralMeaning": "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-failure-5f17e1f1ef7fece5": {
+      "id": "exp-failure-5f17e1f1ef7fece5",
+      "type": "failure",
+      "centralMeaning": "+ if (!resourceRoot) throw new Error(messages[locale].genericError);",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务出现相同失败、相同命令或相同文件区域"
+      ],
+      "doThis": "先复核已知失败原因，再决定重试、回退、补验证或调整计划。",
+      "avoidThis": "不要无视同类失败历史直接重复上一条路径。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-reusable-signal-bbd83203f5340823": {
+      "id": "exp-reusable-signal-bbd83203f5340823",
+      "type": "reusable_signal",
+      "centralMeaning": "Completion: Solo 对话已完成，等待用户决定是否关联到路线图环节。",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11",
+        "__solo__-8",
+        "__solo__-7",
+        "__solo__-6",
+        "__solo__-5",
+        "__solo__-4",
+        "__solo__-2"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求",
+        "soloview-0.1.7.vsix",
+        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
+        "package-lock.json"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -"
+      ],
+      "stats": {
+        "uses": 7,
+        "wins": 7,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 8,
+        "beta": 1,
+        "winRate": 0.8889,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-handoff-action-5fefcc3b4cc60775": {
+      "id": "exp-handoff-action-5fefcc3b4cc60775",
+      "type": "handoff_action",
+      "centralMeaning": "先阅读上一轮改动/触达文件：.playwright-cli/page-2026-07-19T05-52-34-588Z.yml, .vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache, .vscode-test/user-data/Code Cach...",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "接手同一路线图入口：__solo__",
+        "后续 Agent 需要接续上一轮未完全显式化的上下文"
+      ],
+      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
+      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
+    "exp-handoff-action-f1425867a79a61a0": {
+      "id": "exp-handoff-action-f1425867a79a61a0",
+      "type": "handoff_action",
+      "centralMeaning": "复用或复跑验证信号：diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs / --- a/test/extensionManifest.test.mjs",
+      "sourceKinds": [
+        "solo"
+      ],
+      "sourceRefs": [
+        "__solo__-11",
+        "__solo__-8"
+      ],
+      "appliesWhen": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0",
+        "接手同一路线图入口：__solo__",
+        "后续 Agent 需要接续上一轮未完全显式化的上下文",
+        "soloview-0.1.7.vsix",
+        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0"
+      ],
+      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
+      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
+      "checks": [
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "--- a/test/extensionManifest.test.mjs",
+        "+++ b/test/extensionManifest.test.mjs",
+        "+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {",
+        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {"
+      ],
+      "stats": {
+        "uses": 2,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 2,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-19T05:57:59.127Z"
+      }
+    },
     "exp-reusable-signal-1477c0bd97fdae96": {
       "id": "exp-reusable-signal-1477c0bd97fdae96",
       "type": "reusable_signal",
@@ -382,140 +753,6 @@
         "beta": 1,
         "winRate": 0.6667,
         "lastUsed": "2026-07-19T05:46:19.801Z"
-      }
-    },
-    "exp-verification-cfd05ebb611eb422": {
-      "id": "exp-verification-cfd05ebb611eb422",
-      "type": "verification",
-      "centralMeaning": "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-2"
-      ],
-      "appliesWhen": [
-        "soloview-0.1.7.vsix",
-        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
-        "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环",
-        "package-lock.json",
-        "package.json",
-        "src/webview/viewer.css",
-        "test/extensionManifest.test.mjs"
-      ],
-      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
-      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "--- a/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "+test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "/bin/bash -lc 'git add -A && git commit -m \"chore: update Solo run log\" && git update-index --assume-unchanged .solopreneur/agent-runs/<runGroup>/<runId>/output.log && git pull --rebase origin main && npm run check && git push o..."
-      ],
-      "stats": {
-        "uses": 3,
-        "wins": 3,
-        "losses": 0,
-        "neutral": 0,
-        "alpha": 4,
-        "beta": 1,
-        "winRate": 0.8,
-        "lastUsed": "2026-07-16T12:06:10.720Z"
-      }
-    },
-    "exp-verification-5642cea234f4442a": {
-      "id": "exp-verification-5642cea234f4442a",
-      "type": "verification",
-      "centralMeaning": "--- a/test/extensionManifest.test.mjs",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-8",
-        "__solo__-7"
-      ],
-      "appliesWhen": [
-        "soloview-0.1.7.vsix",
-        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
-        "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环",
-        "package-lock.json",
-        "package.json",
-        "src/webview/viewer.css",
-        "test/extensionManifest.test.mjs"
-      ],
-      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
-      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "--- a/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "+test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "/bin/bash -lc 'git add -A && git commit -m \"chore: update Solo run log\" && git update-index --assume-unchanged .solopreneur/agent-runs/<runGroup>/<runId>/output.log && git pull --rebase origin main && npm run check && git push o..."
-      ],
-      "stats": {
-        "uses": 2,
-        "wins": 2,
-        "losses": 0,
-        "neutral": 0,
-        "alpha": 3,
-        "beta": 1,
-        "winRate": 0.75,
-        "lastUsed": "2026-07-16T12:06:10.720Z"
-      }
-    },
-    "exp-verification-9a49da584bcc3b73": {
-      "id": "exp-verification-9a49da584bcc3b73",
-      "type": "verification",
-      "centralMeaning": "+++ b/test/extensionManifest.test.mjs",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-2"
-      ],
-      "appliesWhen": [
-        "soloview-0.1.7.vsix",
-        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
-        "同一路线图入口：__solo__",
-        "后续任务需要证明相同区域或相同命令链路已闭环",
-        "package-lock.json",
-        "package.json",
-        "src/webview/viewer.css",
-        "test/extensionManifest.test.mjs"
-      ],
-      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
-      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "--- a/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "+test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "/bin/bash -lc 'git add -A && git commit -m \"chore: update Solo run log\" && git update-index --assume-unchanged .solopreneur/agent-runs/<runGroup>/<runId>/output.log && git pull --rebase origin main && npm run check && git push o..."
-      ],
-      "stats": {
-        "uses": 3,
-        "wins": 3,
-        "losses": 0,
-        "neutral": 0,
-        "alpha": 4,
-        "beta": 1,
-        "winRate": 0.8,
-        "lastUsed": "2026-07-16T12:06:10.720Z"
       }
     },
     "exp-verification-7e20514e7679db7b": {
@@ -623,54 +860,6 @@
         "alpha": 1,
         "beta": 1,
         "winRate": 0.5,
-        "lastUsed": "2026-07-16T12:06:10.720Z"
-      }
-    },
-    "exp-reusable-signal-bbd83203f5340823": {
-      "id": "exp-reusable-signal-bbd83203f5340823",
-      "type": "reusable_signal",
-      "centralMeaning": "Completion: Solo 对话已完成，等待用户决定是否关联到路线图环节。",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-8",
-        "__solo__-7",
-        "__solo__-6",
-        "__solo__-5",
-        "__solo__-4",
-        "__solo__-2"
-      ],
-      "appliesWhen": [
-        "soloview-0.1.7.vsix",
-        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
-        "同一路线图入口：__solo__",
-        "后续任务出现相同目标、文件或验证需求",
-        "package-lock.json",
-        "package.json",
-        "src/webview/viewer.css",
-        "test/extensionManifest.test.mjs"
-      ],
-      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
-      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "--- a/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/7/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "+test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {",
-        "/bin/bash -lc 'git add -A && git commit -m \"chore: update Solo run log\" && git update-index --assume-unchanged .solopreneur/agent-runs/<runGroup>/<runId>/output.log && git pull --rebase origin main && npm run check && git push o..."
-      ],
-      "stats": {
-        "uses": 6,
-        "wins": 6,
-        "losses": 0,
-        "neutral": 0,
-        "alpha": 7,
-        "beta": 1,
-        "winRate": 0.875,
         "lastUsed": "2026-07-16T12:06:10.720Z"
       }
     },
@@ -858,42 +1047,6 @@
       "id": "exp-handoff-action-d8d981ac3fc4f4a1",
       "type": "handoff_action",
       "centralMeaning": "+ assert.match(webviewSource, /kind: 'setLanguage', locale: next/);",
-      "sourceKinds": [
-        "solo"
-      ],
-      "sourceRefs": [
-        "__solo__-8"
-      ],
-      "appliesWhen": [
-        "soloview-0.1.7.vsix",
-        ".vscode-test/user-data/Cache/Cache_Data/09d7b945ed912562_0",
-        "接手同一路线图入口：__solo__",
-        "后续 Agent 需要接续上一轮未完全显式化的上下文"
-      ],
-      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
-      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
-      "checks": [
-        "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/8/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
-        "diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
-        "--- a/test/extensionManifest.test.mjs",
-        "+++ b/test/extensionManifest.test.mjs",
-        "-test('文档查看器只在多工作表时显示标签栏，工具栏两侧保留安全边距', () => {"
-      ],
-      "stats": {
-        "uses": 1,
-        "wins": 0,
-        "losses": 0,
-        "neutral": 1,
-        "alpha": 1,
-        "beta": 1,
-        "winRate": 0.5,
-        "lastUsed": "2026-07-16T12:06:10.720Z"
-      }
-    },
-    "exp-handoff-action-f1425867a79a61a0": {
-      "id": "exp-handoff-action-f1425867a79a61a0",
-      "type": "handoff_action",
-      "centralMeaning": "复用或复跑验证信号：diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs / --- a/test/extensionManifest.test.mjs",
       "sourceKinds": [
         "solo"
       ],
@@ -2116,6 +2269,126 @@
   },
   "usageEdges": [
     {
+      "runId": "__solo__-11",
+      "experienceId": "exp-verification-cfd05ebb611eb422",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-verification-5642cea234f4442a",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-verification-9a49da584bcc3b73",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-verification-0fff6d67a061f52a",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-failure-5f17e1f1ef7fece5",
+      "phase": "failed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-reusable-signal-bbd83203f5340823",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-handoff-action-5fefcc3b4cc60775",
+      "phase": "observed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
+      "runId": "__solo__-11",
+      "experienceId": "exp-handoff-action-f1425867a79a61a0",
+      "phase": "observed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-11.json",
+        "execution_logs:11",
+        "check:cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -",
+        "check:diff --git a/test/extensionManifest.test.mjs b/test/extensionManifest.test.mjs",
+        "check:--- a/test/extensionManifest.test.mjs",
+        "check:+++ b/test/extensionManifest.test.mjs"
+      ],
+      "createdAt": "2026-07-19T05:57:59.127Z"
+    },
+    {
       "runId": "__solo__-10",
       "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
       "phase": "observed",
@@ -3043,6 +3316,25 @@
     }
   ],
   "runs": [
+    {
+      "runId": "__solo__-11",
+      "executionLogId": 11,
+      "nodeId": "__solo__",
+      "runKind": "solo",
+      "agentCli": "/usr/local/bin/codex",
+      "status": "Completed",
+      "finishedAt": "2026-07-19T05:57:59.127Z",
+      "changedFiles": [],
+      "touchedFiles": [
+        ".playwright-cli/page-2026-07-19T05-52-34-588Z.yml",
+        ".vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache",
+        ".vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0"
+      ],
+      "failures": [
+        "+ if (!resourceRoot) throw new Error(messages[locale].genericError);"
+      ],
+      "handoffSummary": "Solo 对话已完成，等待用户决定是否关联到路线图环节。 优先查看 .playwright-cli/page-2026-07-19T05-52-34-588Z.yml, .vscode-test/user-data/Code Cache/electron-preload/C107E069D6E072FE68EF9AB2F9C02CB63EFB64A39013A485166431056752C74F.cache, .vscode-test/user-data/Code Cache/js/662abfcc9e043af3_0。 阻塞/风险：+ if (!resourceRoot) throw new Error(messages[locale].genericError);。 建议验证：cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox -。"
+    },
     {
       "runId": "__solo__-10",
       "executionLogId": 10,

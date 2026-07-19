@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-19T05:47:08.800Z",
+  "updatedAt": "2026-07-19T06:16:43.702Z",
   "documents": [
     {
       "path": "README.md",
@@ -24,10 +24,17 @@
       "status": "active",
       "solves": "保存项目长期解释性背景。",
       "lastReviewedAt": "",
-      "lastTouchedAt": "2026-07-16T02:22:38.011Z"
+      "lastTouchedAt": "2026-07-19T05:53:18.231Z"
     }
   ],
   "pendingReview": [
+    {
+      "path": "docs/research/github-document-viewer-landscape.md",
+      "reason": "文档缺少长期判断结构，建议确认它解决的项目判断和适用范围。",
+      "severity": "info",
+      "detectedAt": "2026-07-19T05:57:59.127Z",
+      "source": "documentation_audit"
+    },
     {
       "path": "README.md",
       "reason": "文档内容疑似包含 prompt、终端输出或执行流水，不适合进入长期项目解释性文档。",
@@ -37,12 +44,14 @@
     }
   ],
   "lastAudit": {
-    "auditedAt": "2026-07-16T12:06:10.720Z",
+    "auditedAt": "2026-07-19T05:57:59.127Z",
     "runKind": "solo",
     "nodeId": "__solo__",
     "status": "Completed",
-    "action": "none",
-    "touchedDocuments": [],
-    "pendingReviewCount": 1
+    "action": "needs_review",
+    "touchedDocuments": [
+      "docs/research/github-document-viewer-landscape.md"
+    ],
+    "pendingReviewCount": 2
   }
 }
