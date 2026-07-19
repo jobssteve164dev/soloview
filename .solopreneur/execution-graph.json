@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-16T12:11:40.256Z",
-  "runCount": 9,
+  "updatedAt": "2026-07-19T05:46:19.807Z",
+  "runCount": 10,
   "indexes": {
     "byNode": {
       "1": [
@@ -9,6 +9,7 @@
         "1-1"
       ],
       "__solo__": [
+        "__solo__-10",
         "__solo__-8",
         "__solo__-7",
         "__solo__-6",
@@ -20,6 +21,7 @@
     },
     "byAgent": {
       "/usr/local/bin/codex": [
+        "__solo__-10",
         "1-9",
         "__solo__-8",
         "__solo__-7",
@@ -78,6 +80,7 @@
     },
     "byStatus": {
       "Recorded": [
+        "__solo__-10",
         "1-9",
         "__solo__-3"
       ],
@@ -118,6 +121,9 @@
       ]
     },
     "byCommand": {
+      "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'": [
+        "__solo__-10"
+      ],
       "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f0-a9f5-79c0-b878-a34a5f357af2'": [
         "1-9"
       ],
@@ -148,8 +154,12 @@
     },
     "byExperience": {
       "exp-reusable-signal-1477c0bd97fdae96": [
+        "__solo__-10",
         "1-9",
         "__solo__-3"
+      ],
+      "exp-reusable-signal-a9fa41ec41a4c9d0": [
+        "__solo__-10"
       ],
       "exp-verification-cfd05ebb611eb422": [
         "__solo__-8",
@@ -313,33 +323,65 @@
       "type": "reusable_signal",
       "centralMeaning": "Completion: 续聊已记录；不参与任务完成、失败或进行中判断。",
       "sourceKinds": [
-        "step_continue",
-        "solo_continue"
+        "solo_continue",
+        "step_continue"
       ],
       "sourceRefs": [
+        "__solo__-10",
         "1-9",
         "__solo__-3"
       ],
       "appliesWhen": [
-        "同一路线图入口：1",
+        "同一路线图入口：__solo__",
         "后续任务出现相同目标、文件或验证需求",
-        "同一路线图入口：__solo__"
+        "同一路线图入口：1"
       ],
       "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
       "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
       "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'",
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f0-a9f5-79c0-b878-a34a5f357af2'",
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
       ],
       "stats": {
-        "uses": 2,
-        "wins": 2,
+        "uses": 3,
+        "wins": 3,
         "losses": 0,
         "neutral": 0,
-        "alpha": 3,
+        "alpha": 4,
         "beta": 1,
-        "winRate": 0.75,
-        "lastUsed": "2026-07-16T12:11:40.244Z"
+        "winRate": 0.8,
+        "lastUsed": "2026-07-19T05:46:19.801Z"
+      }
+    },
+    "exp-reusable-signal-a9fa41ec41a4c9d0": {
+      "id": "exp-reusable-signal-a9fa41ec41a4c9d0",
+      "type": "reusable_signal",
+      "centralMeaning": "3a91e09 fix: remove webview page gutters",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-10"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T05:46:19.801Z"
       }
     },
     "exp-verification-cfd05ebb611eb422": {
@@ -2074,6 +2116,30 @@
   },
   "usageEdges": [
     {
+      "runId": "__solo__-10",
+      "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-10.json",
+        "execution_logs:10",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'"
+      ],
+      "createdAt": "2026-07-19T05:46:19.801Z"
+    },
+    {
+      "runId": "__solo__-10",
+      "experienceId": "exp-reusable-signal-a9fa41ec41a4c9d0",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-10.json",
+        "execution_logs:10",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'"
+      ],
+      "createdAt": "2026-07-19T05:46:19.801Z"
+    },
+    {
       "runId": "1-9",
       "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
       "phase": "observed",
@@ -2977,6 +3043,19 @@
     }
   ],
   "runs": [
+    {
+      "runId": "__solo__-10",
+      "executionLogId": 10,
+      "nodeId": "__solo__",
+      "runKind": "solo_continue",
+      "agentCli": "/usr/local/bin/codex",
+      "status": "Recorded",
+      "finishedAt": "2026-07-19T05:46:19.801Z",
+      "changedFiles": [],
+      "touchedFiles": [],
+      "failures": [],
+      "handoffSummary": "续聊已记录；不参与任务完成、失败或进行中判断。"
+    },
     {
       "runId": "1-9",
       "executionLogId": 9,
