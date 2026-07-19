@@ -15,6 +15,7 @@ const extensionSource = await readFile(
 );
 const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
 const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
+const buildSource = await readFile(new URL('../build.mjs', import.meta.url), 'utf8');
 const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
 const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
 
@@ -77,4 +78,15 @@ test('文档查看器首屏样式同步注入，页面壳完整覆盖 Webview', 
   assert.match(viewerStyles, /html, body \{ width:\s*100%; height:\s*100%; margin:\s*0; padding:\s*0;/);
   assert.match(viewerStyles, /body \{ width:\s*100vw; height:\s*100vh; overflow:\s*hidden;/);
   assert.match(viewerStyles, /min-height:\s*100%;\s*padding:\s*24px;/);
+});
+
+test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () => {
+  assert.match(buildSource, /pdfjs-dist\/wasm[\s\S]*dist\/pdfjs\/wasm/);
+  assert.match(buildSource, /pdfjs-dist\/cmaps[\s\S]*dist\/pdfjs\/cmaps/);
+  assert.match(buildSource, /pdfjs-dist\/standard_fonts[\s\S]*dist\/pdfjs\/standard_fonts/);
+  assert.match(extensionSource, /data-pdf-resource-root="\$\{pdfResourceRoot\}"/);
+  assert.match(extensionSource, /script-src[^;]*'wasm-unsafe-eval'/);
+  assert.match(webviewSource, /cMapUrl: `\$\{resourceRoot\}\/cmaps\/`/);
+  assert.match(webviewSource, /standardFontDataUrl: `\$\{resourceRoot\}\/standard_fonts\/`/);
+  assert.match(webviewSource, /wasmUrl: `\$\{resourceRoot\}\/wasm\/`/);
 });
