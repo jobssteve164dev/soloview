@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-19T06:20:00.486Z",
-  "runCount": 12,
+  "updatedAt": "2026-07-19T09:53:54.270Z",
+  "runCount": 13,
   "indexes": {
     "byNode": {
       "1": [
@@ -9,6 +9,7 @@
         "1-1"
       ],
       "__solo__": [
+        "__solo__-12",
         "__solo__-13",
         "__solo__-11",
         "__solo__-10",
@@ -23,6 +24,7 @@
     },
     "byAgent": {
       "/usr/local/bin/codex": [
+        "__solo__-12",
         "__solo__-13",
         "__solo__-11",
         "__solo__-10",
@@ -93,6 +95,7 @@
     },
     "byStatus": {
       "Recorded": [
+        "__solo__-12",
         "__solo__-13",
         "__solo__-10",
         "1-9",
@@ -140,6 +143,7 @@
     },
     "byCommand": {
       "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'": [
+        "__solo__-12",
         "__solo__-13"
       ],
       "cat '/home/ubuntu/project/soloview/.solopreneur/agent-runs/__solo__/11/prompt.txt' | '/usr/local/bin/codex' exec --color always -C '/home/ubuntu/project/soloview' --skip-git-repo-c...": [
@@ -177,11 +181,27 @@
       ]
     },
     "byExperience": {
+      "exp-verification-55c05c0509bd55e3": [
+        "__solo__-12"
+      ],
       "exp-reusable-signal-1477c0bd97fdae96": [
+        "__solo__-12",
         "__solo__-13",
         "__solo__-10",
         "1-9",
         "__solo__-3"
+      ],
+      "exp-reusable-signal-02c404d8991e5254": [
+        "__solo__-12"
+      ],
+      "exp-reusable-signal-4f998295831497c9": [
+        "__solo__-12"
+      ],
+      "exp-reusable-signal-ac28de160e9b7b9b": [
+        "__solo__-12"
+      ],
+      "exp-handoff-action-78d7ac47a6fe41a3": [
+        "__solo__-12"
       ],
       "exp-verification-cfd05ebb611eb422": [
         "__solo__-11",
@@ -357,6 +377,37 @@
     }
   },
   "experienceNodes": {
+    "exp-verification-55c05c0509bd55e3": {
+      "id": "exp-verification-55c05c0509bd55e3",
+      "type": "verification",
+      "centralMeaning": "test/extensionManifest.test.mjs | 22 +++++++",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-12"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务需要证明相同区域或相同命令链路已闭环"
+      ],
+      "doThis": "优先复用或改写这组验证动作，并验证最终产物。",
+      "avoidThis": "不要只凭实现描述或完成摘要宣称闭环。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
+      }
+    },
     "exp-reusable-signal-1477c0bd97fdae96": {
       "id": "exp-reusable-signal-1477c0bd97fdae96",
       "type": "reusable_signal",
@@ -366,6 +417,7 @@
         "step_continue"
       ],
       "sourceRefs": [
+        "__solo__-12",
         "__solo__-13",
         "__solo__-10",
         "1-9",
@@ -380,19 +432,144 @@
       "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
       "checks": [
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++",
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f6ac6-49de-7411-8005-5c85d8bebd63'",
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f0-a9f5-79c0-b878-a34a5f357af2'",
         "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f68f4-d66c-7583-a305-fbfc402132b1'"
       ],
       "stats": {
-        "uses": 4,
-        "wins": 4,
+        "uses": 5,
+        "wins": 5,
         "losses": 0,
         "neutral": 0,
-        "alpha": 5,
+        "alpha": 6,
         "beta": 1,
-        "winRate": 0.8333,
-        "lastUsed": "2026-07-19T06:20:00.465Z"
+        "winRate": 0.8571,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
+      }
+    },
+    "exp-reusable-signal-02c404d8991e5254": {
+      "id": "exp-reusable-signal-02c404d8991e5254",
+      "type": "reusable_signal",
+      "centralMeaning": "• Waited for background terminal · git add -A && git commit -m \"fix: speed up document previews\" && git push origin main",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-12"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
+      }
+    },
+    "exp-reusable-signal-4f998295831497c9": {
+      "id": "exp-reusable-signal-4f998295831497c9",
+      "type": "reusable_signal",
+      "centralMeaning": "• Ran git add -A && git commit -m \"fix: speed up document previews\" && git push origin main",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-12"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
+      }
+    },
+    "exp-reusable-signal-ac28de160e9b7b9b": {
+      "id": "exp-reusable-signal-ac28de160e9b7b9b",
+      "type": "reusable_signal",
+      "centralMeaning": "└ [main b906e30] fix: speed up document previews",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-12"
+      ],
+      "appliesWhen": [
+        "同一路线图入口：__solo__",
+        "后续任务出现相同目标、文件或验证需求"
+      ],
+      "doThis": "在下一次执行前召回这条经验，并转成具体动作或验证。",
+      "avoidThis": "不要只复述历史摘要；必须用当前证据确认适用性。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 1,
+        "losses": 0,
+        "neutral": 0,
+        "alpha": 2,
+        "beta": 1,
+        "winRate": 0.6667,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
+      }
+    },
+    "exp-handoff-action-78d7ac47a6fe41a3": {
+      "id": "exp-handoff-action-78d7ac47a6fe41a3",
+      "type": "handoff_action",
+      "centralMeaning": "复用或复跑验证信号：test/extensionManifest.test.mjs | 22 +++++++",
+      "sourceKinds": [
+        "solo_continue"
+      ],
+      "sourceRefs": [
+        "__solo__-12"
+      ],
+      "appliesWhen": [
+        "接手同一路线图入口：__solo__",
+        "后续 Agent 需要接续上一轮未完全显式化的上下文"
+      ],
+      "doThis": "把这条交接动作转成当前任务的第一步检查或验证。",
+      "avoidThis": "不要把 handoff 当成已验证结论；先和当前代码、日志、测试对齐。",
+      "checks": [
+        "'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "stats": {
+        "uses": 1,
+        "wins": 0,
+        "losses": 0,
+        "neutral": 1,
+        "alpha": 1,
+        "beta": 1,
+        "winRate": 0.5,
+        "lastUsed": "2026-07-19T09:53:54.264Z"
       }
     },
     "exp-verification-cfd05ebb611eb422": {
@@ -2278,6 +2455,84 @@
   },
   "usageEdges": [
     {
+      "runId": "__solo__-12",
+      "experienceId": "exp-verification-55c05c0509bd55e3",
+      "phase": "verified",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
+      "runId": "__solo__-12",
+      "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
+      "runId": "__solo__-12",
+      "experienceId": "exp-reusable-signal-02c404d8991e5254",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
+      "runId": "__solo__-12",
+      "experienceId": "exp-reusable-signal-4f998295831497c9",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
+      "runId": "__solo__-12",
+      "experienceId": "exp-reusable-signal-ac28de160e9b7b9b",
+      "phase": "observed",
+      "outcome": "win",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
+      "runId": "__solo__-12",
+      "experienceId": "exp-handoff-action-78d7ac47a6fe41a3",
+      "phase": "observed",
+      "outcome": "neutral",
+      "evidenceRefs": [
+        "digest:.solopreneur/run-digests/__solo__-12.json",
+        "execution_logs:12",
+        "check:'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'",
+        "check:test/extensionManifest.test.mjs | 22 +++++++"
+      ],
+      "createdAt": "2026-07-19T09:53:54.264Z"
+    },
+    {
       "runId": "__solo__-13",
       "experienceId": "exp-reusable-signal-1477c0bd97fdae96",
       "phase": "observed",
@@ -3337,6 +3592,19 @@
     }
   ],
   "runs": [
+    {
+      "runId": "__solo__-12",
+      "executionLogId": 12,
+      "nodeId": "__solo__",
+      "runKind": "solo_continue",
+      "agentCli": "/usr/local/bin/codex",
+      "status": "Recorded",
+      "finishedAt": "2026-07-19T09:53:54.264Z",
+      "changedFiles": [],
+      "touchedFiles": [],
+      "failures": [],
+      "handoffSummary": "续聊已记录；不参与任务完成、失败或进行中判断。"
+    },
     {
       "runId": "__solo__-13",
       "executionLogId": 13,
