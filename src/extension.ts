@@ -96,7 +96,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
   }
 
   private html(webview: vscode.Webview, uri: vscode.Uri, type: string | undefined, locale: 'zh' | 'en'): string {
-    const script = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview.js'));
+    const script = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'webview', 'main.js'));
     const styles = readFileSync(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'viewer.css').fsPath, 'utf8');
     const worker = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdf.worker.min.mjs'));
     const pdfResourceRoot = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'pdfjs'));
@@ -146,7 +146,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
     </section>
     <div id="viewer" class="viewer" aria-label="${copy.content}" data-i18n-aria="content"></div>
   </main>
-  <script nonce="${nonce}" src="${script}"></script>
+  <script nonce="${nonce}" type="module" src="${script}"></script>
 </body>
 </html>`;
   }

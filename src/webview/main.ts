@@ -1,7 +1,4 @@
-import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
-import { renderAsync as renderDocx } from 'docx-preview';
-import * as XLSX from 'xlsx';
-import { PptxViewer, RECOMMENDED_ZIP_LIMITS } from '@aiden0z/pptx-renderer';
+export {};
 
 declare function acquireVsCodeApi(): {
   postMessage(message: unknown): void;
@@ -46,8 +43,6 @@ const zoomValue = requiredElement<HTMLOutputElement>('zoom-value');
 let zoom = 1;
 let renderGeneration = 0;
 
-GlobalWorkerOptions.workerSrc = document.body.dataset.pdfWorker ?? '';
-
 requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => setZoom(zoom + 0.1));
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
@@ -81,13 +76,9 @@ async function openDocument(message: OpenMessage): Promise<void> {
   try {
     const bytes = normalizeBytes(message.bytes);
     if (message.type === 'pdf') await showPdf(bytes, generation);
-    else if (message.type === 'docx') await renderDocx(bytes.buffer, viewer, undefined, { inWrapper: true, breakPages: true });
-    else if (message.type === 'pptx') await PptxViewer.open(bytes, viewer, {
-      renderMode: 'list',
-      fitMode: 'contain',
-      zipLimits: RECOMMENDED_ZIP_LIMITS,
-    });
-    else showWorkbook(bytes, message.type);
+    else if (message.type === 'docx') await showDocx(bytes);
+    else if (message.type === 'pptx') await showPptx(bytes);
+    else await showWorkbook(bytes, message.type);
     if (generation === renderGeneration) status.hidden = true;
   } catch (error) {
     if (generation === renderGeneration) {
@@ -97,6 +88,8 @@ async function openDocument(message: OpenMessage): Promise<void> {
 }
 
 async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
+  const { GlobalWorkerOptions, getDocument } = await import('pdfjs-dist');
+  GlobalWorkerOptions.workerSrc = document.body.dataset.pdfWorker ?? '';
   const resourceRoot = document.body.dataset.pdfResourceRoot;
   if (!resourceRoot) throw new Error(messages[locale].genericError);
   const pdf = await getDocument({
@@ -106,7 +99,6 @@ async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
     standardFontDataUrl: `${resourceRoot}/standard_fonts/`,
     wasmUrl: `${resourceRoot}/wasm/`,
   }).promise;
-  const fragment = document.createDocumentFragment();
   for (let number = 1; number <= pdf.numPages; number += 1) {
     if (generation !== renderGeneration) return;
     const page = await pdf.getPage(number);
@@ -121,12 +113,27 @@ async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
     const context = canvas.getContext('2d');
     if (!context) throw new Error(messages[locale].canvasError);
     await page.render({ canvas, canvasContext: context, viewport }).promise;
-    fragment.append(canvas);
+    viewer.append(canvas);
+    if (number === 1 && generation === renderGeneration) status.hidden = true;
   }
-  viewer.append(fragment);
 }
 
-function showWorkbook(bytes: Uint8Array, type: 'xlsx' | 'xls' | 'csv'): void {
+async function showDocx(bytes: Uint8Array): Promise<void> {
+  const { renderAsync } = await import('docx-preview');
+  await renderAsync(bytes.buffer, viewer, undefined, { inWrapper: true, breakPages: true });
+}
+
+async function showPptx(bytes: Uint8Array): Promise<void> {
+  const { PptxViewer, RECOMMENDED_ZIP_LIMITS } = await import('@aiden0z/pptx-renderer');
+  await PptxViewer.open(bytes, viewer, {
+    renderMode: 'list',
+    fitMode: 'contain',
+    zipLimits: RECOMMENDED_ZIP_LIMITS,
+  });
+}
+
+async function showWorkbook(bytes: Uint8Array, type: 'xlsx' | 'xls' | 'csv'): Promise<void> {
+  const XLSX = await import('xlsx');
   const workbook = XLSX.read(bytes, { type: 'array' });
   const renderSheet = (name: string): void => {
     const sheet = workbook.Sheets[name];

@@ -73,7 +73,13 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .pdf-page { display: block; max-width: 100%; height: auto; margin: 0 auto 20px; background: white; box-shadow: var(--shadow); }
 .docx-wrapper { background: transparent !important; padding: 0 !important; }
-.docx-wrapper > section.docx { margin: 0 auto 20px; box-shadow: var(--shadow); }
+.docx-wrapper > section.docx {
+  margin: 0 auto 20px;
+  background: #fff !important;
+  color: #111 !important;
+  color-scheme: light;
+  box-shadow: var(--shadow);
+}
 .pptx-viewer, .slide { margin-inline: auto; }
 #workbook-table { border-collapse: collapse; min-width: 100%; background: var(--vscode-editor-background); }
 #workbook-table td, #workbook-table th { min-width: 80px; padding: 6px 8px; border: 1px solid var(--border); white-space: pre-wrap; }

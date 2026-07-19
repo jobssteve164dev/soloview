@@ -16,6 +16,7 @@ const extensionSource = await readFile(
 const webviewSource = await readFile(new URL('../src/webview/main.ts', import.meta.url), 'utf8');
 const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
 const buildSource = await readFile(new URL('../build.mjs', import.meta.url), 'utf8');
+const vscodeIgnore = await readFile(new URL('../.vscodeignore', import.meta.url), 'utf8');
 const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
 const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
 
@@ -89,4 +90,25 @@ test('PDF 查看器带齐扫描件解码资源并允许 PDF.js 执行 WASM', () 
   assert.match(webviewSource, /cMapUrl: `\$\{resourceRoot\}\/cmaps\/`/);
   assert.match(webviewSource, /standardFontDataUrl: `\$\{resourceRoot\}\/standard_fonts\/`/);
   assert.match(webviewSource, /wasmUrl: `\$\{resourceRoot\}\/wasm\/`/);
+});
+
+test('查看器按格式加载渲染器并优先显示 PDF 首页面', () => {
+  assert.match(buildSource, /outdir: 'dist\/webview'/);
+  assert.match(buildSource, /splitting: true/);
+  assert.match(extensionSource, /dist', 'webview', 'main\.js'/);
+  assert.match(extensionSource, /<script nonce="\$\{nonce\}" type="module"/);
+  assert.match(webviewSource, /await import\('docx-preview'\)/);
+  assert.match(webviewSource, /await import\('pdfjs-dist'\)/);
+  assert.match(webviewSource, /viewer\.append\(canvas\);[\s\S]*number === 1[\s\S]*status\.hidden = true/);
+});
+
+test('DOCX 页面始终使用浅色纸张背景与可读正文颜色', () => {
+  assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*background:\s*#fff !important/);
+  assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*color:\s*#111 !important/);
+  assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*color-scheme:\s*light/);
+});
+
+test('最终插件包排除浏览器验收与旧版查看器产物', () => {
+  assert.match(vscodeIgnore, /^\.playwright-cli\/\*\*$/m);
+  assert.match(vscodeIgnore, /^dist\/webview\.js$/m);
 });

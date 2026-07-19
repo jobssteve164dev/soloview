@@ -1,0 +1,1 @@
+'/usr/local/bin/codex' resume --include-non-interactive --all -C '/home/ubuntu/project/soloview' '019f78ea-1566-71a3-960d-a776874b6cee'
