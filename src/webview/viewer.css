@@ -72,6 +72,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .error-symbol { display: grid; place-content: center; width: 40px; height: 40px; border: 2px solid var(--vscode-errorForeground); border-radius: 50%; color: var(--vscode-errorForeground); font-weight: 700; }
 
 .pdf-page { display: block; max-width: 100%; height: auto; margin: 0 auto 20px; background: white; box-shadow: var(--shadow); }
+.image-preview { display: block; max-width: 100%; height: auto; margin: 0 auto; box-shadow: var(--shadow); }
 .docx-wrapper { background: transparent !important; padding: 0 !important; }
 .docx-wrapper > section.docx {
   margin: 0 auto 20px;
