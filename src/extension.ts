@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { readFileSync } from 'node:fs';
-import { documentTypeForPath } from './documentTypes.js';
+import { documentTypeForPath, supportedDocumentTypes } from './documentTypes.js';
 import { RecentDocuments, type RecentDocument } from './recentDocuments.js';
 
 export { documentTypeForPath } from './documentTypes.js';
@@ -229,7 +229,7 @@ export function activate(context: vscode.ExtensionContext): void {
         canSelectMany: false,
         openLabel: hostCopy().openInSoloView,
         filters: {
-          [hostCopy().supported]: ['pdf', 'docx', 'xlsx', 'xls', 'csv', 'pptx'],
+          [hostCopy().supported]: [...supportedDocumentTypes],
         },
       });
       const uri = selected?.[0];

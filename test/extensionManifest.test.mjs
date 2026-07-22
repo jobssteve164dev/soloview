@@ -115,6 +115,16 @@ test('DOCX 页面始终使用浅色纸张背景与可读正文颜色', () => {
   assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*color-scheme:\s*light/);
 });
 
+test('常见图片格式统一由 SoloView 打开并使用内置图片查看器', () => {
+  const patterns = manifest.contributes.customEditors[0].selector.map(({ filenamePattern }) => filenamePattern);
+  for (const extension of ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']) {
+    assert.ok(patterns.includes(`*.${extension}`));
+  }
+  assert.match(webviewSource, /URL\.createObjectURL\(new Blob/);
+  assert.match(webviewSource, /await image\.decode\(\)/);
+  assert.match(viewerStyles, /\.image-preview[\s\S]*max-width:\s*100%/);
+});
+
 test('最终插件包排除浏览器验收与旧版查看器产物', () => {
   assert.match(vscodeIgnore, /^\.playwright-cli\/\*\*$/m);
   assert.match(vscodeIgnore, /^dist\/webview\.js$/m);

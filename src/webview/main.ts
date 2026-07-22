@@ -29,7 +29,7 @@ const messages = {
 
 type OpenMessage = {
   kind: 'open';
-  type: 'pdf' | 'docx' | 'xlsx' | 'xls' | 'csv' | 'pptx';
+  type: 'pdf' | 'docx' | 'xlsx' | 'xls' | 'csv' | 'pptx' | ImageType;
   name: string;
   bytes: Uint8Array | { data: number[] } | number[];
 };
@@ -42,6 +42,14 @@ const tabs = requiredElement<HTMLDivElement>('sheet-tabs');
 const zoomValue = requiredElement<HTMLOutputElement>('zoom-value');
 let zoom = 1;
 let renderGeneration = 0;
+let imageUrl: string | undefined;
+
+type ImageType = 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp' | 'bmp' | 'svg' | 'ico' | 'avif';
+
+const imageMimeTypes: Record<ImageType, string> = {
+  png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif',
+  webp: 'image/webp', bmp: 'image/bmp', svg: 'image/svg+xml', ico: 'image/x-icon', avif: 'image/avif',
+};
 
 requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => setZoom(zoom + 0.1));
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
@@ -71,6 +79,10 @@ async function openDocument(message: OpenMessage): Promise<void> {
   viewer.replaceChildren();
   tabs.replaceChildren();
   tabs.hidden = true;
+  if (imageUrl) {
+    URL.revokeObjectURL(imageUrl);
+    imageUrl = undefined;
+  }
   setZoom(1);
 
   try {
@@ -78,6 +90,7 @@ async function openDocument(message: OpenMessage): Promise<void> {
     if (message.type === 'pdf') await showPdf(bytes, generation);
     else if (message.type === 'docx') await showDocx(bytes);
     else if (message.type === 'pptx') await showPptx(bytes, generation);
+    else if (isImageType(message.type)) await showImage(bytes, message.type, message.name, generation);
     else await showWorkbook(bytes, message.type);
     if (generation === renderGeneration) status.hidden = true;
   } catch (error) {
@@ -85,6 +98,22 @@ async function openDocument(message: OpenMessage): Promise<void> {
       showError(error instanceof Error ? error.message : messages[locale].genericError);
     }
   }
+}
+
+async function showImage(bytes: Uint8Array, type: ImageType, name: string, generation: number): Promise<void> {
+  const url = URL.createObjectURL(new Blob([Uint8Array.from(bytes).buffer], { type: imageMimeTypes[type] }));
+  imageUrl = url;
+  const image = new Image();
+  image.className = 'image-preview';
+  image.alt = name;
+  image.src = url;
+  await image.decode();
+  if (generation !== renderGeneration) return;
+  viewer.append(image);
+}
+
+function isImageType(type: OpenMessage['type']): type is ImageType {
+  return type in imageMimeTypes;
 }
 
 async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
