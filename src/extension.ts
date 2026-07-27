@@ -8,6 +8,11 @@ export { documentTypeForPath } from './documentTypes.js';
 const viewType = 'soloview.documentViewer';
 const sidebarViewType = 'soloview.sidebar';
 type Locale = 'zh' | 'en';
+const imageTypes = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']);
+
+function isImageType(type: string): boolean {
+  return imageTypes.has(type);
+}
 
 function resolveLocale(): Locale {
   const configured = vscode.workspace.getConfiguration('soloview').get<string>('language', 'auto').toLowerCase();
@@ -46,9 +51,12 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
     if (type) {
       this.onOpened(document.uri);
     }
+    const distRoot = vscode.Uri.joinPath(this.context.extensionUri, 'dist');
     panel.webview.options = {
       enableScripts: true,
-      localResourceRoots: [vscode.Uri.joinPath(this.context.extensionUri, 'dist')],
+      localResourceRoots: isImageType(type ?? '')
+        ? [distRoot, vscode.Uri.joinPath(document.uri, '..')]
+        : [distRoot],
     };
     panel.webview.html = this.html(panel.webview, document.uri, type, resolveLocale());
 
@@ -58,6 +66,20 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 
     const sendDocument = async (): Promise<void> => {
       try {
+        if (isImageType(type)) {
+          const stat = await vscode.workspace.fs.stat(document.uri);
+          const version = encodeURIComponent(`${stat.mtime}-${stat.size}`);
+          const resourceUri = document.uri.with({
+            query: [document.uri.query, `soloview=${version}`].filter(Boolean).join('&'),
+          });
+          await panel.webview.postMessage({
+            kind: 'open',
+            type,
+            name: document.uri.path.split('/').pop() ?? 'Image',
+            src: panel.webview.asWebviewUri(resourceUri).toString(),
+          });
+          return;
+        }
         const bytes = await vscode.workspace.fs.readFile(document.uri);
         await panel.webview.postMessage({
           kind: 'open',

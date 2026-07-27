@@ -120,8 +120,10 @@ test('常见图片格式统一由 SoloView 打开并使用内置图片查看器'
   for (const extension of ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']) {
     assert.ok(patterns.includes(`*.${extension}`));
   }
-  assert.match(webviewSource, /URL\.createObjectURL\(new Blob/);
-  assert.match(webviewSource, /await image\.decode\(\)/);
+  assert.match(extensionSource, /localResourceRoots:[\s\S]*vscode\.Uri\.joinPath\(document\.uri, '\.\.'\)/);
+  assert.match(extensionSource, /if \(isImageType\(type\)\)[\s\S]*asWebviewUri\(resourceUri\)[\s\S]*return;[\s\S]*workspace\.fs\.readFile/);
+  assert.doesNotMatch(webviewSource, /URL\.createObjectURL|image\.decode\(\)/);
+  assert.match(webviewSource, /image\.src = src;[\s\S]*viewer\.append\(image\);[\s\S]*status\.hidden = true;[\s\S]*await loaded/);
   assert.match(viewerStyles, /\.image-preview[\s\S]*max-width:\s*100%/);
 });
 

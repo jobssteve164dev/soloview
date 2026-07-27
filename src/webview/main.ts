@@ -27,12 +27,21 @@ const messages = {
   },
 };
 
-type OpenMessage = {
+type BinaryOpenMessage = {
   kind: 'open';
-  type: 'pdf' | 'docx' | 'xlsx' | 'xls' | 'csv' | 'pptx' | ImageType;
+  type: 'pdf' | 'docx' | 'xlsx' | 'xls' | 'csv' | 'pptx';
   name: string;
   bytes: Uint8Array | { data: number[] } | number[];
 };
+
+type ImageOpenMessage = {
+  kind: 'open';
+  type: ImageType;
+  name: string;
+  src: string;
+};
+
+type OpenMessage = BinaryOpenMessage | ImageOpenMessage;
 
 const vscode = acquireVsCodeApi();
 let locale: Locale = vscode.getState()?.locale ?? (document.body.dataset.initialLocale === 'zh' ? 'zh' : 'en');
@@ -42,14 +51,10 @@ const tabs = requiredElement<HTMLDivElement>('sheet-tabs');
 const zoomValue = requiredElement<HTMLOutputElement>('zoom-value');
 let zoom = 1;
 let renderGeneration = 0;
-let imageUrl: string | undefined;
 
 type ImageType = 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp' | 'bmp' | 'svg' | 'ico' | 'avif';
 
-const imageMimeTypes: Record<ImageType, string> = {
-  png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif',
-  webp: 'image/webp', bmp: 'image/bmp', svg: 'image/svg+xml', ico: 'image/x-icon', avif: 'image/avif',
-};
+const imageTypes = new Set<ImageType>(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']);
 
 requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => setZoom(zoom + 0.1));
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
@@ -79,18 +84,17 @@ async function openDocument(message: OpenMessage): Promise<void> {
   viewer.replaceChildren();
   tabs.replaceChildren();
   tabs.hidden = true;
-  if (imageUrl) {
-    URL.revokeObjectURL(imageUrl);
-    imageUrl = undefined;
-  }
   setZoom(1);
 
   try {
+    if (isImageMessage(message)) {
+      await showImage(message.src, message.name, generation);
+      return;
+    }
     const bytes = normalizeBytes(message.bytes);
     if (message.type === 'pdf') await showPdf(bytes, generation);
     else if (message.type === 'docx') await showDocx(bytes);
     else if (message.type === 'pptx') await showPptx(bytes, generation);
-    else if (isImageType(message.type)) await showImage(bytes, message.type, message.name, generation);
     else await showWorkbook(bytes, message.type);
     if (generation === renderGeneration) status.hidden = true;
   } catch (error) {
@@ -100,20 +104,23 @@ async function openDocument(message: OpenMessage): Promise<void> {
   }
 }
 
-async function showImage(bytes: Uint8Array, type: ImageType, name: string, generation: number): Promise<void> {
-  const url = URL.createObjectURL(new Blob([Uint8Array.from(bytes).buffer], { type: imageMimeTypes[type] }));
-  imageUrl = url;
+async function showImage(src: string, name: string, generation: number): Promise<void> {
   const image = new Image();
   image.className = 'image-preview';
   image.alt = name;
-  image.src = url;
-  await image.decode();
-  if (generation !== renderGeneration) return;
+  const loaded = new Promise<void>((resolve, reject) => {
+    image.addEventListener('load', () => resolve(), { once: true });
+    image.addEventListener('error', () => reject(new Error(messages[locale].genericError)), { once: true });
+  });
+  image.src = src;
   viewer.append(image);
+  if (generation !== renderGeneration) return;
+  status.hidden = true;
+  await loaded;
 }
 
-function isImageType(type: OpenMessage['type']): type is ImageType {
-  return type in imageMimeTypes;
+function isImageMessage(message: OpenMessage): message is ImageOpenMessage {
+  return imageTypes.has(message.type as ImageType);
 }
 
 async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {
@@ -232,7 +239,7 @@ function setLocale(next: Locale): void {
   requiredElement<HTMLButtonElement>('language-toggle').textContent = copy.languageLabel;
 }
 
-function normalizeBytes(value: OpenMessage['bytes']): Uint8Array {
+function normalizeBytes(value: BinaryOpenMessage['bytes']): Uint8Array {
   if (value instanceof Uint8Array) return value;
   if (Array.isArray(value)) return new Uint8Array(value);
   return new Uint8Array(value.data);
