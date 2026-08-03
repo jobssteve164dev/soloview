@@ -128,10 +128,16 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       skip: '跳到文档内容', toolbar: '文档工具栏', zoomOut: '缩小', zoomIn: '放大', reload: '重新载入',
       reveal: '在文件夹中显示', sheets: '工作表', opening: '正在打开文档…', content: '文档内容',
       unsupported: 'SoloView 暂不支持这种文件格式。', language: '切换为英文', languageLabel: 'EN',
+      csvEncoding: 'CSV 编码', encodingAuto: '自动检测', encodingUtf8: 'UTF-8',
+      encodingGb18030: '简体中文 (GBK / GB18030)', encodingBig5: '繁体中文 (Big5)',
+      encodingUtf16Le: 'UTF-16 LE', encodingUtf16Be: 'UTF-16 BE',
     } : {
       skip: 'Skip to document', toolbar: 'Document toolbar', zoomOut: 'Zoom out', zoomIn: 'Zoom in', reload: 'Reload',
       reveal: 'Show in folder', sheets: 'Worksheets', opening: 'Opening document…', content: 'Document content',
       unsupported: 'SoloView does not support this file format yet.', language: 'Switch to Chinese', languageLabel: '中文',
+      csvEncoding: 'CSV encoding', encodingAuto: 'Auto detect', encodingUtf8: 'UTF-8',
+      encodingGb18030: 'Simplified Chinese (GBK / GB18030)', encodingBig5: 'Traditional Chinese (Big5)',
+      encodingUtf16Le: 'UTF-16 LE', encodingUtf16Be: 'UTF-16 BE',
     };
     const unsupported = type ? '' : `<p class="error-copy" data-i18n="unsupported">${copy.unsupported}</p>`;
     return `<!doctype html>
@@ -151,6 +157,17 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       <span class="document-title" title="${title}">${title}</span>
     </div>
     <div class="toolbar-actions">
+      <label id="csv-encoding-control" class="encoding-control" hidden>
+        <span data-i18n="csvEncoding">${copy.csvEncoding}</span>
+        <select id="csv-encoding" aria-label="${copy.csvEncoding}" data-i18n-aria="csvEncoding">
+          <option value="auto">${copy.encodingAuto}</option>
+          <option value="utf-8">${copy.encodingUtf8}</option>
+          <option value="gb18030">${copy.encodingGb18030}</option>
+          <option value="big5">${copy.encodingBig5}</option>
+          <option value="utf-16le">${copy.encodingUtf16Le}</option>
+          <option value="utf-16be">${copy.encodingUtf16Be}</option>
+        </select>
+      </label>
       <button id="zoom-out" type="button" aria-label="${copy.zoomOut}" data-i18n-aria="zoomOut">−</button>
       <output id="zoom-value" aria-live="polite">100%</output>
       <button id="zoom-in" type="button" aria-label="${copy.zoomIn}" data-i18n-aria="zoomIn">+</button>

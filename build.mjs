@@ -35,6 +35,13 @@ const builds = [
     platform: 'node',
     format: 'cjs',
   },
+  {
+    ...shared,
+    entryPoints: ['src/csvEncoding.ts'],
+    outfile: 'dist/csvEncoding.cjs',
+    platform: 'node',
+    format: 'cjs',
+  },
 ];
 
 await mkdir('dist', { recursive: true });

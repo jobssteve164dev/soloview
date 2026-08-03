@@ -1,5 +1,7 @@
 export {};
 
+import type { CsvEncoding } from '../csvEncoding.js';
+
 declare function acquireVsCodeApi(): {
   postMessage(message: unknown): void;
   getState(): { locale?: Locale } | undefined;
@@ -15,6 +17,8 @@ const messages = {
     unsupported: 'SoloView 暂不支持这种文件格式。', language: '切换为英文', languageLabel: 'EN',
     openFailed: '无法打开这个文档', retry: '重新尝试', genericError: '文档无法打开。',
     canvasError: '当前环境无法创建 PDF 画布。', emptyWorkbook: '文件中没有可显示的工作表。',
+    csvEncoding: '编码', encodingAuto: '自动检测', encodingUtf8: 'UTF-8', encodingGb18030: '简体中文 (GBK / GB18030)',
+    encodingBig5: '繁体中文 (Big5)', encodingUtf16Le: 'UTF-16 LE', encodingUtf16Be: 'UTF-16 BE',
     page: (number: number, total: number) => `第 ${number} 页，共 ${total} 页`,
   },
   en: {
@@ -23,6 +27,8 @@ const messages = {
     unsupported: 'SoloView does not support this file format yet.', language: 'Switch to Chinese', languageLabel: '中文',
     openFailed: 'Unable to open this document', retry: 'Try again', genericError: 'The document could not be opened.',
     canvasError: 'PDF canvas is unavailable in this environment.', emptyWorkbook: 'This file has no worksheets to display.',
+    csvEncoding: 'Encoding', encodingAuto: 'Auto detect', encodingUtf8: 'UTF-8', encodingGb18030: 'Simplified Chinese (GBK / GB18030)',
+    encodingBig5: 'Traditional Chinese (Big5)', encodingUtf16Le: 'UTF-16 LE', encodingUtf16Be: 'UTF-16 BE',
     page: (number: number, total: number) => `Page ${number} of ${total}`,
   },
 };
@@ -49,8 +55,11 @@ const viewer = requiredElement<HTMLDivElement>('viewer');
 const status = requiredElement<HTMLElement>('status');
 const tabs = requiredElement<HTMLDivElement>('sheet-tabs');
 const zoomValue = requiredElement<HTMLOutputElement>('zoom-value');
+const encodingControl = requiredElement<HTMLLabelElement>('csv-encoding-control');
+const encodingSelect = requiredElement<HTMLSelectElement>('csv-encoding');
 let zoom = 1;
 let renderGeneration = 0;
+let currentCsvBytes: Uint8Array | undefined;
 
 type ImageType = 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp' | 'bmp' | 'svg' | 'ico' | 'avif';
 
@@ -60,6 +69,12 @@ requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => se
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
 requiredElement<HTMLButtonElement>('open-external').addEventListener('click', () => vscode.postMessage({ kind: 'openExternal' }));
+encodingSelect.addEventListener('change', () => {
+  if (currentCsvBytes) {
+    void showWorkbook(currentCsvBytes, 'csv', encodingSelect.value as CsvEncoding)
+      .catch((error) => showError(error instanceof Error ? error.message : messages[locale].genericError));
+  }
+});
 requiredElement<HTMLButtonElement>('language-toggle').addEventListener('click', () => {
   const next = locale === 'zh' ? 'en' : 'zh';
   setLocale(next);
@@ -84,6 +99,9 @@ async function openDocument(message: OpenMessage): Promise<void> {
   viewer.replaceChildren();
   tabs.replaceChildren();
   tabs.hidden = true;
+  currentCsvBytes = undefined;
+  encodingControl.hidden = message.type !== 'csv';
+  encodingSelect.value = 'auto';
   setZoom(1);
 
   try {
@@ -178,9 +196,21 @@ async function showPptx(bytes: Uint8Array, generation: number): Promise<void> {
   });
 }
 
-async function showWorkbook(bytes: Uint8Array, type: 'xlsx' | 'xls' | 'csv'): Promise<void> {
+async function showWorkbook(
+  bytes: Uint8Array,
+  type: 'xlsx' | 'xls' | 'csv',
+  encoding: CsvEncoding = 'auto',
+): Promise<void> {
   const XLSX = await import('xlsx');
-  const workbook = XLSX.read(bytes, { type: 'array' });
+  tabs.replaceChildren();
+  const csv = type === 'csv' ? (await import('../csvEncoding.js')).decodeCsv(bytes, encoding) : undefined;
+  if (csv) {
+    currentCsvBytes = bytes;
+    encodingSelect.value = encoding === 'auto' ? 'auto' : csv.encoding;
+  }
+  const workbook = csv
+    ? XLSX.read(csv.text, { type: 'string' })
+    : XLSX.read(bytes, { type: 'array' });
   const renderSheet = (name: string): void => {
     const sheet = workbook.Sheets[name];
     if (!sheet) return;
@@ -237,6 +267,13 @@ function setLocale(next: Locale): void {
     canvas.setAttribute('aria-label', copy.page(Number(canvas.dataset.page), Number(canvas.dataset.totalPages)));
   });
   requiredElement<HTMLButtonElement>('language-toggle').textContent = copy.languageLabel;
+  const encodingLabels = [
+    copy.encodingAuto, copy.encodingUtf8, copy.encodingGb18030,
+    copy.encodingBig5, copy.encodingUtf16Le, copy.encodingUtf16Be,
+  ];
+  Array.from(encodingSelect.options).forEach((option, index) => {
+    option.textContent = encodingLabels[index] ?? option.textContent;
+  });
 }
 
 function normalizeBytes(value: BinaryOpenMessage['bytes']): Uint8Array {

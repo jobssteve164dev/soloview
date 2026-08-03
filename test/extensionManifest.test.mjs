@@ -99,6 +99,7 @@ test('查看器按格式加载渲染器并优先显示 PDF 首页面', () => {
   assert.match(extensionSource, /<script nonce="\$\{nonce\}" type="module"/);
   assert.match(webviewSource, /await import\('docx-preview'\)/);
   assert.match(webviewSource, /await import\('pdfjs-dist'\)/);
+  assert.match(webviewSource, /type === 'csv' \? \(await import\('\.\.\/csvEncoding\.js'\)\)\.decodeCsv/);
   assert.match(webviewSource, /viewer\.append\(canvas\);[\s\S]*number === 1[\s\S]*status\.hidden = true/);
 });
 
