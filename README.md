@@ -19,7 +19,7 @@ SoloView 把日常文档直接放进 VS Code 编辑器标签页。需求说明�
 2. 使用工具栏缩放、重新载入，或在文件夹中定位原文件。
 3. 查看 Excel 工作簿时，直接切换工作表标签。
 
-> SoloView 适合快速、私密的日常查看。复杂字体、Office 图表、动画、SmartArt 和第三方插件对象可能与桌面 Office 存在差异；`.doc`、`.ppt` 等旧二进制格式暂不支持。
+> SoloView 适合快速、私密的日常查看。复杂字体、Office 图表、动画、SmartArt 和第三方插件对象可能与桌面 Office 存在差异；旧版 `.doc` 以可读正文模式展示，`.ppt` 等其他旧二进制格式暂不支持。
 
 ---
 
@@ -44,7 +44,7 @@ SoloView brings everyday documents into a VS Code editor tab. Keep specs, spread
 2. Zoom, reload, or reveal the original file from the viewer toolbar.
 3. For Excel workbooks, move between worksheets with the built-in tabs.
 
-> SoloView is designed for fast, private everyday viewing. Complex fonts, Office charts, animations, SmartArt, and third-party embedded objects may differ from desktop Office. Legacy binary formats such as `.doc` and `.ppt` are not currently supported.
+> SoloView is designed for fast, private everyday viewing. Complex fonts, Office charts, animations, SmartArt, and third-party embedded objects may differ from desktop Office. Legacy `.doc` files open in a readable text-focused view; other legacy binary formats such as `.ppt` are not currently supported.
 
 ## Development
 

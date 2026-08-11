@@ -40,6 +40,13 @@ type BinaryOpenMessage = {
   bytes: Uint8Array | { data: number[] } | number[];
 };
 
+type LegacyWordOpenMessage = {
+  kind: 'open';
+  type: 'doc';
+  name: string;
+  text: string;
+};
+
 type ImageOpenMessage = {
   kind: 'open';
   type: ImageType;
@@ -47,7 +54,7 @@ type ImageOpenMessage = {
   src: string;
 };
 
-type OpenMessage = BinaryOpenMessage | ImageOpenMessage;
+type OpenMessage = BinaryOpenMessage | LegacyWordOpenMessage | ImageOpenMessage;
 
 const vscode = acquireVsCodeApi();
 let locale: Locale = vscode.getState()?.locale ?? (document.body.dataset.initialLocale === 'zh' ? 'zh' : 'en');
@@ -109,6 +116,11 @@ async function openDocument(message: OpenMessage): Promise<void> {
       await showImage(message.src, message.name, generation);
       return;
     }
+    if (message.type === 'doc') {
+      showLegacyWord(message.text);
+      status.hidden = true;
+      return;
+    }
     const bytes = normalizeBytes(message.bytes);
     if (message.type === 'pdf') await showPdf(bytes, generation);
     else if (message.type === 'docx') await showDocx(bytes);
@@ -120,6 +132,13 @@ async function openDocument(message: OpenMessage): Promise<void> {
       showError(error instanceof Error ? error.message : messages[locale].genericError);
     }
   }
+}
+
+function showLegacyWord(text: string): void {
+  const documentText = document.createElement('pre');
+  documentText.className = 'legacy-word-document';
+  documentText.textContent = text;
+  viewer.append(documentText);
 }
 
 async function showImage(src: string, name: string, generation: number): Promise<void> {

@@ -40,3 +40,4 @@ This file stores stable project facts future agents should reuse. Do not paste r
 - PPTX 长文稿必须启用上游 `lazySlides`、`lazyMedia` 和 windowed list，首张幻灯片渲染后立即显示；禁止使用默认 eager 模式等待全部幻灯片解析、媒体解压和 DOM 挂载。60 页、9.8 MB 媒体样本在 Chromium 中首张可见约 1.88 秒，滚动到末页可继续增量渲染。
 - 常见图片由 SoloView 的只读自定义编辑器统一查看，当前支持 PNG、JPEG、GIF、WebP、BMP、SVG、ICO 与 AVIF；图片由 Webview 通过受限本地资源 URI 直接流式读取，URI 使用文件修改时间与大小作版本标记，避免整文件跨进程传输、多次内存复制和文件变更后的旧缓存。
 - CSV 在进入 SheetJS 前自动识别 UTF-8、UTF-16 LE/BE、GBK/GB18030 与 Big5；仅 CSV 查看器显示编码选择，误判时可直接改选，解码模块保持按格式动态加载。
+- 旧版 Word `.doc` 由同一个只读自定义编辑器接管，在扩展宿主中本地提取正文后以可读文档页展示；不保证复原旧版 Word 的原始版式。

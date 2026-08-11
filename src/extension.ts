@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { readFileSync } from 'node:fs';
+import WordExtractor from 'word-extractor';
 import { documentTypeForPath, supportedDocumentTypes } from './documentTypes.js';
 import { RecentDocuments, type RecentDocument } from './recentDocuments.js';
 
@@ -9,6 +10,7 @@ const viewType = 'soloview.documentViewer';
 const sidebarViewType = 'soloview.sidebar';
 type Locale = 'zh' | 'en';
 const imageTypes = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']);
+const wordExtractor = new WordExtractor();
 
 function isImageType(type: string): boolean {
   return imageTypes.has(type);
@@ -81,6 +83,16 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
           return;
         }
         const bytes = await vscode.workspace.fs.readFile(document.uri);
+        if (type === 'doc') {
+          const extracted = await wordExtractor.extract(Buffer.from(bytes));
+          await panel.webview.postMessage({
+            kind: 'open',
+            type,
+            name: document.uri.path.split('/').pop() ?? 'Document',
+            text: extracted.getBody(),
+          });
+          return;
+        }
         await panel.webview.postMessage({
           kind: 'open',
           type,

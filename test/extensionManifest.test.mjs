@@ -116,6 +116,14 @@ test('DOCX 页面始终使用浅色纸张背景与可读正文颜色', () => {
   assert.match(viewerStyles, /\.docx-wrapper > section\.docx[\s\S]*color-scheme:\s*light/);
 });
 
+test('旧版 Word 文档由 SoloView 接管并在本地提取可读正文', () => {
+  const patterns = manifest.contributes.customEditors[0].selector.map(({ filenamePattern }) => filenamePattern);
+  assert.ok(patterns.includes('*.doc'));
+  assert.match(extensionSource, /type === 'doc'[\s\S]*wordExtractor\.extract\(Buffer\.from\(bytes\)\)/);
+  assert.match(webviewSource, /message\.type === 'doc'[\s\S]*showLegacyWord\(message\.text\)/);
+  assert.match(viewerStyles, /\.legacy-word-document[\s\S]*white-space:\s*pre-wrap/);
+});
+
 test('常见图片格式统一由 SoloView 打开并使用内置图片查看器', () => {
   const patterns = manifest.contributes.customEditors[0].selector.map(({ filenamePattern }) => filenamePattern);
   for (const extension of ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']) {
