@@ -67,6 +67,7 @@ const encodingSelect = requiredElement<HTMLSelectElement>('csv-encoding');
 let zoom = 1;
 let renderGeneration = 0;
 let currentCsvBytes: Uint8Array | undefined;
+let currentImage: HTMLImageElement | undefined;
 
 type ImageType = 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp' | 'bmp' | 'svg' | 'ico' | 'avif';
 
@@ -74,6 +75,7 @@ const imageTypes = new Set<ImageType>(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp
 
 requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => setZoom(zoom + 0.1));
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
+window.addEventListener('resize', updateImageZoom);
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
 requiredElement<HTMLButtonElement>('open-external').addEventListener('click', () => vscode.postMessage({ kind: 'openExternal' }));
 encodingSelect.addEventListener('change', () => {
@@ -107,6 +109,7 @@ async function openDocument(message: OpenMessage): Promise<void> {
   tabs.replaceChildren();
   tabs.hidden = true;
   currentCsvBytes = undefined;
+  currentImage = undefined;
   encodingControl.hidden = message.type !== 'csv';
   encodingSelect.value = 'auto';
   setZoom(1);
@@ -151,9 +154,11 @@ async function showImage(src: string, name: string, generation: number): Promise
   });
   image.src = src;
   viewer.append(image);
+  currentImage = image;
   if (generation !== renderGeneration) return;
   status.hidden = true;
   await loaded;
+  if (generation === renderGeneration) updateImageZoom();
 }
 
 function isImageMessage(message: OpenMessage): message is ImageOpenMessage {
@@ -259,6 +264,17 @@ function setZoom(next: number): void {
   zoom = Math.min(2.5, Math.max(0.5, Math.round(next * 10) / 10));
   viewer.style.setProperty('--viewer-zoom', String(zoom));
   zoomValue.value = `${Math.round(zoom * 100)}%`;
+  updateImageZoom();
+}
+
+function updateImageZoom(): void {
+  if (!currentImage?.naturalWidth) return;
+  const viewerStyles = getComputedStyle(viewer);
+  const horizontalPadding = Number.parseFloat(viewerStyles.paddingLeft) + Number.parseFloat(viewerStyles.paddingRight);
+  const availableWidth = Math.max(0, viewer.clientWidth - horizontalPadding);
+  const fittedWidth = Math.min(currentImage.naturalWidth, availableWidth);
+  currentImage.style.maxWidth = 'none';
+  currentImage.style.width = `${Math.round(fittedWidth * zoom * 10) / 10}px`;
 }
 
 function showError(message: string): void {
