@@ -86,7 +86,7 @@ jobs:
 
       - name: Check and package
         run: |
-          npm run check
+          npm run verify
           npx vsce package --no-dependencies --out "${{ steps.version.outputs.vsix }}"
 
       - name: Push version commit and tag

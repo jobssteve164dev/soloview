@@ -17,6 +17,8 @@ const webviewSource = await readFile(new URL('../src/webview/main.ts', import.me
 const viewerStyles = await readFile(new URL('../src/webview/viewer.css', import.meta.url), 'utf8');
 const buildSource = await readFile(new URL('../build.mjs', import.meta.url), 'utf8');
 const vscodeIgnore = await readFile(new URL('../.vscodeignore', import.meta.url), 'utf8');
+const ciWorkflow = await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8');
+const publishWorkflow = await readFile(new URL('../.github/workflows/publish.yml', import.meta.url), 'utf8');
 const english = JSON.parse(await readFile(new URL('../package.nls.json', import.meta.url), 'utf8'));
 const chinese = JSON.parse(await readFile(new URL('../package.nls.zh-cn.json', import.meta.url), 'utf8'));
 
@@ -130,10 +132,41 @@ test('常见图片格式统一由 SoloView 打开并使用内置图片查看器'
     assert.ok(patterns.includes(`*.${extension}`));
   }
   assert.match(extensionSource, /localResourceRoots:[\s\S]*vscode\.Uri\.joinPath\(document\.uri, '\.\.'\)/);
-  assert.match(extensionSource, /if \(isImageType\(type\)\)[\s\S]*asWebviewUri\(resourceUri\)[\s\S]*return;[\s\S]*workspace\.fs\.readFile/);
-  assert.doesNotMatch(webviewSource, /URL\.createObjectURL|image\.decode\(\)/);
+  assert.match(extensionSource, /if \(usesLocalResource\(type\)\)[\s\S]*asWebviewUri\(resourceUri\)[\s\S]*return;[\s\S]*workspace\.fs\.readFile/);
+  const imageRenderer = webviewSource.match(/async function showImage[\s\S]*?function isImageMessage/)?.[0] ?? '';
+  assert.doesNotMatch(imageRenderer, /URL\.createObjectURL|image\.decode\(\)/);
   assert.match(webviewSource, /image\.src = src;[\s\S]*viewer\.append\(image\);[\s\S]*status\.hidden = true;[\s\S]*await loaded/);
   assert.match(viewerStyles, /\.image-preview[\s\S]*max-width:\s*100%/);
+});
+
+test('HTML 文件由 SoloView 打开并在受限预览框中显示', () => {
+  const patterns = manifest.contributes.customEditors[0].selector.map(({ filenamePattern }) => filenamePattern);
+  assert.ok(patterns.includes('*.html'));
+  assert.match(extensionSource, /localResourceRoots:[\s\S]*vscode\.Uri\.joinPath\(document\.uri, '\.\.'\)/);
+  assert.match(extensionSource, /type === 'html'[\s\S]*workspace\.fs\.readFile\(document\.uri\)[\s\S]*html:[\s\S]*base:/);
+  assert.match(webviewSource, /message\.type === 'html'[\s\S]*showHtml\(message\.html, message\.base, message\.name, generation\)/);
+  assert.match(webviewSource, /new DOMParser\(\)[\s\S]*URL\.createObjectURL\(new Blob[\s\S]*frame\.src = previewUrl/);
+  assert.match(webviewSource, /frame\.setAttribute\('sandbox', 'allow-same-origin'\)/);
+  assert.match(webviewSource, /querySelectorAll\('template'\)[\s\S]*element\.remove\(\)/);
+  assert.match(webviewSource, /querySelectorAll\('animate, animateMotion, animateTransform, set'\)[\s\S]*element\.remove\(\)/);
+  assert.match(webviewSource, /querySelectorAll\('a'\)[\s\S]*replaceWith\([\s\S]*element\.childNodes/);
+  assert.match(webviewSource, /querySelectorAll\('area'\)[\s\S]*element\.remove\(\)/);
+  assert.match(webviewSource, /querySelectorAll<HTMLLinkElement>\('link\[href\]'\)[\s\S]*rel === 'stylesheet'[\s\S]*url\.origin === resourceOrigin[\s\S]*element\.remove\(\)/);
+  assert.match(webviewSource, /httpEquiv\.toLowerCase\(\) === 'refresh'[\s\S]*element\.remove\(\)/);
+  assert.match(webviewSource, /await loaded;[\s\S]*frame\.contentWindow\?\.location\.href !== previewUrl[\s\S]*frame\.contentDocument/);
+  assert.match(webviewSource, /await fetch\(stylesheetUrl\)[\s\S]*soloviewLocalStylesheet[\s\S]*response\.text\(\)/);
+  assert.match(webviewSource, /style\[data-soloview-local-stylesheet\][\s\S]*localStylesheets/);
+  assert.match(webviewSource, /headingText:[\s\S]*getComputedStyle[\s\S]*activeContentExecuted[\s\S]*navigableElements[\s\S]*stayedOnPreview/);
+  assert.match(webviewSource, /let cancelHtmlRender:[\s\S]*cancelHtmlRender\?\.\(\);[\s\S]*viewer\.replaceChildren\(\)/);
+  assert.match(webviewSource, /removeEventListener\('load'[\s\S]*removeEventListener\('error'[\s\S]*URL\.revokeObjectURL\(previewUrl\)/);
+  assert.match(webviewSource, /window\.addEventListener\('beforeunload',[\s\S]*cancelHtmlRender\?\.\(\)/);
+  assert.match(extensionSource, /frame-src 'self' \$\{webview\.cspSource\} blob:/);
+  assert.match(extensionSource, /style-src \$\{webview\.cspSource\} 'unsafe-inline'/);
+  assert.match(extensionSource, /connect-src \$\{webview\.cspSource\}/);
+  assert.match(viewerStyles, /\.html-preview[\s\S]*width:\s*100%/);
+  assert.match(manifest.scripts.verify, /npm run check && npm run test:host/);
+  assert.match(ciWorkflow, /run: npm run verify/);
+  assert.match(publishWorkflow, /npm run verify/);
 });
 
 test('最终插件包排除浏览器验收与旧版查看器产物', () => {

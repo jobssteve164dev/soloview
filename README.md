@@ -1,13 +1,13 @@
 # SoloView — 文档不离开 VS Code
 
-**双击即看 PDF、Word、Excel、CSV、PowerPoint 和常见图片。无需切换应用，无需上传文件。**
+**双击即看 PDF、Word、Excel、CSV、PowerPoint、HTML 和常见图片。无需切换应用，无需上传文件。**
 
 SoloView 把日常文档直接放进 VS Code 编辑器标签页。需求说明、数据表、演示稿和参考资料都留在你的工作流里：打开、查看、缩放，然后继续手头的工作。
 
 ## 为什么安装 SoloView
 
 - **少一次应用切换**：像打开代码一样打开文档，不再往返于 Office、浏览器和文件管理器。
-- **常用格式一个入口**：支持 PDF、Word、Excel、CSV、PowerPoint，以及 PNG、JPEG、GIF、WebP、BMP、SVG、ICO 和 AVIF 图片。
+- **常用格式一个入口**：支持 PDF、Word、Excel、CSV、PowerPoint、HTML，以及 PNG、JPEG、GIF、WebP、BMP、SVG、ICO 和 AVIF 图片。
 - **文件留在本机**：本地读取和渲染，不把文档上传到远程服务。
 - **安心查看**：只读模式，不执行 Office 宏，也不会意外改动原文件。
 - **快速回到上下文**：活动栏保留最近打开的 12 个文档，点击即可继续查看。
@@ -25,14 +25,14 @@ SoloView 把日常文档直接放进 VS Code 编辑器标签页。需求说明�
 
 # SoloView — Keep documents inside VS Code
 
-**Open PDF, Word, Excel, CSV, PowerPoint, and common images with a double-click. No app switching. No uploads.**
+**Open PDF, Word, Excel, CSV, PowerPoint, HTML, and common images with a double-click. No app switching. No uploads.**
 
 SoloView brings everyday documents into a VS Code editor tab. Keep specs, spreadsheets, slide decks, and references inside your workflow: open, inspect, zoom, and get straight back to work.
 
 ## Why developers choose SoloView
 
 - **Stay in flow**: open documents like source files instead of bouncing between Office, a browser, and Finder or Explorer.
-- **One viewer for everyday formats**: PDF, Word, Excel, CSV, PowerPoint, plus PNG, JPEG, GIF, WebP, BMP, SVG, ICO, and AVIF images.
+- **One viewer for everyday formats**: PDF, Word, Excel, CSV, PowerPoint, HTML, plus PNG, JPEG, GIF, WebP, BMP, SVG, ICO, and AVIF images.
 - **Local-first privacy**: files are read and rendered locally, never uploaded to a remote service.
 - **Safe by design**: read-only viewing does not run Office macros or modify the original file.
 - **Return to context fast**: reopen any of your 12 most recent documents from the Activity Bar.

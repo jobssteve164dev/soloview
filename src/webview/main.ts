@@ -54,7 +54,15 @@ type ImageOpenMessage = {
   src: string;
 };
 
-type OpenMessage = BinaryOpenMessage | LegacyWordOpenMessage | ImageOpenMessage;
+type HtmlOpenMessage = {
+  kind: 'open';
+  type: 'html';
+  name: string;
+  html: string;
+  base: string;
+};
+
+type OpenMessage = BinaryOpenMessage | LegacyWordOpenMessage | ImageOpenMessage | HtmlOpenMessage;
 
 const vscode = acquireVsCodeApi();
 let locale: Locale = vscode.getState()?.locale ?? (document.body.dataset.initialLocale === 'zh' ? 'zh' : 'en');
@@ -68,14 +76,20 @@ let zoom = 1;
 let renderGeneration = 0;
 let currentCsvBytes: Uint8Array | undefined;
 let currentImage: HTMLImageElement | undefined;
+let cancelHtmlRender: (() => void) | undefined;
 
 type ImageType = 'png' | 'jpg' | 'jpeg' | 'gif' | 'webp' | 'bmp' | 'svg' | 'ico' | 'avif';
 
 const imageTypes = new Set<ImageType>(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']);
+const xlinkNamespace = 'http://www.w3.org/1999/xlink';
 
 requiredElement<HTMLButtonElement>('zoom-in').addEventListener('click', () => setZoom(zoom + 0.1));
 requiredElement<HTMLButtonElement>('zoom-out').addEventListener('click', () => setZoom(zoom - 0.1));
 window.addEventListener('resize', updateImageZoom);
+window.addEventListener('beforeunload', () => {
+  renderGeneration += 1;
+  cancelHtmlRender?.();
+});
 requiredElement<HTMLButtonElement>('reload').addEventListener('click', () => vscode.postMessage({ kind: 'reload' }));
 requiredElement<HTMLButtonElement>('open-external').addEventListener('click', () => vscode.postMessage({ kind: 'openExternal' }));
 encodingSelect.addEventListener('change', () => {
@@ -103,6 +117,8 @@ window.addEventListener('message', (event: MessageEvent<OpenMessage | { kind: 'e
 
 async function openDocument(message: OpenMessage): Promise<void> {
   const generation = ++renderGeneration;
+  cancelHtmlRender?.();
+  cancelHtmlRender = undefined;
   status.hidden = false;
   status.innerHTML = `<div class="spinner" aria-hidden="true"></div><p data-i18n="opening">${messages[locale].opening}</p>`;
   viewer.replaceChildren();
@@ -117,6 +133,11 @@ async function openDocument(message: OpenMessage): Promise<void> {
   try {
     if (isImageMessage(message)) {
       await showImage(message.src, message.name, generation);
+      return;
+    }
+    if (message.type === 'html') {
+      const diagnostics = await showHtml(message.html, message.base, message.name, generation);
+      if (generation === renderGeneration) vscode.postMessage({ kind: 'previewReady', ...diagnostics });
       return;
     }
     if (message.type === 'doc') {
@@ -163,6 +184,147 @@ async function showImage(src: string, name: string, generation: number): Promise
 
 function isImageMessage(message: OpenMessage): message is ImageOpenMessage {
   return imageTypes.has(message.type as ImageType);
+}
+
+type HtmlPreviewDiagnostics = {
+  localStylesheets: number;
+  headingText: string;
+  bodyMargin: string;
+  activeContentExecuted: boolean;
+  navigableElements: number;
+  stayedOnPreview: boolean;
+};
+
+async function showHtml(html: string, base: string, name: string, generation: number): Promise<HtmlPreviewDiagnostics> {
+  const previewDocument = new DOMParser().parseFromString(html, 'text/html');
+  const resourceOrigin = new URL(base).origin;
+  previewDocument.querySelectorAll('base').forEach((element) => element.remove());
+  previewDocument.querySelectorAll('template').forEach((element) => element.remove());
+  previewDocument.querySelectorAll('animate, animateMotion, animateTransform, set').forEach((element) => element.remove());
+  previewDocument.querySelectorAll('a').forEach((element) => element.replaceWith(...Array.from(element.childNodes)));
+  previewDocument.querySelectorAll('area').forEach((element) => element.remove());
+  previewDocument.querySelectorAll<HTMLMetaElement>('meta[http-equiv]').forEach((element) => {
+    if (element.httpEquiv.toLowerCase() === 'content-security-policy') element.remove();
+    if (element.httpEquiv.toLowerCase() === 'refresh') element.remove();
+  });
+  previewDocument.querySelectorAll<HTMLLinkElement>('link[href]').forEach((element) => {
+    const rel = element.rel.trim().toLowerCase();
+    let url: URL;
+    try {
+      url = new URL(element.getAttribute('href') ?? '', base);
+    } catch {
+      element.remove();
+      return;
+    }
+    if (!(rel === 'stylesheet' && url.origin === resourceOrigin)) element.remove();
+  });
+  for (const stylesheet of Array.from(
+    previewDocument.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][href]'),
+  )) {
+    const stylesheetUrl = new URL(stylesheet.getAttribute('href') ?? '', base);
+    const response = await fetch(stylesheetUrl);
+    if (!response.ok) throw new Error(messages[locale].genericError);
+    const inlineStylesheet = previewDocument.createElement('style');
+    inlineStylesheet.dataset.soloviewLocalStylesheet = 'true';
+    inlineStylesheet.textContent = await response.text();
+    stylesheet.replaceWith(inlineStylesheet);
+  }
+  if (hasHtmlNavigation(previewDocument) || hasUnsafeHtmlLink(previewDocument, base, resourceOrigin)) {
+    throw new Error(messages[locale].genericError);
+  }
+  const baseElement = previewDocument.createElement('base');
+  baseElement.href = base;
+  const policy = previewDocument.createElement('meta');
+  policy.httpEquiv = 'Content-Security-Policy';
+  policy.content = `default-src 'none'; img-src ${resourceOrigin} data: blob:; style-src ${resourceOrigin} 'unsafe-inline'; font-src ${resourceOrigin} data:; media-src ${resourceOrigin} data: blob:;`;
+  previewDocument.head.prepend(policy);
+  previewDocument.head.prepend(baseElement);
+
+  const frame = document.createElement('iframe');
+  frame.className = 'html-preview';
+  frame.title = name;
+  frame.setAttribute('sandbox', 'allow-same-origin');
+  let settled = false;
+  let resolveLoad!: () => void;
+  let rejectLoad!: (error: Error) => void;
+  const loaded = new Promise<void>((resolve, reject) => {
+    resolveLoad = resolve;
+    rejectLoad = reject;
+  });
+  const onLoad = (): void => {
+    if (settled) return;
+    settled = true;
+    resolveLoad();
+  };
+  const onError = (): void => {
+    if (settled) return;
+    settled = true;
+    rejectLoad(new Error(messages[locale].genericError));
+  };
+  const cancel = (): void => {
+    if (settled) return;
+    settled = true;
+    rejectLoad(new Error('HTML preview was replaced.'));
+  };
+  frame.addEventListener('load', onLoad, { once: true });
+  frame.addEventListener('error', onError, { once: true });
+  cancelHtmlRender = cancel;
+  const previewHtml = `<!doctype html>\n${previewDocument.documentElement.outerHTML}`;
+  const previewUrl = URL.createObjectURL(new Blob([previewHtml], { type: 'text/html' }));
+  frame.src = previewUrl;
+  viewer.append(frame);
+  try {
+    await loaded;
+    if (frame.contentWindow?.location.href !== previewUrl
+      || !frame.contentDocument
+      || hasHtmlNavigation(frame.contentDocument)
+      || hasUnsafeHtmlLink(frame.contentDocument, base, resourceOrigin)) {
+      throw new Error(messages[locale].genericError);
+    }
+    const localStylesheets = frame.contentDocument.querySelectorAll('style[data-soloview-local-stylesheet]').length;
+    const navigableElements = frame.contentDocument.querySelectorAll(
+      'a[href], area[href], a[xlink\\:href], area[xlink\\:href], meta[http-equiv="refresh"]',
+    ).length;
+    const previewWindow = frame.contentWindow as (Window & { __soloviewActiveContentExecuted?: boolean }) | null;
+    const diagnostics = {
+      localStylesheets,
+      headingText: frame.contentDocument.querySelector('h1, h2, h3, h4, h5, h6')?.textContent?.trim() ?? '',
+      bodyMargin: previewWindow?.getComputedStyle(frame.contentDocument.body).margin ?? '',
+      activeContentExecuted: previewWindow?.__soloviewActiveContentExecuted === true,
+      navigableElements,
+      stayedOnPreview: previewWindow?.location.href === previewUrl,
+    };
+    if (generation === renderGeneration) status.hidden = true;
+    return diagnostics;
+  } finally {
+    frame.removeEventListener('load', onLoad);
+    frame.removeEventListener('error', onError);
+    if (cancelHtmlRender === cancel) cancelHtmlRender = undefined;
+    URL.revokeObjectURL(previewUrl);
+  }
+}
+
+function hasHtmlNavigation(previewDocument: Document): boolean {
+  const linked = Array.from(previewDocument.querySelectorAll('a, area')).some((element) => (
+    element.hasAttribute('href')
+    || element.hasAttribute('xlink:href')
+    || element.hasAttributeNS(xlinkNamespace, 'href')
+  ));
+  const refresh = Array.from(previewDocument.querySelectorAll<HTMLMetaElement>('meta[http-equiv]'))
+    .some((element) => element.httpEquiv.toLowerCase() === 'refresh');
+  return linked || refresh;
+}
+
+function hasUnsafeHtmlLink(previewDocument: Document, base: string, resourceOrigin: string): boolean {
+  return Array.from(previewDocument.querySelectorAll<HTMLLinkElement>('link[href]')).some((element) => {
+    const rel = element.rel.trim().toLowerCase();
+    try {
+      const url = new URL(element.getAttribute('href') ?? '', base);
+      return rel !== 'stylesheet' || url.origin !== resourceOrigin;
+    } catch {
+      return true;
+    }
+  });
 }
 
 async function showPdf(bytes: Uint8Array, generation: number): Promise<void> {

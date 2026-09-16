@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Check extension
-        run: npm run check
+        run: npm run verify
 
       - name: Package extension
         run: npm run package

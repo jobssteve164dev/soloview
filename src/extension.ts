@@ -10,10 +10,11 @@ const viewType = 'soloview.documentViewer';
 const sidebarViewType = 'soloview.sidebar';
 type Locale = 'zh' | 'en';
 const imageTypes = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']);
+const localResourceTypes = new Set([...imageTypes, 'html']);
 const wordExtractor = new WordExtractor();
 
-function isImageType(type: string): boolean {
-  return imageTypes.has(type);
+function usesLocalResource(type: string): boolean {
+  return localResourceTypes.has(type);
 }
 
 function resolveLocale(): Locale {
@@ -42,6 +43,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
   constructor(
     private readonly context: vscode.ExtensionContext,
     private readonly onOpened: (uri: vscode.Uri) => void,
+    private readonly onRendered: (preview: RenderedPreview) => void,
   ) {}
 
   openCustomDocument(uri: vscode.Uri): SoloViewDocument {
@@ -56,7 +58,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
     const distRoot = vscode.Uri.joinPath(this.context.extensionUri, 'dist');
     panel.webview.options = {
       enableScripts: true,
-      localResourceRoots: isImageType(type ?? '')
+      localResourceRoots: usesLocalResource(type ?? '')
         ? [distRoot, vscode.Uri.joinPath(document.uri, '..')]
         : [distRoot],
     };
@@ -68,7 +70,19 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 
     const sendDocument = async (): Promise<void> => {
       try {
-        if (isImageType(type)) {
+        if (type === 'html') {
+          const bytes = await vscode.workspace.fs.readFile(document.uri);
+          const parent = panel.webview.asWebviewUri(vscode.Uri.joinPath(document.uri, '..')).toString();
+          await panel.webview.postMessage({
+            kind: 'open',
+            type,
+            name: document.uri.path.split('/').pop() ?? 'Document',
+            html: Buffer.from(bytes).toString('utf8'),
+            base: `${parent.replace(/\/$/, '')}/`,
+          });
+          return;
+        }
+        if (usesLocalResource(type)) {
           const stat = await vscode.workspace.fs.stat(document.uri);
           const version = encodeURIComponent(`${stat.mtime}-${stat.size}`);
           const resourceUri = document.uri.with({
@@ -77,7 +91,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
           await panel.webview.postMessage({
             kind: 'open',
             type,
-            name: document.uri.path.split('/').pop() ?? 'Image',
+            name: document.uri.path.split('/').pop() ?? 'Document',
             src: panel.webview.asWebviewUri(resourceUri).toString(),
           });
           return;
@@ -113,6 +127,23 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
       }
       if (message?.kind === 'openExternal') {
         void vscode.commands.executeCommand('revealFileInOS', document.uri);
+      }
+      if (message?.kind === 'previewReady'
+        && Number.isInteger(message.localStylesheets)
+        && typeof message.headingText === 'string'
+        && typeof message.bodyMargin === 'string'
+        && typeof message.activeContentExecuted === 'boolean'
+        && Number.isInteger(message.navigableElements)
+        && typeof message.stayedOnPreview === 'boolean') {
+        this.onRendered({
+          uri: document.uri,
+          localStylesheets: Math.max(0, message.localStylesheets),
+          headingText: message.headingText,
+          bodyMargin: message.bodyMargin,
+          activeContentExecuted: message.activeContentExecuted,
+          navigableElements: Math.max(0, message.navigableElements),
+          stayedOnPreview: message.stayedOnPreview,
+        });
       }
       if (message?.kind === 'setLanguage' && (message.locale === 'zh' || message.locale === 'en')) {
         void vscode.workspace.getConfiguration('soloview').update('language', message.locale, vscode.ConfigurationTarget.Global);
@@ -157,7 +188,7 @@ class SoloViewProvider implements vscode.CustomReadonlyEditorProvider<SoloViewDo
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}' ${webview.cspSource} 'wasm-unsafe-eval'; worker-src ${webview.cspSource} blob:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src ${webview.cspSource}; img-src ${webview.cspSource} data: blob:; font-src ${webview.cspSource} data:; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' ${webview.cspSource} 'wasm-unsafe-eval'; worker-src ${webview.cspSource} blob:; frame-src 'self' ${webview.cspSource} blob:;">
   <style nonce="${nonce}">${styles}</style>
   <title>${title}</title>
 </head>
@@ -250,10 +281,21 @@ function recentDocumentForUri(uri: vscode.Uri): RecentDocument {
   return { uri: uri.toString(), name, parentPath, openedAt: Date.now() };
 }
 
-export function activate(context: vscode.ExtensionContext): void {
+type RenderedPreview = {
+  uri: vscode.Uri;
+  localStylesheets: number;
+  headingText: string;
+  bodyMargin: string;
+  activeContentExecuted: boolean;
+  navigableElements: number;
+  stayedOnPreview: boolean;
+};
+
+export function activate(context: vscode.ExtensionContext): { onDidRenderPreview: vscode.Event<RenderedPreview> } {
   const recent = new RecentDocuments(context.globalState);
   const recentProvider = new RecentDocumentsProvider(recent);
   const recentView = vscode.window.createTreeView(sidebarViewType, { treeDataProvider: recentProvider });
+  const renderedPreviews = new vscode.EventEmitter<RenderedPreview>();
   const localizeSidebar = (): void => {
     recentView.title = 'SoloView';
     recentView.description = hostCopy().recent;
@@ -265,11 +307,14 @@ export function activate(context: vscode.ExtensionContext): void {
   };
 
   context.subscriptions.push(
-    vscode.window.registerCustomEditorProvider(viewType, new SoloViewProvider(context, recordOpened), {
+    vscode.window.registerCustomEditorProvider(viewType, new SoloViewProvider(context, recordOpened, (preview) => {
+      renderedPreviews.fire(preview);
+    }), {
       supportsMultipleEditorsPerDocument: true,
       webviewOptions: { retainContextWhenHidden: true },
     }),
     recentView,
+    renderedPreviews,
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (event.affectsConfiguration('soloview.language')) localizeSidebar();
     }),
@@ -298,6 +343,8 @@ export function activate(context: vscode.ExtensionContext): void {
       }
     }),
   );
+
+  return { onDidRenderPreview: renderedPreviews.event };
 }
 
 export function deactivate(): void {}

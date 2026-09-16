@@ -1,5 +1,5 @@
 export const supportedDocumentTypes = [
-  'pdf', 'doc', 'docx', 'xlsx', 'xls', 'csv', 'pptx',
+  'pdf', 'doc', 'docx', 'xlsx', 'xls', 'csv', 'pptx', 'html',
   'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif',
 ] as const;
 

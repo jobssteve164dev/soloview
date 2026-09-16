@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=https://example.com/escaped-preview">
+  <link rel="preconnect" href="{{NETWORK_SINK}}/preconnect">
+  <link rel="stylesheet" href="{{NETWORK_SINK}}/remote.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>@import url("{{NETWORK_SINK}}/import.css");</style>
+  <title>HTML preview fixture</title>
+</head>
+<body>
+  <main>
+    <h1>HTML preview</h1>
+    <p>Relative styles stay with the document.</p>
+    <img src="{{NETWORK_SINK}}/remote.png" alt="Blocked remote image">
+    <a href="{{NETWORK_SINK}}/escaped-preview">External link</a>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <a xlink:href="{{NETWORK_SINK}}/escaped-preview">
+        <set attributeName="xlink:href" to="{{NETWORK_SINK}}/delayed-navigation" begin="0.1s"></set>
+        <text>SVG link</text>
+      </a>
+    </svg>
+    <script>window.__soloviewActiveContentExecuted = true;</script>
+    <div>
+      <template shadowrootmode="open">
+        <a href="{{NETWORK_SINK}}/shadow-navigation">Shadow link</a>
+      </template>
+    </div>
+  </main>
+</body>
+</html>

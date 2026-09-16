@@ -6,7 +6,7 @@ This file stores stable project facts future agents should reuse. Do not paste r
 
 - Name: soloview
 - Type: Infrastructure / tooling foundation
-- Users: 需要在 VS Code 内本地查看 PDF 与 Office 文档的用户
+- Users: 需要在 VS Code 内本地查看 PDF、Office 文档、HTML 与常见图片的用户
 - Current stage: `0.1.5` 已发布到 Visual Studio Marketplace 与 Open VSX
 
 ## Stable Decisions
@@ -41,3 +41,4 @@ This file stores stable project facts future agents should reuse. Do not paste r
 - 常见图片由 SoloView 的只读自定义编辑器统一查看，当前支持 PNG、JPEG、GIF、WebP、BMP、SVG、ICO 与 AVIF；图片由 Webview 通过受限本地资源 URI 直接流式读取，URI 使用文件修改时间与大小作版本标记，避免整文件跨进程传输、多次内存复制和文件变更后的旧缓存。
 - CSV 在进入 SheetJS 前自动识别 UTF-8、UTF-16 LE/BE、GBK/GB18030 与 Big5；仅 CSV 查看器显示编码选择，误判时可直接改选，解码模块保持按格式动态加载。
 - 旧版 Word `.doc` 由同一个只读自定义编辑器接管，在扩展宿主中本地提取正文后以可读文档页展示；不保证复原旧版 Word 的原始版式。
+- HTML 由同一个只读自定义编辑器接管；正文和同目录样式在沙箱 iframe 中本地展示，脚本、表单、导航与远程资源均不执行或加载。当前按 UTF-8 解码，其他编码可能显示异常。

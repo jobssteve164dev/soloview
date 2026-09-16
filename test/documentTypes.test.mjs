@@ -5,7 +5,7 @@ import documentTypes from '../dist/documentTypes.cjs';
 const { documentTypeForPath } = documentTypes;
 
 test('recognizes every supported document and image type case-insensitively', () => {
-  for (const type of ['pdf', 'doc', 'docx', 'xlsx', 'xls', 'csv', 'pptx', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']) {
+  for (const type of ['pdf', 'doc', 'docx', 'xlsx', 'xls', 'csv', 'pptx', 'html', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'ico', 'avif']) {
     assert.equal(documentTypeForPath(`/tmp/example.${type.toUpperCase()}`), type);
   }
 });

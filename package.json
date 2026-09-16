@@ -102,6 +102,9 @@
             "filenamePattern": "*.pptx"
           },
           {
+            "filenamePattern": "*.html"
+          },
+          {
             "filenamePattern": "*.png"
           },
           {
@@ -157,6 +160,7 @@
     "build": "node build.mjs",
     "check": "tsc --noEmit && npm run build && node --test test/*.test.mjs",
     "test:host": "npm run build && xvfb-run -a node test/host/run.mjs",
+    "verify": "npm run check && npm run test:host",
     "watch": "node build.mjs --watch",
     "package": "npm run check && vsce package --no-dependencies --allow-missing-repository --no-rewrite-relative-links"
   },
